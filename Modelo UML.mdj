@@ -10999,7 +10999,7 @@
 							"width": 281,
 							"height": 187,
 							"autoResize": false,
-							"text": "Modelado de datos de entrada:\n\n- numeroPedido(int): se maneja con contador.\n\n- nombreSocio(string)\n\n- numeroEntrega(int): identificador de la finca.\n\n- producto(string): trabajar en cascada.\n\n- cantidadKilos(double)\n\n- fechaEntrega(string o calendario)\n\n- horaEntrega (string)\n\n- numeroPedido(int)",
+							"text": "Modelado de datos de entrada:\n\n- numeroPedido(int): se maneja con contador.\n\n- nombreSocio(string)\n\n- numeroEntrega(int): identificador de la finca.\n\n- producto(string): trabajar en cascada.\n\n- cantidadKilos(double)\n\n- fechaEntrega(string o calendario)\n\n- horaEntrega (string)\n\n- numeroPedido (int)",
 							"wordWrap": true
 						},
 						{
@@ -11306,6 +11306,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
+									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
