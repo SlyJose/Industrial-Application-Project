@@ -17,7 +17,7 @@ public class ProyectoTIndustrial {
     public static void main(String[] args) {
         
         
-        SeleccionProducto pruebaI = new SeleccionProducto();
+        SeleccionAsociado pruebaI = new SeleccionAsociado();
         pruebaI.prueba();
     }
     

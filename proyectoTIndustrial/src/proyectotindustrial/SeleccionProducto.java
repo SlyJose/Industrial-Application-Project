@@ -15,7 +15,7 @@ import java.io.*;                                                               
 
 /**
  *
- * @author Jose Pablo Urena Gutierrez, Luis Diego Hernandez
+ * @author Jose Pablo Urena Gutierrez, Luis Diego Hernandez Herrera
  * 
  * @version 1.0
  * 
@@ -29,7 +29,7 @@ public class SeleccionProducto {
     
     public ArrayList<NodoLista> listaProductos = new ArrayList<NodoLista>();    // Lista de objetos producto
     
-    public boolean existeProducto(String producto){
+    public boolean existeProducto(String producto){                             // Metodo encargado de verificar si se encuentra en la lista el producto
         boolean existe = false;
         for(int iterador = 0; iterador < listaProductos.size(); ++iterador){
             if(listaProductos.get(iterador).producto.equals(producto)){
