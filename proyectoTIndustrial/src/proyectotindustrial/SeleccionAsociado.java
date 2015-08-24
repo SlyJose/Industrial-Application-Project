@@ -1,7 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase encargada de manejar un listado de todos los asociados y sus principales
+    atributos, esto a partir de un archivo de texto con todos los datos. 
+
+    El estandar de separacion para los valores en el archivo es la coma ",", de
+   esta forma la clase separa cada valor del archivo adecuadamente.
+
  */
 package proyectotindustrial;
 
@@ -62,7 +65,7 @@ public class SeleccionAsociado {
         FileReader lector = null;
         BufferedReader lectorLinea = null;
         
-        try {                                                                   // Se abre el archivo de productos
+        try {                                                                   // Se abre el archivo de asociados
          archivo = new File ("C:\\Users\\Jose\\Documents\\GitHub\\proyectoTIndustrial\\proyectoTIndustrial\\Asociados.txt");
          lector = new FileReader(archivo);
          lectorLinea = new BufferedReader(lector);
@@ -201,24 +204,4 @@ public class SeleccionAsociado {
         }         
         return preferencia;    
     }
-    
-    public void prueba(){
-        cargarArchivo();
-        System.out.println("zona: "+getZona(5123));
-        System.out.println("capacidad: "+getCapacidad(5123));
-        System.out.println("ventH: "+getVentanaH(5123));        
-        System.out.println("ventM: "+getVentanaM(5123));
-        System.out.println("costo: "+getCostoD(5123));
-        System.out.println("kmB: "+getKmBuenos(5123));
-        System.out.println("kmM: "+getKmMalos(5123));
-        System.out.println("preferencia: "+getPreferencia(5123));
-        
-        if(existeAsociado(1237)){
-            System.out.println("esta");
-        }else{
-            System.out.println("no esta");
-        }
-        
-    }
-    
 }

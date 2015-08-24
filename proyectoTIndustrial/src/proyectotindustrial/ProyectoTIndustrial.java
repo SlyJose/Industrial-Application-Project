@@ -15,10 +15,7 @@ public class ProyectoTIndustrial {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        
-        SeleccionAsociado pruebaI = new SeleccionAsociado();
-        pruebaI.prueba();
+                
     }
     
 }
