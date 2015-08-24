@@ -15,7 +15,10 @@ public class ProyectoTIndustrial {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hola mundo");
+        
+        
+        SeleccionProducto pruebaI = new SeleccionProducto();
+        pruebaI.prueba();
     }
     
 }
