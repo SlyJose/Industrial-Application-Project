@@ -283,7 +283,63 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Operation1()",
+											"text": "+existeCamion(int)",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFPXeZWB2R+TFQ=",
+											"_parent": {
+												"$ref": "AAAAAAFPV2H1WgpQ7Wo="
+											},
+											"model": {
+												"$ref": "AAAAAAFPXeZV12R79mM="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffff00",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 141,
+											"top": 387,
+											"width": 207,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+agregarCamion(...)",
+											"horizontalAlignment": 0,
+											"verticalAlignment": 5
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFPXeaZuma4CiY=",
+											"_parent": {
+												"$ref": "AAAAAAFPV2H1WgpQ7Wo="
+											},
+											"model": {
+												"$ref": "AAAAAAFPXeaZj2a1GUc="
+											},
+											"visible": true,
+											"enabled": true,
+											"lineColor": "#000000",
+											"fillColor": "#ffff00",
+											"fontColor": "#000000",
+											"font": "Arial;13;0",
+											"showShadow": true,
+											"containerChangeable": false,
+											"containerExtending": false,
+											"left": 141,
+											"top": 402,
+											"width": 207,
+											"height": 13,
+											"autoResize": false,
+											"underline": false,
+											"text": "+getAtributos...todos menos placa()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -300,7 +356,7 @@
 									"left": 136,
 									"top": 352,
 									"width": 217,
-									"height": 38,
+									"height": 68,
 									"autoResize": false
 								},
 								{
@@ -364,7 +420,7 @@
 							"left": 136,
 							"top": 304,
 							"width": 217,
-							"height": 112,
+							"height": 116,
 							"autoResize": false,
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
@@ -438,7 +494,7 @@
 								"$ref": "AAAAAAFPV2H1WApJT/M="
 							},
 							"lineStyle": 1,
-							"points": "135:365;108:366"
+							"points": "135:366;108:367"
 						},
 						{
 							"_type": "UMLClassView",
@@ -2989,7 +3045,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 379,
-									"top": 298,
+									"top": 299,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -3022,7 +3078,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 375,
-									"top": 284,
+									"top": 285,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -3055,7 +3111,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 388,
-									"top": 327,
+									"top": 328,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -3086,7 +3142,7 @@
 								"$ref": "AAAAAAFPV2H1WApJT/M="
 							},
 							"lineStyle": 1,
-							"points": "353:328;415:310",
+							"points": "353:329;415:311",
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": true,
@@ -8691,7 +8747,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "VentanaModificarCamion",
+											"text": "VentanaModificarProducto",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -11222,7 +11278,71 @@
 							"_parent": {
 								"$ref": "AAAAAAFPV2H1VgpHdRM="
 							},
-							"name": "Operation1",
+							"name": "existeCamion",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFPXeZGlmOzwyM=",
+									"_parent": {
+										"$ref": "AAAAAAFPV9BO0pHlqUA="
+									},
+									"name": "int",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFPXeZV12R79mM=",
+							"_parent": {
+								"$ref": "AAAAAAFPV2H1VgpHdRM="
+							},
+							"name": "agregarCamion",
+							"visibility": "public",
+							"isStatic": false,
+							"isLeaf": false,
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFPXeaGs2WKiOM=",
+									"_parent": {
+										"$ref": "AAAAAAFPXeZV12R79mM="
+									},
+									"name": "...",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
+								}
+							],
+							"concurrency": "sequential",
+							"isQuery": false,
+							"isAbstract": false
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFPXeaZj2a1GUc=",
+							"_parent": {
+								"$ref": "AAAAAAFPV2H1VgpHdRM="
+							},
+							"name": "getAtributos...todos menos placa",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -12531,7 +12651,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "VentanaModificarCamion",
+					"name": "VentanaModificarProducto",
 					"visibility": "public",
 					"isAbstract": false,
 					"isFinalSpecialization": false,

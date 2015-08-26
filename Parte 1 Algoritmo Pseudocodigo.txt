@@ -1,0 +1,86 @@
+
+
+										Algoritmo Pseudocodigo
+										
+Parte I 
+{
+
+		subclase Compartimento{
+			string productoInterno = "vacio"
+			double capacidadDisponibe = inicia depende del camion y la capacidad por compartimento
+		}
+
+
+	variables:	
+			int     #pedido -- contador interno inicializado en 0							#1
+			string  nombreSocio
+			int 	entrega
+			string	producto
+			double	cantidadPedido
+			string	fechaEntrega
+			int		horaEntrega
+			int		minutosEntrega
+						
+			------
+			string preferenciaTemp 				-- variable temporal que almacena la preferencia del asociado con respecto al camion					
+			int cantCompartimientosReq			-- variable que almacena la cantidad de compartimientos que se necesitan para cargar el producto
+			
+			
+			
+			
+	Se toman los valores provenientes de la interfaz y se inicializan, verificacion de datos válidos.     #1  #2
+	
+	preferenciaTemp = listaAsociados( entrega )->preferencia												#3
+	
+	
+	for( iterador, iterador pasa por lista de camiones){													#4 
+	
+		if( (listaCamiones(iterador)->proveedor == preferenciaTemp ) && (listaCamiones(iterador)->entregaNoDisponible != entrega ) ||			#5
+		
+			( (preferenciaTemp == "No disponible") && listaCamiones(iterador)->entregaNoDisponible != entrega) 
+          
+		  ){		// si el camion cumple ambos parametros se selecciona, iterador guarda el puntero al camion
+		  
+				cantCompartimientosReq = se redondea hacia arriba el resultado (cantidadPedido / listaCamiones(iterador)-> (capacidad, capacidadQ, capacidadKg ? cual de estas)  **** )        #6 #7 dudas
+				
+				
+				if( listaCamiones(iterador)->campos < cantCompartimientosReq  ){					// el pedido no cabe en el camion							*** dudas #8
+					
+					// no se entiende que se debe hacer en este caso
+				
+				}
+				
+				// este proceso que sigue mete el producto en o los compartimientos necesarios
+				
+								
+				Vector <Compartimento> carreta = new <Compartimento> (listaCamiones(iterador)->campos)									// 
+				
+				
+		  
+		  }	
+	}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
