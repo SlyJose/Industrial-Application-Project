@@ -22,6 +22,7 @@ public class ProyectoTIndustrial {
         nuevo.agregarProducto("arroz", 2330.0, 111);
         nuevo.agregarProducto("frijoles", 5500.25, 111);
         nuevo.agregarProducto("arroz", 300.0, 111);
+        VenPrincipal ven = new VenPrincipal();
     }
     
 }
