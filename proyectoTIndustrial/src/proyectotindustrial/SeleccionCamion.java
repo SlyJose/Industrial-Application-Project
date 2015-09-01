@@ -19,6 +19,11 @@ import java.io.*;                                                               
  */
 public class SeleccionCamion {
     
+    static class NodoCompartimento{
+        String productoInterno = "vacio" ;                                      // Cada compartimento solo almacena un tipo de producto
+        double capacidadLibre = 0.0;                                            // Capacidad de almacenamiento en el compartimento
+    }
+        
     static class NodoLista{                                                     // Clase que define cada nodo
         int numeroCamion;
         int placa;
@@ -27,7 +32,9 @@ public class SeleccionCamion {
         double capacidadKg;
         double capacidad;
         String proveedor;
-        int entregaNodisponible;        
+        int entregaNodisponible;      
+        String carretaProductos[];                                              // Vector que indica el producto que contiene cada compartimento
+        double carretaEspacioLibre[];                                           // Vector que indica la cantidad de espacio libre que queda en el compartimento
     }
     
     public ArrayList<NodoLista> listaCamiones = new ArrayList<NodoLista>();     // Lista de objetos camiones
@@ -52,8 +59,47 @@ public class SeleccionCamion {
         nuevoNodo.capacidadKg = capacidadKg;
         nuevoNodo.capacidad = capacidad;
         nuevoNodo.proveedor = proveedor;
-        nuevoNodo.entregaNodisponible = entregaNoDisponible;        
+        nuevoNodo.entregaNodisponible = entregaNoDisponible;    
+        nuevoNodo.carretaProductos = new String[campos];
+        nuevoNodo.carretaEspacioLibre = new double[campos];
+        
+        for(int i = 0; i < campos; ++i){                                        // Se asigna la capacidad del compartimento a cada uno de ellos                                    
+            nuevoNodo.carretaProductos[i] = "vacio";                            // Todos los compartimentos inician vacios por defecto
+            nuevoNodo.carretaEspacioLibre[i] = capacidadKg;
+        }                
         listaCamiones.add(nuevoNodo);    
+    }
+    
+    public boolean agregarProducto(String productoAcargar, double cantidadProducto, int placa){                     // Metodo encargado de reducir la cantidad de espacio libre en un compartimento, e indicar el producto que almacena
+        boolean agregado = false;
+        double temporal = 0.0;
+        double temporalCant = 0.0;
+        for(int i = 0; i < listaCamiones.size(); ++i){                          // Se busca el camion al cual agregar el producto
+            if(listaCamiones.get(i).placa == placa){                            
+                                                                                
+                
+                                                                                // Se asegura que el pedido cabe en el camion antes de depositarlo
+                for(int k = 0; k < listaCamiones.get(i).carretaProductos.length; ++k){
+                    
+                }
+                                                                                // Busca algun compartimento libre en el camion
+                for(int j = 0; j < listaCamiones.get(i).carretaProductos.length; ++j){      
+                                                                                // El compartimento esta vacio
+                    if(listaCamiones.get(i).carretaProductos[j].equals("vacio")){       
+                        temporal = listaCamiones.get(i).carretaEspacioLibre[j];
+                        listaCamiones.get(i).carretaProductos[j] = productoAcargar;
+                        listaCamiones.get(i).carretaEspacioLibre[j] -= cantidadProducto;
+                        cantidadProducto -= temporal;
+                    }
+                    if(cantidadProducto == 0.0){
+                        j = listaCamiones.get(i).carretaProductos.length;
+                        agregado = true;
+                    }
+                }
+            }
+        }
+        
+        return agregado;
     }
     
     private void cargarArchivo(){                                               // Metodo encargado de cargar el txt de camiones al programa

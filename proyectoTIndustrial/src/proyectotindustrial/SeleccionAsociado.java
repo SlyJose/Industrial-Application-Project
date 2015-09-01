@@ -30,7 +30,7 @@ public class SeleccionAsociado {
         double costoDistribucion;                                               // Costo de distribucion por kilogramo
         double kmBuenos;                                                        // Kilometros buenos al Coyol
         double kmMalos;                                                         // Kilometros malos al Coyol
-        String preferencia;                                                     // Preferencia de transporte
+        String preferencia;                                                     // Preferencia de transporte, si el asociado no posee preferencia, se inicializa como (No disponible)
     }
     
     public ArrayList<NodoLista> listaAsociados = new ArrayList<NodoLista>();    // Lista de objetos asociados
