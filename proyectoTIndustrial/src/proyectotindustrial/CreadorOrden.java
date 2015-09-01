@@ -16,6 +16,9 @@ import java.io.IOException;
 
 import java.io.Writer;
 
+import java.io.BufferedWriter;
+
+
 
 
 public class CreadorOrden {
@@ -40,10 +43,24 @@ public class CreadorOrden {
 
         {
 
-         FileWriter writer = new FileWriter(fileName);
+         FileWriter writer = new FileWriter(fileName,true);
 
          writer.append(numPedido);
          writer.append(",");
+         writer.append(nomSocio);
+         writer.append(",");
+         writer.append(numEntrega);
+         writer.append(",");
+         writer.append(cantKg);
+         writer.append(",");
+         writer.append(fechaEntrega);
+         writer.append(",");
+         writer.append(horaEntrega);
+         writer.append(",");
+         writer.append(codPedido);
+         writer.write(System.lineSeparator());
+     
+         writer.close(); 
          
         }
 

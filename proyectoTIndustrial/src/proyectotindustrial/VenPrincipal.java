@@ -31,6 +31,8 @@ public class VenPrincipal extends javax.swing.JFrame {
     String fechaEntrega;
     String horaEntrega;
     String codPedido;
+    
+    CreadorOrden orden = new CreadorOrden();
 
     
     public VenPrincipal() {
@@ -409,9 +411,9 @@ public class VenPrincipal extends javax.swing.JFrame {
         codPedido = txtCodigoPedido.getText();
         System.out.println(codPedido);
         
-        //CreadorOrden orden = new CreadorOrden();
         
-        //orden.creaOrden(numPedido, nomSocio, numEntrega, cantKg, fechaEntrega, horaEntrega, codPedido);
+        orden.creaOrden(numPedido, nomSocio, numEntrega, cantKg, fechaEntrega, horaEntrega, codPedido);
+        
   
         limpiaRegistros();
     }//GEN-LAST:event_btnNuevaOrdenActionPerformed
