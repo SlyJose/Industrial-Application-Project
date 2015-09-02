@@ -27,6 +27,7 @@ public class VenPrincipal extends javax.swing.JFrame {
     String numPedido;
     String nomSocio;
     String numEntrega;
+    String producto;
     String cantKg;
     String fechaEntrega;
     String horaEntrega;
@@ -62,7 +63,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        btnProducto = new javax.swing.JComboBox();
         txtNombreSocio = new javax.swing.JTextField();
         txtNumeroEntrega = new javax.swing.JTextField();
         txtCantidadKilos = new javax.swing.JTextField();
@@ -103,7 +104,12 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         jLabel9.setText("Codigo de Pedido");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PERFECTA ESPECIAL GRANEL", "APOLO 16 % GR", "COMPLETE GR", "CRAPID GRANEL", "DESARROLLO RB GRANEL", "DESARROLLO TERNERAS GRANEL", "DESTILADO MAÍZ GRANEL", "ENELAC C/LEV ESPECIAL", "ENELAC ESPECIAL GRANEL", "ENELAC GRANEL", "ENELAC LEVADURA GRANEL", "ENELAC PELETIZADO GRANEL", "ENELAC RUMENSIN GRANEL", "FASE 1 GRANEL", "INICIO LACTANCIA GRANEL", "MAÍZ MOLIDO GRANEL", "PELETHENO GRANEL", "PELETHIZADA ESPECIAL GRANEL", "PERFECTA GRANEL", "PREDILECTA GRANEL", "PRODUCTORA LECHE GRANEL", "SUPLEMAX KG", "ULTRA FEED GRANEL", "VAP 17 GRANEL", "VAP FEED C/ LEV ESPECIAL", "VAP FEED ESPECIAL GRANEL", "VAP FEED LEVADURA GRANEL", "VAP FEED PELETIZADO GRANEL", "VAP PELETIZADO ESPECIAL GRANEL", "VAP RB GRANEL" }));
+        btnProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductoActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Producto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +202,7 @@ public class VenPrincipal extends javax.swing.JFrame {
                             .addComponent(txtFechaEntrega)
                             .addComponent(txtHoraEntrega)
                             .addComponent(txtCodigoPedido)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtNumeroDePedido, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -211,7 +217,7 @@ public class VenPrincipal extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(70, 70, 70)
@@ -228,10 +234,10 @@ public class VenPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(270, 270, 270)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(348, 348, 348))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,7 +266,7 @@ public class VenPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -411,12 +417,23 @@ public class VenPrincipal extends javax.swing.JFrame {
         codPedido = txtCodigoPedido.getText();
         System.out.println(codPedido);
         
+        producto = String.valueOf(btnProducto.getSelectedItem());
+        System.out.println(producto);
         
-        orden.creaOrden(numPedido, nomSocio, numEntrega, cantKg, fechaEntrega, horaEntrega, codPedido);
+        
+        orden.creaOrden(numPedido, nomSocio, numEntrega, producto, cantKg, fechaEntrega, horaEntrega, codPedido);
         
   
         limpiaRegistros();
     }//GEN-LAST:event_btnNuevaOrdenActionPerformed
+
+    private void btnProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductoActionPerformed
+        // TODO add your handling code here:
+        
+     //  String x = String.valueOf(btnProducto.getSelectedItem());
+     //  System.out.println(x);
+        
+    }//GEN-LAST:event_btnProductoActionPerformed
 
     public void limpiaRegistros(){
     
@@ -468,6 +485,7 @@ public class VenPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevaOrden;
+    private javax.swing.JComboBox btnProducto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -475,7 +493,6 @@ public class VenPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -46,7 +46,7 @@
                           <Component id="txtFechaEntrega" max="32767" attributes="0"/>
                           <Component id="txtHoraEntrega" max="32767" attributes="0"/>
                           <Component id="txtCodigoPedido" max="32767" attributes="0"/>
-                          <Component id="jComboBox1" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnProducto" alignment="1" max="32767" attributes="0"/>
                           <Component id="txtNumeroDePedido" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -65,7 +65,7 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jButton1" alignment="1" pref="88" max="32767" attributes="0"/>
+                                          <Component id="jButton1" alignment="1" max="32767" attributes="0"/>
                                           <Component id="jButton2" alignment="1" max="32767" attributes="0"/>
                                           <Component id="jButton3" max="32767" attributes="0"/>
                                       </Group>
@@ -93,10 +93,10 @@
                   </Group>
               </Group>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel10" min="-2" pref="316" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -131,7 +131,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnProducto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -238,17 +238,46 @@
         <Property name="text" type="java.lang.String" value="Codigo de Pedido"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="btnProducto">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="30">
+            <StringItem index="0" value="PERFECTA ESPECIAL GRANEL"/>
+            <StringItem index="1" value="APOLO 16 % GR"/>
+            <StringItem index="2" value="COMPLETE GR"/>
+            <StringItem index="3" value="CRAPID GRANEL"/>
+            <StringItem index="4" value="DESARROLLO RB GRANEL"/>
+            <StringItem index="5" value="DESARROLLO TERNERAS GRANEL"/>
+            <StringItem index="6" value="DESTILADO MA&#xcd;Z GRANEL"/>
+            <StringItem index="7" value="ENELAC C/LEV ESPECIAL"/>
+            <StringItem index="8" value="ENELAC ESPECIAL GRANEL"/>
+            <StringItem index="9" value="ENELAC GRANEL"/>
+            <StringItem index="10" value="ENELAC LEVADURA GRANEL"/>
+            <StringItem index="11" value="ENELAC PELETIZADO GRANEL"/>
+            <StringItem index="12" value="ENELAC RUMENSIN GRANEL"/>
+            <StringItem index="13" value="FASE 1 GRANEL"/>
+            <StringItem index="14" value="INICIO LACTANCIA GRANEL"/>
+            <StringItem index="15" value="MA&#xcd;Z MOLIDO GRANEL"/>
+            <StringItem index="16" value="PELETHENO GRANEL"/>
+            <StringItem index="17" value="PELETHIZADA ESPECIAL GRANEL"/>
+            <StringItem index="18" value="PERFECTA GRANEL"/>
+            <StringItem index="19" value="PREDILECTA GRANEL"/>
+            <StringItem index="20" value="PRODUCTORA LECHE GRANEL"/>
+            <StringItem index="21" value="SUPLEMAX KG"/>
+            <StringItem index="22" value="ULTRA FEED GRANEL"/>
+            <StringItem index="23" value="VAP 17 GRANEL"/>
+            <StringItem index="24" value="VAP FEED C/ LEV ESPECIAL"/>
+            <StringItem index="25" value="VAP FEED ESPECIAL GRANEL"/>
+            <StringItem index="26" value="VAP FEED LEVADURA GRANEL"/>
+            <StringItem index="27" value="VAP FEED PELETIZADO GRANEL"/>
+            <StringItem index="28" value="VAP PELETIZADO ESPECIAL GRANEL"/>
+            <StringItem index="29" value="VAP RB GRANEL"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProductoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNombreSocio">
     </Component>

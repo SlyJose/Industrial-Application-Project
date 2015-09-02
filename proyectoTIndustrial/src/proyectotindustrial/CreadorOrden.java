@@ -18,6 +18,8 @@ import java.io.Writer;
 
 import java.io.BufferedWriter;
 
+import java.io.*;
+
 
 
 
@@ -27,6 +29,7 @@ public class CreadorOrden {
     String numPedido, 
     String nomSocio,
     String numEntrega,
+    String producto,
     String cantKg,
     String fechaEntrega,
     String horaEntrega,
@@ -35,21 +38,27 @@ public class CreadorOrden {
     {
 
          
-
-        String fileName = "C:\\Users\\luis diego\\Desktop\\proyectoTIndustrial\\proyectoTIndustrial\\Orden.txt"; //location of generated report
+        File file_ = new File("Orden.txt"); 
+        String fileName = file_.getAbsolutePath();
+        
+        //String fileName = "C:\\Users\\luis diego\\Desktop\\proyectoTIndustrial\\proyectoTIndustrial\\Orden.txt"; //location of generated report
          
+        
 
         try
 
         {
 
          FileWriter writer = new FileWriter(fileName,true);
+            
 
          writer.append(numPedido);
          writer.append(",");
          writer.append(nomSocio);
          writer.append(",");
          writer.append(numEntrega);
+         writer.append(",");
+         writer.append(producto);
          writer.append(",");
          writer.append(cantKg);
          writer.append(",");
