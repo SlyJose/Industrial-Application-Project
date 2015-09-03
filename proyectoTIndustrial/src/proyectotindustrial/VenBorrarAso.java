@@ -34,6 +34,7 @@ public class VenBorrarAso extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel2.setText("Digite el numero de entrega del asociado que desea borrar");
 

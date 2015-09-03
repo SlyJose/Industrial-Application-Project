@@ -47,6 +47,7 @@ public class VenAgregarAso extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 48)); // NOI18N
         jLabel1.setText("Agregar Asociado");

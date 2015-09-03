@@ -48,6 +48,7 @@ public class VenModificarCam extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(420, 500));
+        setResizable(false);
 
         jLabel5.setText("Capacidad por campo (kg)");
 

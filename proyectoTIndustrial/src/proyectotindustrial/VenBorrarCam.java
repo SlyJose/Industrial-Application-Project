@@ -34,6 +34,7 @@ public class VenBorrarCam extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel2.setText("Digite el numero de placa del camion que desea borrar");
 

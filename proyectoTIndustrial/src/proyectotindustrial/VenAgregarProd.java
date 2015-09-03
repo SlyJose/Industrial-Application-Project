@@ -35,8 +35,6 @@ public class VenAgregarProd extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAutoRequestFocus(false);
-        setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(420, 500));
         setResizable(false);
 

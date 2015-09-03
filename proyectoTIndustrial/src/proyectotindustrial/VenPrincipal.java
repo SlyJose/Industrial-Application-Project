@@ -85,6 +85,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         txtNumeroDePedido = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Campos para una nueva orden");
 
@@ -170,7 +171,7 @@ public class VenPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("Realizar Cambios a archivos");
+        jLabel11.setText("Realizar cambios a archivos");
 
         jLabel12.setText("Seleccion Conjunto");
 

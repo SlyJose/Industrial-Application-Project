@@ -34,6 +34,7 @@ public class VenBorrarProd extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel2.setText("Digite el nombre del producto que desea borrar");
 

@@ -47,7 +47,7 @@ public class VenModificarAso extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(420, 500));
+        setResizable(false);
 
         jLabel2.setText("Numero de Entrega");
 
