@@ -60,13 +60,16 @@ public class SeleccionAsociado {
         listaAsociados.add(nuevoNodo);    
     }
     
-    private void cargarArchivo(){                                               // Metodo encargado de cargar el txt de productos al programa
+    public void cargarArchivo(){                                               // Metodo encargado de cargar el txt de productos al programa
         File archivo = null;
         FileReader lector = null;
         BufferedReader lectorLinea = null;
         
+        File file_ = new File("Asociados.txt"); 
+       String fileName = file_.getAbsolutePath();
+        
         try {                                                                   // Se abre el archivo de asociados
-         archivo = new File ("C:\\Users\\Jose\\Documents\\GitHub\\proyectoTIndustrial\\proyectoTIndustrial\\Asociados.txt");
+         archivo = new File (fileName);
          lector = new FileReader(archivo);
          lectorLinea = new BufferedReader(lector);
           

@@ -7,7 +7,9 @@ package proyectotindustrial;
 
 /**
  *
- * @author luis diego
+ * @author Jose Pablo Urena Gutierrez, Luis Diego Hernandez Herrera
+ * 
+ * @version 1.0
  */
 public class ProyectoTIndustrial {
 
@@ -22,6 +24,10 @@ public class ProyectoTIndustrial {
         nuevo.agregarProducto("arroz", 2330.0, 111);
         nuevo.agregarProducto("frijoles", 5500.25, 111);
         nuevo.agregarProducto("arroz", 300.0, 111);
+        
+        
+        
+        
         
     }
     

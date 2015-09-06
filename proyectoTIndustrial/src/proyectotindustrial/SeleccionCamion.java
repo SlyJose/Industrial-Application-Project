@@ -19,11 +19,7 @@ import java.io.*;                                                               
  */
 public class SeleccionCamion {
     
-    static class NodoCompartimento{
-        String productoInterno = "vacio" ;                                      // Cada compartimento solo almacena un tipo de producto
-        double capacidadLibre = 0.0;                                            // Capacidad de almacenamiento en el compartimento
-    }
-        
+            
     static class NodoLista{                                                     // Clase que define cada nodo
         int numeroCamion;
         int placa;
@@ -102,13 +98,16 @@ public class SeleccionCamion {
         return agregado;
     }
     
-    private void cargarArchivo(){                                               // Metodo encargado de cargar el txt de camiones al programa
+    public void cargarArchivo(){                                               // Metodo encargado de cargar el txt de camiones al programa
         File archivo = null;
         FileReader lector = null;
         BufferedReader lectorLinea = null;
         
+        File file_ = new File("Camiones.txt"); 
+       String fileName = file_.getAbsolutePath();
+        
         try {                                                                   // Se abre el archivo de camiones
-         archivo = new File ("C:\\Users\\Jose\\Documents\\GitHub\\proyectoTIndustrial\\proyectoTIndustrial\\Camiones.txt");
+         archivo = new File (fileName);
          lector = new FileReader(archivo);
          lectorLinea = new BufferedReader(lector);
           
