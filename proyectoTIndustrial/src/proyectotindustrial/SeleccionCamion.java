@@ -66,36 +66,30 @@ public class SeleccionCamion {
         listaCamiones.add(nuevoNodo);    
     }
     
-    public boolean agregarProducto(String productoAcargar, double cantidadProducto, int placa){                     // Metodo encargado de reducir la cantidad de espacio libre en un compartimento, e indicar el producto que almacena
-        boolean agregado = false;
+    public void agregarProducto(String productoAcargar, double cantidadProducto, int placa){                     // Metodo encargado de reducir la cantidad de espacio libre en un compartimento, e indicar el producto que almacena
         double temporal = 0.0;
         double temporalCant = 0.0;
         for(int i = 0; i < listaCamiones.size(); ++i){                          // Se busca el camion al cual agregar el producto
-            if(listaCamiones.get(i).placa == placa){                            
-                                                                                
+            if(listaCamiones.get(i).placa == placa){                            // Se asegura que el pedido cabe en el camion antes de depositarlo
                 
-                                                                                // Se asegura que el pedido cabe en el camion antes de depositarlo
-                for(int k = 0; k < listaCamiones.get(i).carretaProductos.length; ++k){
+                for(int k = 0; k < listaCamiones.get(i).carretaProductos.length && cantidadProducto != 0.0; ++k){   // Itera sobre los compartimentos del camion, buscando vacios hasta que deposite todo el producto 
                     
-                }
-                                                                                // Busca algun compartimento libre en el camion
-                for(int j = 0; j < listaCamiones.get(i).carretaProductos.length; ++j){      
-                                                                                // El compartimento esta vacio
-                    if(listaCamiones.get(i).carretaProductos[j].equals("vacio")){       
-                        temporal = listaCamiones.get(i).carretaEspacioLibre[j];
-                        listaCamiones.get(i).carretaProductos[j] = productoAcargar;
-                        listaCamiones.get(i).carretaEspacioLibre[j] -= cantidadProducto;
-                        cantidadProducto -= temporal;
-                    }
-                    if(cantidadProducto == 0.0){
-                        j = listaCamiones.get(i).carretaProductos.length;
-                        agregado = true;
+                    if(listaCamiones.get(i).carretaProductos[k].equals("vacio")){                   // Encuentra un compartimento vacio
+                        listaCamiones.get(i).carretaProductos[k] = productoAcargar;
+                        
+                        temporal = listaCamiones.get(i).carretaEspacioLibre[k];                    
+                    
+                        if(listaCamiones.get(i).carretaEspacioLibre[k] >= cantidadProducto){        // La cantidad de producto cabe perfectamente en el compartimento
+                            listaCamiones.get(i).carretaEspacioLibre[k] -= cantidadProducto;
+                            cantidadProducto = 0.0;
+                        }else{
+                            listaCamiones.get(i).carretaEspacioLibre[k] = 0.0;                      // El compartimento no soporta todo el producto, se llena y se reduce la cantidad de producto a depositar
+                            cantidadProducto -= temporal;
+                        }
                     }
                 }
             }
         }
-        
-        return agregado;
     }
     
     public void cargarArchivo(){                                               // Metodo encargado de cargar el txt de camiones al programa
@@ -230,4 +224,22 @@ public class SeleccionCamion {
         }         
         return entregaNoDisponible;    
     }    
+    
+    public double getCantidadEspacioLibre(int placa){
+        double espacioLibre = 0.0;
+        if(existeCamion(placa)){
+            for(int iterador = 0; iterador < listaCamiones.size(); ++iterador){
+                if(listaCamiones.get(iterador).placa == placa){
+                    
+                    for(int i = 0; i < listaCamiones.get(iterador).campos; ++i){
+                        if(listaCamiones.get(iterador).carretaProductos[i].equals("vacio")){
+                            espacioLibre += listaCamiones.get(iterador).capacidadKg;                            
+                        }
+                    }
+                    iterador = listaCamiones.size();                
+                }                    
+            }
+        }
+        return espacioLibre;
+    }
 }
