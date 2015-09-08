@@ -89,13 +89,19 @@ public class OptimizadorRutas {
 
                 for(int k = 0; k < insCamion.listaCamiones.size(); ++k){                // Se encarga de escoger un camion que cumpla los requisitos de dicho pedido
 
-                    if( insCamion.listaCamiones.get(k).proveedor == preferenciaActual ){    // Se verifica que el camion sea de la preferencia requerida por el pedido
+                    if( insCamion.listaCamiones.get(k).proveedor == preferenciaActual || preferenciaActual.equals("no hay preferencia")){    // Se verifica que el camion sea de la preferencia requerida por el pedido
 
                         if(insCamion.getCantidadEspacioLibre(insCamion.listaCamiones.get(k).placa) >= subListaPedidos.get(pedidoAescoger).cantKg){      // Se verifica si la cantidad de producto cabe en el camion escogido
 
                             insCamion.agregarProducto(subListaPedidos.get(pedidoAescoger).producto, subListaPedidos.get(pedidoAescoger).cantKg, insCamion.listaCamiones.get(k).placa);
 
-                            // se mete este agregado a la lista de rutas
+                            
+                            /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
+                                de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:
+                                    - monto de flete
+                                    - precio de flete
+                                    - hora de entrega
+                            */
                             
                             
                             int day, month, year;
@@ -116,7 +122,7 @@ public class OptimizadorRutas {
                             
                             nuevaRuta.mes = month;
                             nuevaRuta.dia = day;
-                            nuevaRuta.numRuta = insCamion.listaCamiones.get(k).placa; // declarado por placa como identificador de pedido
+                            nuevaRuta.numRuta = insCamion.listaCamiones.get(k).placa;                   // Declarado por placa como identificador de ruta
                             nuevaRuta.socio = subListaPedidos.get(pedidoAescoger).nomSocio;
                             nuevaRuta.producto = subListaPedidos.get(pedidoAescoger).producto;
                             nuevaRuta.kgAentregar = subListaPedidos.get(pedidoAescoger).cantKg;
@@ -148,35 +154,39 @@ public class OptimizadorRutas {
             
             auxSubListaPedidos.clear();
             
-            //verificar si esta empanada sirve subListaPedidos = auxSubListaPedidos;
-            if (i == 9 && subListaPedidos.size() != 0) {
+            if (i == 8 && subListaPedidos.size() != 0) {                        // Si quedaron pedidos sin tramitar, se incluyen en camiones libre a fuerza por medio del metodo cargarAfuerza()
             
                 cargarAfuerza();
             }
             
         }
         
-        // Evalua ruta
+       evaluarCostos();                                                         // Al finalizar todas las rutas, se evalua si el nuevo conjunto de rutas obtenido es mas eficiente que el anterior obtenido
+       limpiarOrdenes();                                                        // Se limpian las listas para una nueva busqueda de rutas
         
     }
     
-public void cargarAfuerza(){
+public void cargarAfuerza(){                                                    // Método encargado de revisar la sublista de pedidos y procesar los restantes que no hayan sido procesados
     
-    for (int i = 0; i < subListaPedidos.size(); i++){
+    for (int i = 0; i < subListaPedidos.size(); i++){                           // Se itera sobre la sublista de pedidos
         
        String preferenciaActual = insAsociado.getPreferencia(subListaPedidos.get(i).numEntrega);                    
             
-        for (int j= 0; j < insCamion.listaCamiones.size(); ++j ) {
+        for (int j= 0; j < insCamion.listaCamiones.size(); ++j ) {              // Se escoge un camion que cumpla la preferencia y el espacio libre disponible
             
-            if( insCamion.listaCamiones.get(j).proveedor == preferenciaActual ){    // Se verifica que el camion sea de la preferencia requerida por el pedido
+            if( insCamion.listaCamiones.get(j).proveedor == preferenciaActual || preferenciaActual.equals("no hay preferencia") ){    
 
                 if(insCamion.getCantidadEspacioLibre(insCamion.listaCamiones.get(j).placa) >= subListaPedidos.get(i).cantKg){      // Se verifica si la cantidad de producto cabe en el camion escogido
 
                     insCamion.agregarProducto(subListaPedidos.get(i).producto, subListaPedidos.get(i).cantKg, insCamion.listaCamiones.get(j).placa);
 
-                    // se mete este agregado a la lista de rutas
-                            
-                            
+                    /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
+                                de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:
+                                    - monto de flete
+                                    - precio de flete
+                                    - hora de salida
+                    */
+                 
                     int day, month, year;
                     int second, minute, hour;
                             
@@ -189,13 +199,11 @@ public void cargarAfuerza(){
                     second = date.get(Calendar.SECOND);
                     minute = date.get(Calendar.MINUTE);
       
-                         
                     NodoRuta nuevaRuta = new NodoRuta();
-                            
                             
                     nuevaRuta.mes = month;
                     nuevaRuta.dia = day;
-                    nuevaRuta.numRuta = insCamion.listaCamiones.get(j).placa; // declarado por placa como identificador de pedido
+                    nuevaRuta.numRuta = insCamion.listaCamiones.get(j).placa;               // Declarado por placa como identificador de pedido
                     nuevaRuta.socio = subListaPedidos.get(i).nomSocio;
                     nuevaRuta.producto = subListaPedidos.get(i).producto;
                     nuevaRuta.kgAentregar = subListaPedidos.get(i).cantKg;
@@ -206,15 +214,12 @@ public void cargarAfuerza(){
                     nuevaRuta.proveedor = insCamion.listaCamiones.get(j).proveedor;
                     nuevaRuta.precioFlete = 0.0;
                     nuevaRuta.montoFlete = 0.0;
-                     
                             
                    listaRutas.add(nuevaRuta);
 
-                   subListaPedidos.remove(i);                 // El pedido se elimina de la sublista, ya fue procesado                        
-                   j = insCamion.listaCamiones.size();
-                
+                   subListaPedidos.remove(i);                                   // El pedido se elimina de la sublista, ya fue procesado                        
+                   j = insCamion.listaCamiones.size();                          // Se detiene la busqueda de camiones para este pedido             
                 }
-                        
             }
         }
     }
@@ -224,7 +229,22 @@ public void cargarAfuerza(){
     }
     
     public void limpiarOrdenes(){                                               // Se limpian todas las listas para una nueva ejecucion de algoritmo optimizador
-    }  
+        
+        listaPedidos.clear();
+        listaRutas.clear();
+        subListaPedidos.clear();
+        auxSubListaPedidos.clear();
+        int campos;
+        int placa;
+        for(int i = 0; i < insCamion.listaCamiones.size(); ++i){                // Se recorre la lista de camiones para reiniciar los valores de los compartimentos
+            placa = insCamion.listaCamiones.get(i).placa;
+            campos = insCamion.getCampos(placa);
+            for(int j = 0; j < campos; ++j){                                    // Reinicia los valores de los compartimentos en el camion
+                insCamion.listaCamiones.get(i).carretaEspacioLibre[j] = insCamion.listaCamiones.get(i).capacidadKg;
+                insCamion.listaCamiones.get(i).carretaProductos[j] = "vacio";
+            }
+        }
+    }
     
     public void cargarPedidos(){
         
