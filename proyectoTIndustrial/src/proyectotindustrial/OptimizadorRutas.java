@@ -23,6 +23,9 @@ public class OptimizadorRutas {
     SeleccionCamion insCamion = new SeleccionCamion();
     SeleccionProducto insProducto = new SeleccionProducto();
     
+    double [][] matrizDistancias = new double[251][251];                        // Matrices encargadas de manejar los tiempos y distancias de cada una de las fincas a otras
+    double [][] matrizTiempos = new double[251][251];
+    
         static class NodoPedido{                                                // Clase que define cada nodo
              
             int numPedido;
@@ -33,7 +36,7 @@ public class OptimizadorRutas {
             String fechaEntrega;
             String horaEntrega;
             String codPedido;
-    }
+        }
         
         static class NodoRuta{                                                  // Nodo que contiene los datos de una ruta nueva
             
@@ -93,13 +96,16 @@ public class OptimizadorRutas {
 
                         if(insCamion.getCantidadEspacioLibre(insCamion.listaCamiones.get(k).placa) >= subListaPedidos.get(pedidoAescoger).cantKg){      // Se verifica si la cantidad de producto cabe en el camion escogido
 
+                            
+                            // es necesario verificar si el camion tiene disponibilidad de tiempo
+                            
+                            //if(insCamion.listaCamiones.get(k).diponibilidadTiempo >= ){}
+                            
                             insCamion.agregarProducto(subListaPedidos.get(pedidoAescoger).producto, subListaPedidos.get(pedidoAescoger).cantKg, insCamion.listaCamiones.get(k).placa);
 
                             
                             /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
-                                de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:
-                                    - monto de flete
-                                    - precio de flete
+                                de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:                                    
                                     - hora de entrega
                             */
                             
@@ -131,8 +137,8 @@ public class OptimizadorRutas {
                             nuevaRuta.numEntrega = subListaPedidos.get(pedidoAescoger).numEntrega;
                             nuevaRuta.placaCamion = insCamion.listaCamiones.get(k).placa;
                             nuevaRuta.proveedor = insCamion.listaCamiones.get(k).proveedor;
-                            nuevaRuta.precioFlete = 0.0;
-                            nuevaRuta.montoFlete = 0.0;
+                            nuevaRuta.precioFlete = insAsociado.getCostoD(subListaPedidos.get(pedidoAescoger).numEntrega);
+                            nuevaRuta.montoFlete = nuevaRuta.precioFlete * nuevaRuta.kgAentregar;
                             
                             
                             listaRutas.add(nuevaRuta);
@@ -182,8 +188,6 @@ public void cargarAfuerza(){                                                    
 
                     /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
                                 de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:
-                                    - monto de flete
-                                    - precio de flete
                                     - hora de salida
                     */
                  
@@ -212,9 +216,9 @@ public void cargarAfuerza(){                                                    
                     nuevaRuta.numEntrega = subListaPedidos.get(i).numEntrega;
                     nuevaRuta.placaCamion = insCamion.listaCamiones.get(j).placa;
                     nuevaRuta.proveedor = insCamion.listaCamiones.get(j).proveedor;
-                    nuevaRuta.precioFlete = 0.0;
-                    nuevaRuta.montoFlete = 0.0;
-                            
+                    nuevaRuta.precioFlete = insAsociado.getCostoD(subListaPedidos.get(i).numEntrega);
+                    nuevaRuta.montoFlete = nuevaRuta.montoFlete = nuevaRuta.precioFlete * nuevaRuta.kgAentregar;
+                    
                    listaRutas.add(nuevaRuta);
 
                    subListaPedidos.remove(i);                                   // El pedido se elimina de la sublista, ya fue procesado                        

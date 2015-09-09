@@ -19,7 +19,6 @@ import java.io.*;                                                               
  */
 public class SeleccionCamion {
     
-            
     static class NodoLista{                                                     // Clase que define cada nodo
         int numeroCamion;
         int placa;
@@ -31,6 +30,7 @@ public class SeleccionCamion {
         int entregaNodisponible;      
         String carretaProductos[];                                              // Vector que indica el producto que contiene cada compartimento
         double carretaEspacioLibre[];                                           // Vector que indica la cantidad de espacio libre que queda en el compartimento
+        int diponibilidadTiempo;
     }
     
     public ArrayList<NodoLista> listaCamiones = new ArrayList<NodoLista>();     // Lista de objetos camiones
@@ -58,6 +58,7 @@ public class SeleccionCamion {
         nuevoNodo.entregaNodisponible = entregaNoDisponible;    
         nuevoNodo.carretaProductos = new String[campos];
         nuevoNodo.carretaEspacioLibre = new double[campos];
+        nuevoNodo.diponibilidadTiempo = 11;                                     // Todos los camiones tienen una disponibilidad de 11 horas
         
         for(int i = 0; i < campos; ++i){                                        // Se asigna la capacidad del compartimento a cada uno de ellos                                    
             nuevoNodo.carretaProductos[i] = "vacio";                            // Todos los compartimentos inician vacios por defecto
