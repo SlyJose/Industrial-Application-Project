@@ -23,6 +23,7 @@ public class OptimizadorRutas {
     SeleccionCamion insCamion = new SeleccionCamion();
     SeleccionProducto insProducto = new SeleccionProducto();
     LlenaMatriz llena = new LlenaMatriz();
+    int pedidosPorRuta = 0;                                                         //Me permite llevar el control de cantidad de ordenes por ruta
         
     
         static class NodoPedido{                                                // Clase que define cada nodo
@@ -60,6 +61,8 @@ public class OptimizadorRutas {
         insProducto.cargarArchivo(); 
         llena.llenaMatrizTiempos();
         llena.llenaMatrizDistancia();
+        llena.seteaSub();
+        
         
     }
     
@@ -112,7 +115,8 @@ public class OptimizadorRutas {
                                 insCamion.listaCamiones.get(k).numEntregaPedidoAnterior = numEntregaPedido;                 // El ultimo pedido agregado al camion se modifica
                                 
                                 insCamion.agregarProducto(subListaPedidos.get(pedidoAescoger).producto, subListaPedidos.get(pedidoAescoger).cantKg, insCamion.listaCamiones.get(k).placa);
-
+                                    
+                                pedidosPorRuta++;
                             
                                 /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
                                     de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:                                    
@@ -179,7 +183,7 @@ public class OptimizadorRutas {
         
        evaluarCostos();                                                         // Al finalizar todas las rutas, se evalua si el nuevo conjunto de rutas obtenido es mas eficiente que el anterior obtenido
        limpiarOrdenes();                                                        // Se limpian las listas para una nueva busqueda de rutas
-        
+       pedidosPorRuta = 0; 
     }
 }
     
@@ -191,8 +195,8 @@ public double obtenerTiempoEntreFincas(int numEntCamion, int numEntPedido){     
     if(numEntCamion == 0){                                                      // No se ha insertado ninguna orden en el camion
         
         for(int i = 0; i < 251; ++i){
-            if(llena.matrizTiempos[0][i] == numEntPedido){                            // Busca la distancia de la finca del pedido al Coyol
-                tiempo = llena.matrizTiempos[251][i];
+            if(llena.matriz[0][i].tiempoM == numEntPedido){                            // Busca la distancia de la finca del pedido al Coyol
+                tiempo = llena.matriz[251][i].tiempoM;
                 i = 251;
             }
         }
@@ -200,16 +204,16 @@ public double obtenerTiempoEntreFincas(int numEntCamion, int numEntPedido){     
     }else{
         
         for(int i = 0; i < 251; i++){
-            if(llena.matrizTiempos[0][i] == numEntCamion){
+            if(llena.matriz[0][i].tiempoM == numEntCamion){
                 indice1 = i;
             }
         }
         for(int i = 0; i < 251; ++i){
-            if(llena.matrizTiempos[i][0] == numEntPedido){
+            if(llena.matriz[i][0].tiempoM == numEntPedido){
                 indice1 = i;
             }
         }
-        tiempo = llena.matrizTiempos[indice1][indice2];
+        tiempo = llena.matriz[indice1][indice2].tiempoM;
         
     }
     return tiempo;
@@ -242,7 +246,7 @@ public void cargarAfuerza(){                                                    
                                 
                                 insCamion.agregarProducto(subListaPedidos.get(i).producto, subListaPedidos.get(i).cantKg, insCamion.listaCamiones.get(j).placa);
 
-                            
+                                pedidosPorRuta++;
                                 /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
                                     de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:                                    
                                         - hora de entrega
@@ -294,8 +298,48 @@ public void cargarAfuerza(){                                                    
     
     public void evaluarCostos(){                                                // Evalua el costo de las rutas actuales obtenidas con respecto a otras obtenidas anteriormente
         
-    
-    }
+     //   llena.subHeight = pedidosPorRuta;
+     //   llena.subWidth = pedidosPorRuta;
+        
+        ArrayList<NodoRuta> subListaRutas = new ArrayList<NodoRuta>();
+        
+        for (int i = 0; i < insCamion.listaCamiones.size(); i++){
+         
+            for (int iterador = 0; iterador < listaRutas.size(); iterador++) {
+                
+                if (insCamion.listaCamiones.get(i).placa == listaRutas.get(iterador).placaCamion){
+                
+                    subListaRutas.add(listaRutas.get(iterador));
+                }
+            }
+            
+            for (int j = 0; j < subListaRutas.size(); j++){
+            
+                double numEntrega = subListaRutas.get(j).numEntrega;    
+                
+                for (int k = 0; k < subListaRutas.size(); k++){   
+                     
+                    int contador = 0;
+                    
+                    if ((llena.matriz[j][k].distanciaM)== numEntrega) {
+                    //int numEntrega2 = subListaRutas.get(k).numEntrega;
+                    
+                    llena.subMatriz[j][k] = llena.matriz[llena.retornaIndices(llena.matriz[j][k])][llena.retornaIndices(llena.matriz[j][k])];
+                    
+                    contador++;
+                    
+                    }
+                
+                }    
+                    
+            }
+            
+        }
+        
+    }  
+
+        
+       
     
     public void limpiarOrdenes(){                                               // Se limpian todas las listas para una nueva ejecucion de algoritmo optimizador
         

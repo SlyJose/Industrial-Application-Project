@@ -20,10 +20,43 @@ import java.io.*;
  * @author Jose Sly
  */
 public class LlenaMatriz {
-    
-   double [][] matrizDistancias = new double[251][251];                        // Matrices encargadas de manejar los tiempos y distancias de cada una de las fincas a otras
-   double [][] matrizTiempos = new double[251][251];
    
+   int height, width;
+   int subHeight, subWidth; 
+   
+   matrizObjetos matriz[][] = new matrizObjetos[width][height];
+   matrizObjetos subMatriz[][] = new matrizObjetos[subWidth][subHeight];
+   
+   static class matrizObjetos{
+       
+       double tiempoM;
+       double distanciaM;
+   
+   }
+   
+   public void seteaSub(){
+   
+       for(int i=0; i < subWidth; i++)
+           
+           for (int j=0; j < subHeight; j++)
+               
+               subMatriz [j][j] = new matrizObjetos();
+   
+   }
+   
+       public int retornaIndices(matrizObjetos numEntrega){                                                //retorna los indices de un numero de entrega
+    
+        int indice;
+        
+        for (int i =0; i < matriz.length; i++){
+            
+            if (matriz[0][i] == numEntrega){
+            
+                return indice = i;
+            }
+        }
+        return 0;
+    }
    
    public void llenaMatrizTiempos(){                                               // Metodo encargado de cargar el txt de productos al programa
         File archivo = null;
@@ -44,14 +77,16 @@ public class LlenaMatriz {
          String delimitadoresPalabras = ",";                                    // Variable utilizada para separar los valores en el archivo por cada linea
          String[] palabrasSeparadas;
          
+         
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
             palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
    
                    for (int i = 0; i < 251; i++){
                    
+                       matriz [contador][i] = new matrizObjetos();
                        double campo = (Double.parseDouble(palabrasSeparadas[i]));
-                       matrizTiempos[contador][i] = campo;
+                       matriz [contador][i].tiempoM = campo;
                    }
                    
                    contador++;
@@ -96,8 +131,9 @@ public class LlenaMatriz {
    
                    for (int i = 0; i < 251; i++){
                    
+                       matriz [contador][i] = new matrizObjetos();
                        double campo = (Double.parseDouble(palabrasSeparadas[i]));
-                       matrizDistancias[contador][i] = campo;
+                       matriz [contador][i].distanciaM = campo;
                    }
                    
                    contador++;
