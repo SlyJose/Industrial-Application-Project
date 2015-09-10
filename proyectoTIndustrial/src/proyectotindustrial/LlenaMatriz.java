@@ -27,30 +27,26 @@ public class LlenaMatriz {
    matrizObjetos matriz[][] = new matrizObjetos[width][height];
    matrizObjetos subMatriz[][] = new matrizObjetos[subWidth][subHeight];
    
+   matrizObjetos obj [] = new matrizObjetos[1];
+//   matrizObjetos obj1 [] = new matrizObjetos[1];
+   
+   
    static class matrizObjetos{
        
        double tiempoM;
        double distanciaM;
+       double numEntrega;
    
    }
    
-   public void seteaSub(){
    
-       for(int i=0; i < subWidth; i++)
-           
-           for (int j=0; j < subHeight; j++)
-               
-               subMatriz [j][j] = new matrizObjetos();
-   
-   }
-   
-       public int retornaIndices(matrizObjetos numEntrega){                                                //retorna los indices de un numero de entrega
+       public int retornaIndices(double numEntrega){                                                //retorna los indices de un numero de entrega
     
         int indice;
         
         for (int i =0; i < matriz.length; i++){
             
-            if (matriz[0][i] == numEntrega){
+            if (matriz[0][i].distanciaM  == numEntrega){
             
                 return indice = i;
             }

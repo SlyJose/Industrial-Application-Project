@@ -22,8 +22,7 @@ public class OptimizadorRutas {
     SeleccionAsociado insAsociado = new SeleccionAsociado();                    // Instancias de las clases que manejan los archivos de datos
     SeleccionCamion insCamion = new SeleccionCamion();
     SeleccionProducto insProducto = new SeleccionProducto();
-    LlenaMatriz llena = new LlenaMatriz();
-    int pedidosPorRuta = 0;                                                         //Me permite llevar el control de cantidad de ordenes por ruta
+    LlenaMatriz llena = new LlenaMatriz();                                                    
         
     
         static class NodoPedido{                                                // Clase que define cada nodo
@@ -61,7 +60,6 @@ public class OptimizadorRutas {
         insProducto.cargarArchivo(); 
         llena.llenaMatrizTiempos();
         llena.llenaMatrizDistancia();
-        llena.seteaSub();
         
         
     }
@@ -116,7 +114,6 @@ public class OptimizadorRutas {
                                 
                                 insCamion.agregarProducto(subListaPedidos.get(pedidoAescoger).producto, subListaPedidos.get(pedidoAescoger).cantKg, insCamion.listaCamiones.get(k).placa);
                                     
-                                pedidosPorRuta++;
                             
                                 /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
                                     de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:                                    
@@ -182,8 +179,7 @@ public class OptimizadorRutas {
         }
         
        evaluarCostos();                                                         // Al finalizar todas las rutas, se evalua si el nuevo conjunto de rutas obtenido es mas eficiente que el anterior obtenido
-       limpiarOrdenes();                                                        // Se limpian las listas para una nueva busqueda de rutas
-       pedidosPorRuta = 0; 
+       limpiarOrdenes();                                                        // Se limpian las listas para una nueva busqueda de rutas 
     }
 }
     
@@ -246,7 +242,6 @@ public void cargarAfuerza(){                                                    
                                 
                                 insCamion.agregarProducto(subListaPedidos.get(i).producto, subListaPedidos.get(i).cantKg, insCamion.listaCamiones.get(j).placa);
 
-                                pedidosPorRuta++;
                                 /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
                                     de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:                                    
                                         - hora de entrega
@@ -298,8 +293,7 @@ public void cargarAfuerza(){                                                    
     
     public void evaluarCostos(){                                                // Evalua el costo de las rutas actuales obtenidas con respecto a otras obtenidas anteriormente
         
-     //   llena.subHeight = pedidosPorRuta;
-     //   llena.subWidth = pedidosPorRuta;
+
         
         ArrayList<NodoRuta> subListaRutas = new ArrayList<NodoRuta>();
         
@@ -313,26 +307,41 @@ public void cargarAfuerza(){                                                    
                 }
             }
             
-            for (int j = 0; j < subListaRutas.size(); j++){
             
-                double numEntrega = subListaRutas.get(j).numEntrega;    
+            llena.subHeight = subListaRutas.size() + 1;
+            
+            llena.subWidth = subListaRutas.size() + 1;
+            
+            
+                    
+                for (int j = 1; j < listaRutas.size() + 1; j++){
+                   
+                 
+                    llena.subMatriz[0][j].numEntrega = subListaRutas.get(j).numEntrega;
+                    llena.subMatriz[j][0].numEntrega = subListaRutas.get(j).numEntrega;
                 
-                for (int k = 0; k < subListaRutas.size(); k++){   
-                     
-                    int contador = 0;
-                    
-                    if ((llena.matriz[j][k].distanciaM)== numEntrega) {
-                    //int numEntrega2 = subListaRutas.get(k).numEntrega;
-                    
-                    llena.subMatriz[j][k] = llena.matriz[llena.retornaIndices(llena.matriz[j][k])][llena.retornaIndices(llena.matriz[j][k])];
-                    
-                    contador++;
-                    
-                    }
-                
-                }    
-                    
-            }
+                }
+            
+//            for (int j = 0; j < subListaRutas.size(); j++){
+//            
+//                
+//                llena.obj[1].distanciaM = subListaRutas.get(j).numEntrega;                  
+//                
+//                int posicion = llena.retornaIndices( llena.obj[1].distanciaM);
+//                
+//               
+//                
+//                for (int k = 0; k < subListaRutas.size(); k++){   
+//                     
+//                   llena.obj1[1].distanciaM = subListaRutas.get(k).numEntrega;
+//                   
+//                   int posicion1 = llena.retornaIndices( llena.obj[1].distanciaM);  
+//                   
+//                   llena.subMatriz[j][k] = llena.matriz[posicion][posicion1];
+//                
+//                }    
+//                    
+//            }
             
         }
         
