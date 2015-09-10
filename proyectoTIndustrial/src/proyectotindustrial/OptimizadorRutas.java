@@ -22,9 +22,8 @@ public class OptimizadorRutas {
     SeleccionAsociado insAsociado = new SeleccionAsociado();                    // Instancias de las clases que manejan los archivos de datos
     SeleccionCamion insCamion = new SeleccionCamion();
     SeleccionProducto insProducto = new SeleccionProducto();
-    
-    double [][] matrizDistancias = new double[251][251];                        // Matrices encargadas de manejar los tiempos y distancias de cada una de las fincas a otras
-    double [][] matrizTiempos = new double[251][251];
+    LlenaMatriz llena = new LlenaMatriz();
+        
     
         static class NodoPedido{                                                // Clase que define cada nodo
              
@@ -58,7 +57,10 @@ public class OptimizadorRutas {
     public void cargarBaseDatos(){                                              // Se encarga de que las instancias insasociado, insproducto, inscamion, carguen de los archivos todos los datos al sistema
         insAsociado.cargarArchivo();
         insCamion.cargarArchivo();
-        insProducto.cargarArchivo();                
+        insProducto.cargarArchivo(); 
+        llena.llenaMatrizTiempos();
+        llena.llenaMatrizDistancia();
+        
     }
     
     public ArrayList<NodoPedido> listaPedidos = new ArrayList<NodoPedido>();    // Todos los pedidos ingresados por el usuario
@@ -189,8 +191,8 @@ public double obtenerTiempoEntreFincas(int numEntCamion, int numEntPedido){     
     if(numEntCamion == 0){                                                      // No se ha insertado ninguna orden en el camion
         
         for(int i = 0; i < 251; ++i){
-            if(matrizTiempos[0][i] == numEntPedido){                            // Busca la distancia de la finca del pedido al Coyol
-                tiempo = matrizTiempos[251][i];
+            if(llena.matrizTiempos[0][i] == numEntPedido){                            // Busca la distancia de la finca del pedido al Coyol
+                tiempo = llena.matrizTiempos[251][i];
                 i = 251;
             }
         }
@@ -198,16 +200,16 @@ public double obtenerTiempoEntreFincas(int numEntCamion, int numEntPedido){     
     }else{
         
         for(int i = 0; i < 251; i++){
-            if(matrizTiempos[0][i] == numEntCamion){
+            if(llena.matrizTiempos[0][i] == numEntCamion){
                 indice1 = i;
             }
         }
         for(int i = 0; i < 251; ++i){
-            if(matrizTiempos[i][0] == numEntPedido){
+            if(llena.matrizTiempos[i][0] == numEntPedido){
                 indice1 = i;
             }
         }
-        tiempo = matrizTiempos[indice1][indice2];
+        tiempo = llena.matrizTiempos[indice1][indice2];
         
     }
     return tiempo;
@@ -291,6 +293,8 @@ public void cargarAfuerza(){                                                    
 
     
     public void evaluarCostos(){                                                // Evalua el costo de las rutas actuales obtenidas con respecto a otras obtenidas anteriormente
+        
+    
     }
     
     public void limpiarOrdenes(){                                               // Se limpian todas las listas para una nueva ejecucion de algoritmo optimizador

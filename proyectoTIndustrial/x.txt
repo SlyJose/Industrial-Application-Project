@@ -1,0 +1,80 @@
+
+Datos importantes algoritmo:
+
+- 
+
+- Todos los pedidos de una misma finca tienen el mismo numero de pedido y de codigo de pedido
+
+- Se agrega una variable nueva a camiones (tiempo disponibilidad), tipo int
+
+- Código de pedido formato (#pedidoproductofechaentrega)
+
+- Código de pedido es la variable utilizada para ir escogiendo los diferentes subpedidos del pedido de una finca
+(selecciona producto del pedido)
+
+- Se puede utilizar camiones con productos ya metidos mientras cumplan con las restricciones adecuadas (preferencia
+y espacio en camion)
+
+- Mientras un camion cumpla las restricciones anteriores, no se cambia de camion. Si el pedido no cabe en el camion
+, busca otro pedido de la misma zona (si hay) y trata de meterlo en ese camion. 
+
+- Pedir a los ingenieros que organicen las zonas de acuerdo a su cercania por numero (1 mas cercana a la 2)
+
+- La disponibilidad de un camion queda definida por sus compartimentos, mientras tenga un compartimento vacio el camion
+esta libre. 
+
+- Dentro de la zona, escojo el pedido aleatoriamente, dentro del pedido escojo linealmente el producto. 
+
+- Un pedido no puede caber en mas de un camion
+
+--------------------------------------------------------------- 
+
+Segunda parte
+
+- Precio flete = valor asociado que tiene el numero de entrega llamado "costo de distribucion x kilogramo"
+- Monto flete = multiplicar precio flete por kgs a entregar
+
+
+Agregar a los filtros para escoger camion, el tiempo de disponibilidad. Este disminuye conforme se le agrega
+un pedido al camion. 
+
+Antes de agregar el producto al camion, es necesario que se llame al evaluador de tiempo y disponibilidad para
+analizar si puede o no llevar el pedido. 
+
+Ruta es todos los puntos o fincas por los que tiene que pasar el camion. No importa el numero de ruta que se le asigne 
+al camion.
+
+
+
+Se selecciona una ruta (puntos que toca el camion), saca las distancias de cada punto a cada punto, las ordena de 
+menor a mayor. (algoritmo luis diego)  
+
+Suma el costo  de cada ruta (suma todo el costo de los 1's, de los 2's, en tiempo y distancia).
+
+Obtiene la nota de la ruta:
+
+Km * 0.7
+
+Tiempo * 0.3
+
+Obtiene la nota del set de rutas(todas las rutas)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
