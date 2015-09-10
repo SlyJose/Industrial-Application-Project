@@ -72,6 +72,10 @@ public class OptimizadorRutas {
         Random rand = new Random();
         int pedidoAescoger = 0;
         String preferenciaActual = "";
+        int numEntregaAnterior;
+        int numEntregaPedido;
+        double tiempoEntreFincas;
+        
         
         for(int i = 1; i < 9; ++i){                                             // Itera sobre las zonas para obtener los pedidos en cada una                  
     
@@ -95,61 +99,65 @@ public class OptimizadorRutas {
                     if( insCamion.listaCamiones.get(k).proveedor == preferenciaActual || preferenciaActual.equals("no hay preferencia")){    // Se verifica que el camion sea de la preferencia requerida por el pedido
 
                         if(insCamion.getCantidadEspacioLibre(insCamion.listaCamiones.get(k).placa) >= subListaPedidos.get(pedidoAescoger).cantKg){      // Se verifica si la cantidad de producto cabe en el camion escogido
+                            
+                            numEntregaAnterior = insCamion.listaCamiones.get(k).numEntregaPedidoAnterior;
+                            numEntregaPedido = subListaPedidos.get(pedidoAescoger).numEntrega;
+                            tiempoEntreFincas = obtenerTiempoEntreFincas(numEntregaAnterior, numEntregaPedido);
+                            
+                            if(insCamion.listaCamiones.get(k).diponibilidadTiempo >= tiempoEntreFincas){                    // Se verifica si el camion tiene disponibilidad de tiempo
+                                
+                                insCamion.listaCamiones.get(k).diponibilidadTiempo -= tiempoEntreFincas;                    // Se reduce la cantidad de tiempo disponible en el camion
+                                insCamion.listaCamiones.get(k).numEntregaPedidoAnterior = numEntregaPedido;                 // El ultimo pedido agregado al camion se modifica
+                                
+                                insCamion.agregarProducto(subListaPedidos.get(pedidoAescoger).producto, subListaPedidos.get(pedidoAescoger).cantKg, insCamion.listaCamiones.get(k).placa);
 
                             
-                            // es necesario verificar si el camion tiene disponibilidad de tiempo
-                            
-                            //if(insCamion.listaCamiones.get(k).diponibilidadTiempo >= ){}
-                            
-                            insCamion.agregarProducto(subListaPedidos.get(pedidoAescoger).producto, subListaPedidos.get(pedidoAescoger).cantKg, insCamion.listaCamiones.get(k).placa);
+                                /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
+                                    de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:                                    
+                                        - hora de entrega
+                                */
 
-                            
-                            /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
-                                de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:                                    
-                                    - hora de entrega
-                            */
-                            
-                            
-                            int day, month, year;
-                            int second, minute, hour;
-                            
-                            GregorianCalendar date = new GregorianCalendar();
- 
-                            day = date.get(Calendar.DAY_OF_MONTH);
-                            month = date.get(Calendar.MONTH) + 1;
-                            year = date.get(Calendar.YEAR);
 
-                            second = date.get(Calendar.SECOND);
-                            minute = date.get(Calendar.MINUTE);
-      
-                         
-                            NodoRuta nuevaRuta = new NodoRuta();
-                            
-                            
-                            nuevaRuta.mes = month;
-                            nuevaRuta.dia = day;
-                            nuevaRuta.numRuta = insCamion.listaCamiones.get(k).placa;                   // Declarado por placa como identificador de ruta
-                            nuevaRuta.socio = subListaPedidos.get(pedidoAescoger).nomSocio;
-                            nuevaRuta.producto = subListaPedidos.get(pedidoAescoger).producto;
-                            nuevaRuta.kgAentregar = subListaPedidos.get(pedidoAescoger).cantKg;
-                            nuevaRuta.horaSalida = "";
-                            nuevaRuta.zona = insAsociado.getZona(subListaPedidos.get(pedidoAescoger).numEntrega);
-                            nuevaRuta.numEntrega = subListaPedidos.get(pedidoAescoger).numEntrega;
-                            nuevaRuta.placaCamion = insCamion.listaCamiones.get(k).placa;
-                            nuevaRuta.proveedor = insCamion.listaCamiones.get(k).proveedor;
-                            nuevaRuta.precioFlete = insAsociado.getCostoD(subListaPedidos.get(pedidoAescoger).numEntrega);
-                            nuevaRuta.montoFlete = nuevaRuta.precioFlete * nuevaRuta.kgAentregar;
-                            
-                            
-                            listaRutas.add(nuevaRuta);
+                                int day, month, year;
+                                int second, minute, hour;
 
-                            subListaPedidos.remove(pedidoAescoger);                 // El pedido se elimina de la sublista, ya fue procesado                        
-                            k = insCamion.listaCamiones.size();
-                        }else{
-                            auxSubListaPedidos.add(subListaPedidos.get(pedidoAescoger));        // Agrega el pedido que no cabe en el camion actual a una lista auxiliar, para que pase a la siguiente zona
-                            subListaPedidos.remove(pedidoAescoger);
-                            k = insCamion.listaCamiones.size();
-                        }                                    
+                                GregorianCalendar date = new GregorianCalendar();
+
+                                day = date.get(Calendar.DAY_OF_MONTH);
+                                month = date.get(Calendar.MONTH) + 1;
+                                year = date.get(Calendar.YEAR);
+
+                                second = date.get(Calendar.SECOND);
+                                minute = date.get(Calendar.MINUTE);
+
+
+                                NodoRuta nuevaRuta = new NodoRuta();
+
+
+                                nuevaRuta.mes = month;
+                                nuevaRuta.dia = day;
+                                nuevaRuta.numRuta = insCamion.listaCamiones.get(k).placa;                   // Declarado por placa como identificador de ruta
+                                nuevaRuta.socio = subListaPedidos.get(pedidoAescoger).nomSocio;
+                                nuevaRuta.producto = subListaPedidos.get(pedidoAescoger).producto;
+                                nuevaRuta.kgAentregar = subListaPedidos.get(pedidoAescoger).cantKg;
+                                nuevaRuta.horaSalida = "";
+                                nuevaRuta.zona = insAsociado.getZona(subListaPedidos.get(pedidoAescoger).numEntrega);
+                                nuevaRuta.numEntrega = subListaPedidos.get(pedidoAescoger).numEntrega;
+                                nuevaRuta.placaCamion = insCamion.listaCamiones.get(k).placa;
+                                nuevaRuta.proveedor = insCamion.listaCamiones.get(k).proveedor;
+                                nuevaRuta.precioFlete = insAsociado.getCostoD(subListaPedidos.get(pedidoAescoger).numEntrega);
+                                nuevaRuta.montoFlete = nuevaRuta.precioFlete * nuevaRuta.kgAentregar;
+
+
+                                listaRutas.add(nuevaRuta);
+
+                                subListaPedidos.remove(pedidoAescoger);                 // El pedido se elimina de la sublista, ya fue procesado                        
+                                k = insCamion.listaCamiones.size();
+                            }else{
+                                auxSubListaPedidos.add(subListaPedidos.get(pedidoAescoger));        // Agrega el pedido que no cabe en el camion actual a una lista auxiliar, para que pase a la siguiente zona
+                                subListaPedidos.remove(pedidoAescoger);
+                                k = insCamion.listaCamiones.size();
+                            }                                   
                     }
                 }            
             }
@@ -171,8 +179,45 @@ public class OptimizadorRutas {
        limpiarOrdenes();                                                        // Se limpian las listas para una nueva busqueda de rutas
         
     }
+}
+    
+public double obtenerTiempoEntreFincas(int numEntCamion, int numEntPedido){     // Metodo encargado de recibir dos fincas de asociados y obtener el tiempo entre ellas
+    
+    double tiempo = 0.0;
+    int indice1 = 0;
+    int indice2 = 0;
+    if(numEntCamion == 0){                                                      // No se ha insertado ninguna orden en el camion
+        
+        for(int i = 0; i < 251; ++i){
+            if(matrizTiempos[0][i] == numEntPedido){                            // Busca la distancia de la finca del pedido al Coyol
+                tiempo = matrizTiempos[251][i];
+                i = 251;
+            }
+        }
+        
+    }else{
+        
+        for(int i = 0; i < 251; i++){
+            if(matrizTiempos[0][i] == numEntCamion){
+                indice1 = i;
+            }
+        }
+        for(int i = 0; i < 251; ++i){
+            if(matrizTiempos[i][0] == numEntPedido){
+                indice1 = i;
+            }
+        }
+        tiempo = matrizTiempos[indice1][indice2];
+        
+    }
+    return tiempo;
+}    
     
 public void cargarAfuerza(){                                                    // Método encargado de revisar la sublista de pedidos y procesar los restantes que no hayan sido procesados
+    
+    int numEntregaAnterior;
+    int numEntregaPedido;
+    double tiempoEntreFincas;
     
     for (int i = 0; i < subListaPedidos.size(); i++){                           // Se itera sobre la sublista de pedidos
         
@@ -184,50 +229,66 @@ public void cargarAfuerza(){                                                    
 
                 if(insCamion.getCantidadEspacioLibre(insCamion.listaCamiones.get(j).placa) >= subListaPedidos.get(i).cantKg){      // Se verifica si la cantidad de producto cabe en el camion escogido
 
-                    insCamion.agregarProducto(subListaPedidos.get(i).producto, subListaPedidos.get(i).cantKg, insCamion.listaCamiones.get(j).placa);
-
-                    /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
-                                de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:
-                                    - hora de salida
-                    */
-                 
-                    int day, month, year;
-                    int second, minute, hour;
+                            numEntregaAnterior = insCamion.listaCamiones.get(j).numEntregaPedidoAnterior;
+                            numEntregaPedido = subListaPedidos.get(i).numEntrega;
+                            tiempoEntreFincas = obtenerTiempoEntreFincas(numEntregaAnterior, numEntregaPedido);
                             
-                    GregorianCalendar date = new GregorianCalendar();
- 
-                    day = date.get(Calendar.DAY_OF_MONTH);
-                    month = date.get(Calendar.MONTH) + 1;
-                    year = date.get(Calendar.YEAR);
+                            if(insCamion.listaCamiones.get(j).diponibilidadTiempo >= tiempoEntreFincas){                    // Se verifica si el camion tiene disponibilidad de tiempo
+                                
+                                insCamion.listaCamiones.get(j).diponibilidadTiempo -= tiempoEntreFincas;                    // Se reduce la cantidad de tiempo disponible en el camion
+                                insCamion.listaCamiones.get(j).numEntregaPedidoAnterior = numEntregaPedido;                 // El ultimo pedido agregado al camion se modifica
+                                
+                                insCamion.agregarProducto(subListaPedidos.get(i).producto, subListaPedidos.get(i).cantKg, insCamion.listaCamiones.get(j).placa);
 
-                    second = date.get(Calendar.SECOND);
-                    minute = date.get(Calendar.MINUTE);
-      
-                    NodoRuta nuevaRuta = new NodoRuta();
                             
-                    nuevaRuta.mes = month;
-                    nuevaRuta.dia = day;
-                    nuevaRuta.numRuta = insCamion.listaCamiones.get(j).placa;               // Declarado por placa como identificador de pedido
-                    nuevaRuta.socio = subListaPedidos.get(i).nomSocio;
-                    nuevaRuta.producto = subListaPedidos.get(i).producto;
-                    nuevaRuta.kgAentregar = subListaPedidos.get(i).cantKg;
-                    nuevaRuta.horaSalida = "";
-                    nuevaRuta.zona = insAsociado.getZona(subListaPedidos.get(i).numEntrega);
-                    nuevaRuta.numEntrega = subListaPedidos.get(i).numEntrega;
-                    nuevaRuta.placaCamion = insCamion.listaCamiones.get(j).placa;
-                    nuevaRuta.proveedor = insCamion.listaCamiones.get(j).proveedor;
-                    nuevaRuta.precioFlete = insAsociado.getCostoD(subListaPedidos.get(i).numEntrega);
-                    nuevaRuta.montoFlete = nuevaRuta.montoFlete = nuevaRuta.precioFlete * nuevaRuta.kgAentregar;
-                    
-                   listaRutas.add(nuevaRuta);
+                                /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
+                                    de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:                                    
+                                        - hora de entrega
+                                */
 
-                   subListaPedidos.remove(i);                                   // El pedido se elimina de la sublista, ya fue procesado                        
-                   j = insCamion.listaCamiones.size();                          // Se detiene la busqueda de camiones para este pedido             
+
+                                int day, month, year;
+                                int second, minute, hour;
+
+                                GregorianCalendar date = new GregorianCalendar();
+
+                                day = date.get(Calendar.DAY_OF_MONTH);
+                                month = date.get(Calendar.MONTH) + 1;
+                                year = date.get(Calendar.YEAR);
+
+                                second = date.get(Calendar.SECOND);
+                                minute = date.get(Calendar.MINUTE);
+
+
+                                NodoRuta nuevaRuta = new NodoRuta();
+
+
+                                nuevaRuta.mes = month;
+                                nuevaRuta.dia = day;
+                                nuevaRuta.numRuta = insCamion.listaCamiones.get(j).placa;                   // Declarado por placa como identificador de ruta
+                                nuevaRuta.socio = subListaPedidos.get(i).nomSocio;
+                                nuevaRuta.producto = subListaPedidos.get(i).producto;
+                                nuevaRuta.kgAentregar = subListaPedidos.get(i).cantKg;
+                                nuevaRuta.horaSalida = "";
+                                nuevaRuta.zona = insAsociado.getZona(subListaPedidos.get(i).numEntrega);
+                                nuevaRuta.numEntrega = subListaPedidos.get(i).numEntrega;
+                                nuevaRuta.placaCamion = insCamion.listaCamiones.get(j).placa;
+                                nuevaRuta.proveedor = insCamion.listaCamiones.get(j).proveedor;
+                                nuevaRuta.precioFlete = insAsociado.getCostoD(subListaPedidos.get(i).numEntrega);
+                                nuevaRuta.montoFlete = nuevaRuta.precioFlete * nuevaRuta.kgAentregar;
+
+
+                                listaRutas.add(nuevaRuta);
+
+                                subListaPedidos.remove(i);                 // El pedido se elimina de la sublista, ya fue procesado                                                           // El pedido se elimina de la sublista, ya fue procesado                                        
+                                j = insCamion.listaCamiones.size();                          // Se detiene la busqueda de camiones para este pedido             
+                            }                    
                 }
             }
         }
     }
 }
+
     
     public void evaluarCostos(){                                                // Evalua el costo de las rutas actuales obtenidas con respecto a otras obtenidas anteriormente
     }
