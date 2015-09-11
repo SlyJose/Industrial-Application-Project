@@ -359,9 +359,16 @@ public void cargarAfuerza(){                                                    
                         subMatriz[fil][ultimoIndice].visitado = true; 
                     }
                     
+                    for(int g = 0; g < subListaRutas.size(); ++g){
+                        
+                        if(subListaRutas.get(g).numEntrega == subMatriz[espejoIndice][0].numEntrega ){
+                            listaFinalPedidos.add(subListaRutas.get(g));
+                            g = subListaRutas.size();
+                            subListaRutas.remove(g);
+                        }
+                    }
                     
-                    
-                    
+                    ultimoIndice = espejoIndice;
                     
                     distMinima = 999999999999.0;
                 }
