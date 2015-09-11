@@ -31,6 +31,9 @@ public class ProyectoTIndustrial {
         nuevo.agregarProducto("frijoles", 5500.25, 111);
         nuevo.agregarProducto("arroz", 300.0, 111);
         
+        
+        
+        
 
     }
     

@@ -24,6 +24,13 @@ public class OptimizadorRutas {
     SeleccionProducto insProducto = new SeleccionProducto();
     LlenaMatriz llena = new LlenaMatriz();                                                    
         
+        static class matrizObjetos{
+       
+            double tiempoM;
+            double distanciaM;
+            double numEntrega;
+            boolean visitado = false;
+        }
     
         static class NodoPedido{                                                // Clase que define cada nodo
              
@@ -293,11 +300,15 @@ public void cargarAfuerza(){                                                    
     
     public void evaluarCostos(){                                                // Evalua el costo de las rutas actuales obtenidas con respecto a otras obtenidas anteriormente
         
-
         
-        ArrayList<NodoRuta> subListaRutas = new ArrayList<NodoRuta>();
+        ArrayList<NodoRuta> subListaRutas = new ArrayList<NodoRuta>();          //crear lista de subrutas para identificarlas con el mismo numero de placa
+        ArrayList<NodoRuta> listaFinalPedidos = new ArrayList<NodoRuta>();      // Contiene la lista de rutas finales que todos los camiones deben tomar
         
-        for (int i = 0; i < insCamion.listaCamiones.size(); i++){
+        double distMinima = 999999999999.0;                                     // Finca con la menor distancia a la finca anterior
+        int ultimoIndice = 0;                                            // Numero de finca en el que el camion se encuentra en el momento
+        int espejoIndice = 0;
+        
+        for (int i = 0; i < insCamion.listaCamiones.size(); i++){               // Itera por la lista de camiones ordenando las rutas del camion
          
             for (int iterador = 0; iterador < listaRutas.size(); iterador++) {
                 
@@ -307,46 +318,60 @@ public void cargarAfuerza(){                                                    
                 }
             }
             
+            matrizObjetos [][]subMatriz  = new matrizObjetos [subListaRutas.size()+ 2][subListaRutas.size()+ 2];
             
-            llena.subHeight = subListaRutas.size() + 1;
-            
-            llena.subWidth = subListaRutas.size() + 1;
-            
-            
-                    
-                for (int j = 1; j < listaRutas.size() + 1; j++){
+            for (int j = 1; j < subListaRutas.size() + 1; j++){                            //puebla la matriz con sus filas y columnas de numeros de entrega
                    
-                 
-                    llena.subMatriz[0][j].numEntrega = subListaRutas.get(j).numEntrega;
-                    llena.subMatriz[j][0].numEntrega = subListaRutas.get(j).numEntrega;
+                    subMatriz[0][j].numEntrega = subListaRutas.get(j).numEntrega;
+                    subMatriz[j][0].numEntrega = subListaRutas.get(j).numEntrega;
+                    subMatriz[0][j].visitado = false;
+                    subMatriz[j][0].visitado = false;
+            }
+            
+            subMatriz[0][subListaRutas.size() + 1].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;
+            
+            subMatriz[subListaRutas.size() + 1][0].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;
+            
+            for(int h = 0; h < subMatriz.length; ++h){                          // Evita que se vuelva a considerar la ruta al coyol 
+                subMatriz[subListaRutas.size()+ 1][h].visitado = false; 
+            }
+            
+                for (int k=1; k < subMatriz.length; ++k){
+                    for (int l = 1; l < subMatriz.length; ++l ) {
+                            subMatriz[k][l].distanciaM = llena.retornaDistancia(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);
+                            subMatriz[k][l].tiempoM = llena.retornaTiempo(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);
+                    }
+                } 
                 
+          
+                // algoritmo luis ordenamiento de rutas
+                
+                ultimoIndice = subMatriz.length - 1; // Arranca de la finca el Coyol por su numero de entrega
+                
+                for(int m = 0; m < subMatriz.length - 2; ++m){                       // Cantidad de iteraciones totales a realizar para ordenar las rutas
+                    
+                    for(int fil = 0; fil < subMatriz.length; ++fil ){ 
+                        
+                        if(subMatriz[fil][ultimoIndice].distanciaM < distMinima && subMatriz[fil][ultimoIndice].distanciaM != 0 && subMatriz[fil][ultimoIndice].visitado == false){
+                            distMinima = subMatriz[fil][ultimoIndice].distanciaM;
+                            espejoIndice = fil;
+                        }
+                        subMatriz[fil][ultimoIndice].visitado = true; 
+                    }
+                    
+                    
+                    
+                    
+                    
+                    distMinima = 999999999999.0;
                 }
-            
-//            for (int j = 0; j < subListaRutas.size(); j++){
-//            
-//                
-//                llena.obj[1].distanciaM = subListaRutas.get(j).numEntrega;                  
-//                
-//                int posicion = llena.retornaIndices( llena.obj[1].distanciaM);
-//                
-//               
-//                
-//                for (int k = 0; k < subListaRutas.size(); k++){   
-//                     
-//                   llena.obj1[1].distanciaM = subListaRutas.get(k).numEntrega;
-//                   
-//                   int posicion1 = llena.retornaIndices( llena.obj[1].distanciaM);  
-//                   
-//                   llena.subMatriz[j][k] = llena.matriz[posicion][posicion1];
-//                
-//                }    
-//                    
-//            }
-            
+                
+                
+                
         }
-        
     }  
 
+    
         
        
     

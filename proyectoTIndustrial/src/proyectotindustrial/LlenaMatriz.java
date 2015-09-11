@@ -21,16 +21,12 @@ import java.io.*;
  */
 public class LlenaMatriz {
    
-   int height, width;
-   int subHeight, subWidth; 
    
-   matrizObjetos matriz[][] = new matrizObjetos[width][height];
-   matrizObjetos subMatriz[][] = new matrizObjetos[subWidth][subHeight];
+    int numFincas = 251;
+    
+    matrizObjetos matriz[][] = new matrizObjetos [numFincas][numFincas];
    
-   matrizObjetos obj [] = new matrizObjetos[1];
-//   matrizObjetos obj1 [] = new matrizObjetos[1];
-   
-   
+
    static class matrizObjetos{
        
        double tiempoM;
@@ -39,20 +35,52 @@ public class LlenaMatriz {
    
    }
    
+//      public void seteaSub(){
+//   
+//       for(int i=0; i < subWidth; i++)
+//           
+//           for (int j=0; j < subHeight; j++)
+//               
+//               subMatriz [i][j] = new matrizObjetos();
+//   
+//   }
    
-       public int retornaIndices(double numEntrega){                                                //retorna los indices de un numero de entrega
-    
-        int indice;
-        
-        for (int i =0; i < matriz.length; i++){
-            
-            if (matriz[0][i].distanciaM  == numEntrega){
-            
-                return indice = i;
-            }
-        }
-        return 0;
-    }
+   
+   public double retornaTiempo(double fincaA, double fincaB){
+       
+       int indiceA = 0;
+       int indiceB = 0;
+       
+       for(int i=0; i < matriz.length ; ++i){
+           if(matriz[0][i].numEntrega == fincaA ){
+               indiceA = i;
+           }
+       }
+       for(int i=0; i < matriz.length ; ++i){
+           if(matriz[i][0].numEntrega == fincaB ){
+               indiceB = i;
+           }
+       }
+       return matriz[indiceA][indiceB].tiempoM;
+   }
+   
+   public double retornaDistancia(double fincaA, double fincaB){
+       
+       int indiceA = 0;
+       int indiceB = 0;
+       
+       for(int i=0; i < matriz.length ; ++i){
+           if(matriz[0][i].numEntrega == fincaA ){
+               indiceA = i;
+           }
+       }
+       for(int i=0; i < matriz.length ; ++i){
+           if(matriz[i][0].numEntrega == fincaB ){
+               indiceB = i;
+           }
+       }
+       return matriz[indiceA][indiceB].distanciaM;
+   }
    
    public void llenaMatrizTiempos(){                                               // Metodo encargado de cargar el txt de productos al programa
         File archivo = null;
@@ -78,7 +106,7 @@ public class LlenaMatriz {
             palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
    
-                   for (int i = 0; i < 251; i++){
+                   for (int i = 0; i < numFincas; i++){
                    
                        matriz [contador][i] = new matrizObjetos();
                        double campo = (Double.parseDouble(palabrasSeparadas[i]));
@@ -125,7 +153,7 @@ public class LlenaMatriz {
             palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
    
-                   for (int i = 0; i < 251; i++){
+                   for (int i = 0; i < numFincas; i++){
                    
                        matriz [contador][i] = new matrizObjetos();
                        double campo = (Double.parseDouble(palabrasSeparadas[i]));
