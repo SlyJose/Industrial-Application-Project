@@ -302,25 +302,31 @@ public void cargarAfuerza(){                                                    
         
         
         ArrayList<NodoRuta> subListaRutas = new ArrayList<NodoRuta>();          //crear lista de subrutas para identificarlas con el mismo numero de placa
-        ArrayList<NodoRuta> listaFinalPedidos = new ArrayList<NodoRuta>();      // Contiene la lista de rutas finales que todos los camiones deben tomar
+        //ArrayList<NodoRuta> listaFinalPedidos = new ArrayList<NodoRuta>();    
+        NodoRuta [] listaFinalPedidos = new NodoRuta[listaRutas.size()];        // Contiene el conjunto de rutas finales que todos los camiones deben tomar, en orden
         
         double distMinima = 999999999999.0;                                     // Finca con la menor distancia a la finca anterior
-        int ultimoIndice = 0;                                            // Numero de finca en el que el camion se encuentra en el momento
-        int espejoIndice = 0;
+        int ultimoIndice = 0;                                                   // Numero de finca en el que el camion se encuentra en el momento
+        int espejoIndice = 0;                                                   // Indice paralelo el actual indica la siguiente finca a la que se debe ir
+        boolean tienePedido = false;                                            // Variable bandera que identifica si tiene o no pedidos el camion
+        int indiceVectorFinal = 0;                                              // Indice estatico que corre sobre la listaFinalPedidos
         
         for (int i = 0; i < insCamion.listaCamiones.size(); i++){               // Itera por la lista de camiones ordenando las rutas del camion
          
-            for (int iterador = 0; iterador < listaRutas.size(); iterador++) {
+            for (int iterador = 0; iterador < listaRutas.size(); iterador++) {  // Buscamos en la lista de rutas, todas las pertenecientes a un camion especifico
                 
                 if (insCamion.listaCamiones.get(i).placa == listaRutas.get(iterador).placaCamion){
                 
-                    subListaRutas.add(listaRutas.get(iterador));
+                    subListaRutas.add(listaRutas.get(iterador));                // Contiene las rutas de un solo camion
+                    tienePedido = true;
                 }
             }
             
-            matrizObjetos [][]subMatriz  = new matrizObjetos [subListaRutas.size()+ 2][subListaRutas.size()+ 2];
+            if(tienePedido){                                                    // Ya que el camion si tiene pedidos, se ordenan sus rutas
+                
+                matrizObjetos [][]subMatriz  = new matrizObjetos [subListaRutas.size()+ 2][subListaRutas.size()+ 2];            // Matriz que almacena los pedidos del camion, mas el cero mas el Coyol
             
-            for (int j = 1; j < subListaRutas.size() + 1; j++){                            //puebla la matriz con sus filas y columnas de numeros de entrega
+            for (int j = 1; j < subListaRutas.size() + 1; j++){                 // Llena la matriz con sus primeras filas y columnas de numeros de entrega
                    
                     subMatriz[0][j].numEntrega = subListaRutas.get(j).numEntrega;
                     subMatriz[j][0].numEntrega = subListaRutas.get(j).numEntrega;
@@ -328,15 +334,15 @@ public void cargarAfuerza(){                                                    
                     subMatriz[j][0].visitado = false;
             }
             
-            subMatriz[0][subListaRutas.size() + 1].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;
+            subMatriz[0][subListaRutas.size() + 1].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;        // Se coloca el numero de entrega del Coyol en la ultima casilla de la primera fila y columna
             
             subMatriz[subListaRutas.size() + 1][0].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;
             
-            for(int h = 0; h < subMatriz.length; ++h){                          // Evita que se vuelva a considerar la ruta al coyol 
-                subMatriz[subListaRutas.size()+ 1][h].visitado = false; 
+            for(int h = 0; h < subMatriz.length; ++h){                          // Evita que se vuelva a considerar la ruta al Coyol, en la ultima fila de la matriz 
+                subMatriz[subListaRutas.size()+ 1][h].visitado = true; 
             }
             
-                for (int k=1; k < subMatriz.length; ++k){
+                for (int k=1; k < subMatriz.length; ++k){                       // Se llena el resto de casillas de la submatriz, con las distancias y los tiempos provenientes de la matriz grande Llena 
                     for (int l = 1; l < subMatriz.length; ++l ) {
                             subMatriz[k][l].distanciaM = llena.retornaDistancia(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);
                             subMatriz[k][l].tiempoM = llena.retornaTiempo(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);
@@ -344,38 +350,49 @@ public void cargarAfuerza(){                                                    
                 } 
                 
           
-                // algoritmo luis ordenamiento de rutas
+                // A continuacion se realiza el ordenamiento de rutas, basado en la subMatriz
                 
-                ultimoIndice = subMatriz.length - 1; // Arranca de la finca el Coyol por su numero de entrega
+                ultimoIndice = subMatriz.length - 1;                            // Arranca de la finca el Coyol por su numero de entrega
                 
-                for(int m = 0; m < subMatriz.length - 2; ++m){                       // Cantidad de iteraciones totales a realizar para ordenar las rutas
+                for(int m = 0; m < subMatriz.length - 2; ++m){                  // Cantidad de iteraciones totales a realizar para ordenar las rutas ( cantidad de fincas)
                     
-                    for(int fil = 0; fil < subMatriz.length; ++fil ){ 
+                    for(int fil = 0; fil < subMatriz.length; ++fil ){           // Busca la distancia minima en una columna, que es la finca actual en donde se encuentra el camion, asi encuentra la siguiente finca a la cual ir 
                         
-                        if(subMatriz[fil][ultimoIndice].distanciaM < distMinima && subMatriz[fil][ultimoIndice].distanciaM != 0 && subMatriz[fil][ultimoIndice].visitado == false){
+                        if(subMatriz[fil][ultimoIndice].distanciaM < distMinima && subMatriz[fil][ultimoIndice].distanciaM != 0.0 && subMatriz[fil][ultimoIndice].visitado == false){
                             distMinima = subMatriz[fil][ultimoIndice].distanciaM;
-                            espejoIndice = fil;
+                            espejoIndice = fil;                                 // Se almacena el indice de la siguiente finca
                         }
                         subMatriz[fil][ultimoIndice].visitado = true; 
                     }
                     
-                    for(int g = 0; g < subListaRutas.size(); ++g){
+                    for(int g = 0; g < subListaRutas.size(); ++g){              // Busca la finca siguiente en la subLista de rutas, la agrega a la lista final y la remueve
                         
                         if(subListaRutas.get(g).numEntrega == subMatriz[espejoIndice][0].numEntrega ){
-                            listaFinalPedidos.add(subListaRutas.get(g));
+                            listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(g);                // Se agrega la ruta a su respectiva posicion
+                            ++indiceVectorFinal;
                             g = subListaRutas.size();
                             subListaRutas.remove(g);
                         }
                     }
                     
-                    ultimoIndice = espejoIndice;
+                    ultimoIndice = espejoIndice;                                // La finca siguiente a visitar, se convierte en la actual
                     
-                    distMinima = 999999999999.0;
+                    distMinima = 999999999999.0;                    
                 }
                 
-                
-                
-        }
+            } // fin de if tienePedido
+            
+            tienePedido = false;                                                // Ya que se procede a ordenar las rutas de otro camion, se reinicia la variable
+            
+        }  // fin de for iteraCamiones
+        
+        
+        /** Una vez ordenadas todas las rutas por camion, se verifica si este conjunto de 
+         
+            rutas tiene un mejor costo que rutas almacenadas anteriormenee **/
+        
+        
+        
     }  
 
     
