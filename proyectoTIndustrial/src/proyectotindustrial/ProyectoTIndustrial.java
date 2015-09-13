@@ -9,7 +9,6 @@ import java.io.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-
 /**
  *
  * @author Jose Pablo Urena Gutierrez, Luis Diego Hernandez Herrera
@@ -22,19 +21,7 @@ public class ProyectoTIndustrial {
      * @param args the command line arguments
      */
     
-    public static void main(String[] args) {
-    
-        new VenPrincipal().setVisible(true);
-        SeleccionCamion nuevo = new SeleccionCamion();
-        nuevo.agregarCamion(3, 111, 5, 333.3, 22.2, 15000.0, "DP", 23);
-        nuevo.agregarProducto("arroz", 2330.0, 111);
-        nuevo.agregarProducto("frijoles", 5500.25, 111);
-        nuevo.agregarProducto("arroz", 300.0, 111);
-        
-        
-        
-        
-
+    public static void main(String[] args) {    
+        new VenPrincipal().setVisible(true);       
     }
-    
 }

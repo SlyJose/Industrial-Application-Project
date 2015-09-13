@@ -10,6 +10,12 @@ import java.io.*;
 import java.util.Random;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.io.Writer;                                                          // Biblioteca para la escritura de archivos
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+
 /**
  *
  * @author Jose P. * @author Jose Pablo Urena Gutierrez, Luis Diego Hernandez Herrera
@@ -58,7 +64,11 @@ public class OptimizadorRutas {
             double precioFlete;
             double montoFlete;
             int placaCamion;
-            String proveedor;            
+            String proveedor;     
+            
+            double costoDist;                                                   // Estas dos variables son utilizadas en la lista final para indicar el costo de una ruta en tiempo y distancia
+            double costoTiemp;
+            
         }
     
     public void cargarBaseDatos(){                                              // Se encarga de que las instancias insasociado, insproducto, inscamion, carguen de los archivos todos los datos al sistema
@@ -66,9 +76,7 @@ public class OptimizadorRutas {
         insCamion.cargarArchivo();
         insProducto.cargarArchivo(); 
         llena.llenaMatrizTiempos();
-        llena.llenaMatrizDistancia();
-        
-        
+        llena.llenaMatrizDistancia();        
     }
     
     public ArrayList<NodoPedido> listaPedidos = new ArrayList<NodoPedido>();    // Todos los pedidos ingresados por el usuario
@@ -184,10 +192,15 @@ public class OptimizadorRutas {
             }
             
         }
-        
-       evaluarCostos();                                                         // Al finalizar todas las rutas, se evalua si el nuevo conjunto de rutas obtenido es mas eficiente que el anterior obtenido
-       limpiarOrdenes();                                                        // Se limpian las listas para una nueva busqueda de rutas 
     }
+
+       /** Una vez obtenidas todas las rutas de todas las zonas, se busca
+        *  order estas y analizar si el conjunto de rutas tiene un buen costo
+        */     
+        
+    evaluarCostos();                                                         // Al finalizar todas las rutas, se evalua si el nuevo conjunto de rutas obtenido es mas eficiente que el anterior obtenido
+    limpiarOrdenes();                                                        // Se limpian las listas para una nueva busqueda de rutas     
+        
 }
     
 public double obtenerTiempoEntreFincas(int numEntCamion, int numEntPedido){     // Metodo encargado de recibir dos fincas de asociados y obtener el tiempo entre ellas
@@ -198,7 +211,7 @@ public double obtenerTiempoEntreFincas(int numEntCamion, int numEntPedido){     
     if(numEntCamion == 0){                                                      // No se ha insertado ninguna orden en el camion
         
         for(int i = 0; i < 251; ++i){
-            if(llena.matriz[0][i].tiempoM == numEntPedido){                            // Busca la distancia de la finca del pedido al Coyol
+            if(llena.matriz[0][i].tiempoM == numEntPedido){                     // Busca la distancia de la finca del pedido al Coyol
                 tiempo = llena.matriz[251][i].tiempoM;
                 i = 251;
             }
@@ -300,12 +313,12 @@ public void cargarAfuerza(){                                                    
     
     public void evaluarCostos(){                                                // Evalua el costo de las rutas actuales obtenidas con respecto a otras obtenidas anteriormente
         
-        
         ArrayList<NodoRuta> subListaRutas = new ArrayList<NodoRuta>();          //crear lista de subrutas para identificarlas con el mismo numero de placa
         //ArrayList<NodoRuta> listaFinalPedidos = new ArrayList<NodoRuta>();    
         NodoRuta [] listaFinalPedidos = new NodoRuta[listaRutas.size()];        // Contiene el conjunto de rutas finales que todos los camiones deben tomar, en orden
         
         double distMinima = 999999999999.0;                                     // Finca con la menor distancia a la finca anterior
+        double tiempMinimo = 0.0;
         int ultimoIndice = 0;                                                   // Numero de finca en el que el camion se encuentra en el momento
         int espejoIndice = 0;                                                   // Indice paralelo el actual indica la siguiente finca a la que se debe ir
         boolean tienePedido = false;                                            // Variable bandera que identifica si tiene o no pedidos el camion
@@ -360,6 +373,7 @@ public void cargarAfuerza(){                                                    
                         
                         if(subMatriz[fil][ultimoIndice].distanciaM < distMinima && subMatriz[fil][ultimoIndice].distanciaM != 0.0 && subMatriz[fil][ultimoIndice].visitado == false){
                             distMinima = subMatriz[fil][ultimoIndice].distanciaM;
+                            tiempMinimo = subMatriz[fil][ultimoIndice].tiempoM;
                             espejoIndice = fil;                                 // Se almacena el indice de la siguiente finca
                         }
                         subMatriz[fil][ultimoIndice].visitado = true; 
@@ -369,6 +383,8 @@ public void cargarAfuerza(){                                                    
                         
                         if(subListaRutas.get(g).numEntrega == subMatriz[espejoIndice][0].numEntrega ){
                             listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(g);                // Se agrega la ruta a su respectiva posicion
+                            listaFinalPedidos[indiceVectorFinal].costoDist = distMinima;                // Variables utilizadas para obtener el costo de la ruta
+                            listaFinalPedidos[indiceVectorFinal].costoTiemp = tiempMinimo;
                             ++indiceVectorFinal;
                             g = subListaRutas.size();
                             subListaRutas.remove(g);
@@ -389,15 +405,107 @@ public void cargarAfuerza(){                                                    
         
         /** Una vez ordenadas todas las rutas por camion, se verifica si este conjunto de 
          
-            rutas tiene un mejor costo que rutas almacenadas anteriormenee **/
+            rutas tiene un mejor costo que rutas almacenadas anteriormente **/
         
-        
-        
-    }  
-
-    
-        
+        double costoTotalRutas = 0.0;                                                // Indicador del costo total de todas las rutas
        
+        for(int i = 0; i < listaFinalPedidos.length; ++i){                      // Itera por el set de rutas completo obteniendo su costo
+            
+            costoTotalRutas += (listaFinalPedidos[i].costoDist * 0.70) + (listaFinalPedidos[i].costoTiemp * 0.30);          // Se promedia el costo de la ruta
+            
+        }
+        
+        File archivo = null;                                                    // Se procede con la revision del archivo
+        FileReader lector = null;
+        BufferedReader lectorLinea = null;
+        
+        File file_ = new File("Rutas Finales.txt"); 
+       String fileName = file_.getAbsolutePath();
+        
+        try {                                                                   // Se abre el archivo de rutas finales
+         archivo = new File (fileName);
+         lector = new FileReader(archivo);
+         lectorLinea = new BufferedReader(lector);
+          
+         String linea;
+         double comparador = 0.0;
+         String temp = "";
+         
+         if( ( linea = lectorLinea.readLine() ) != null ){                      // Se lee solo la primera linea
+             
+             for(int i = 0; i < linea.length(); ++i){                           // Se obtiene el costo de las rutas ya almacenadas
+                 if(linea.charAt(i) == '|'){
+                     i = linea.length();
+                 }else{
+                     temp += linea.charAt(i);
+                 }
+              }
+             
+             comparador = Double.parseDouble(temp);
+                 
+             if(costoTotalRutas < comparador || comparador == 0.0){             // Las rutas actuales tienen un mejor costo, se escriben en el archivo
+                     
+                     // Borrar el archivo y escribir las nuevas rutas
+                 
+                 file_.delete();                                                // El archivo de rutas se borra
+                 
+                 FileWriter fw = null;                                          // Se crea un nuevo archivo para almacenar las nuevas rutas finales
+                 try { 
+                    fw = new FileWriter(fileName);                              // La extension de la ruta es la misma que tenia el archivo de rutas borrado
+            
+                 } 
+                    catch (IOException ex) { 
+                 }
+                 
+                 File nuevoArchivo = new File("Rutas Finales.txt");             // Se abre el archivo para su corespondiente escritura
+                 String filename = nuevoArchivo.getAbsolutePath();
+                 
+                    try
+
+                    {
+
+                     FileWriter writer = new FileWriter(filename,true);
+
+                     writer.append(""+costoTotalRutas);                         // Lo primero escrito es el costo de dichas rutas
+                     writer.write(System.lineSeparator());
+                     writer.write(System.lineSeparator());
+                     writer.append("Mes    Dia    # de Ruta    Socio            Producto            KGS A Entregar    Hora Salida del Coyol    Lugar    # Entrega    Precio Flete    Monto Flete    Placa del Camion    Proveedor");
+                     writer.write(System.lineSeparator());                     
+                     
+                     for(int i = 0; i < listaFinalPedidos.length; ++i){         // Se escriben todas las rutas en orden
+                         writer.append(""+listaFinalPedidos[i].mes+"    "+listaFinalPedidos[i].dia+"    "+i+"    "+listaFinalPedidos[i].socio+
+                                        "            "+listaFinalPedidos[i].producto+"            "+listaFinalPedidos[i].kgAentregar+"    "+
+                                        listaFinalPedidos[i].horaSalida+"    "+listaFinalPedidos[i].zona+"    "+listaFinalPedidos[i].numEntrega+
+                                        "    "+listaFinalPedidos[i].precioFlete+"    "+listaFinalPedidos[i].montoFlete+"    "+listaFinalPedidos[i].placaCamion
+                                        +"    "+listaFinalPedidos[i].proveedor);
+                         writer.write(System.lineSeparator());
+                     }                     
+                     writer.close(); 
+                    }
+
+                    catch(IOException e)
+
+                    {
+                 e.printStackTrace();
+
+                    }
+             }             
+         }
+      }
+      catch(Exception e){
+         e.printStackTrace();
+      }finally{        
+         try{                    
+            if( null != lector ){   
+               lector.close();     
+            }                  
+         }catch (Exception e2){ 
+            e2.printStackTrace();
+         }
+      } 
+        
+        subListaRutas.clear();   // Se libera memoria
+ }  
     
     public void limpiarOrdenes(){                                               // Se limpian todas las listas para una nueva ejecucion de algoritmo optimizador
         
@@ -413,6 +521,8 @@ public void cargarAfuerza(){                                                    
             for(int j = 0; j < campos; ++j){                                    // Reinicia los valores de los compartimentos en el camion
                 insCamion.listaCamiones.get(i).carretaEspacioLibre[j] = insCamion.listaCamiones.get(i).capacidadKg;
                 insCamion.listaCamiones.get(i).carretaProductos[j] = "vacio";
+                insCamion.listaCamiones.get(i).diponibilidadTiempo = 11.0;
+                insCamion.listaCamiones.get(i).numEntregaPedidoAnterior = 0;
             }
         }
     }
@@ -473,8 +583,4 @@ public void cargarAfuerza(){                                                    
       } 
     
     }
-    
-        
-    
-    
 }

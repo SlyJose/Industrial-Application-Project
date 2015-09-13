@@ -1,5 +1,15 @@
 package proyectotindustrial;
 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.Writer;
+import java.io.BufferedWriter;
+//import 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,39 +38,224 @@ public class VenArchivar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jLabel3 = new javax.swing.JLabel();
+        jToggleButton3 = new javax.swing.JToggleButton();
+        jToggleButton5 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jButton2.setText("Guardar Rutas");
+        jLabel1.setText("¿ Desea guardar el archivo de rutas finales ? ");
 
-        jButton3.setText("Guardar Orden");
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel2.setText("Almacenar Rutas");
+
+        jToggleButton1.setText("Sí");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("¿ Desea guardar el archivo de órdenes ?");
+
+        jToggleButton3.setText("Sí");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton5.setText("Cerrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(70, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jToggleButton1)
+                            .addComponent(jToggleButton3))
+                        .addGap(87, 87, 87))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jToggleButton5)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jToggleButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jToggleButton5)
+                .addGap(7, 7, 7))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        
+        // Si desea guardar las rutas
+        
+        String ruta = "";
+        
+        // try
+        //{         
+         JFileChooser file=new JFileChooser();
+         file.showSaveDialog(this);
+         File rutaGuardar =file.getSelectedFile();
+         ruta = ""+rutaGuardar+".txt";
+         JOptionPane.showMessageDialog(null,
+                "El archivo se ha guardado exitosamente.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+         
+         
+         // Se lee el archivo original de rutas
+         
+            File archivo = null;
+            FileReader lector = null;
+            BufferedReader lectorLinea = null;
+
+            File file_ = new File("Rutas Finales.txt"); 
+           String fileName = file_.getAbsolutePath();
+           
+           String archivoCompleto = "";
+
+            try {                                                                   // Se abre el archivo de productos
+             archivo = new File (fileName);
+             lector = new FileReader(archivo);
+             lectorLinea = new BufferedReader(lector);
+
+             String linea;             
+             while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
+                archivoCompleto += linea+"\n";
+            }
+             
+          }
+          catch(Exception e){
+             e.printStackTrace();
+          }finally{        
+             try{                    
+                if( null != lector ){   
+                   lector.close();     
+                }                  
+             }catch (Exception e2){ 
+                e2.printStackTrace();
+             }
+          } 
+        
+        
+        // Se escribe en el nuevo archivo de rutas
+        
+        
+            
+        File file2 = new File(ruta); 
+        String filename = file2.getAbsolutePath();
+        
+        try
+
+        {
+
+         FileWriter writer = new FileWriter(filename,true);
+         writer.append(archivoCompleto);
+         writer.close();          
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        
+        // Si desea guardar las ordenes
+        
+        String ruta = "";
+                   
+         JFileChooser file=new JFileChooser();
+         file.showSaveDialog(this);
+         File rutaGuardar =file.getSelectedFile();
+         ruta = ""+rutaGuardar+".txt";
+         JOptionPane.showMessageDialog(null,
+                "El archivo se ha guardado exitosamente.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+         
+         
+         // Se lee el archivo original de rutas
+         
+            File archivo = null;
+            FileReader lector = null;
+            BufferedReader lectorLinea = null;
+
+            File file_ = new File("Orden.txt"); 
+           String fileName = file_.getAbsolutePath();           
+           String archivoCompleto = "";
+
+            try {                                                                   // Se abre el archivo de productos
+             archivo = new File (fileName);
+             lector = new FileReader(archivo);
+             lectorLinea = new BufferedReader(lector);
+
+             String linea;             
+             while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
+                archivoCompleto += linea+"\n";
+            }
+             
+          }
+          catch(Exception e){
+             e.printStackTrace();
+          }finally{        
+             try{                    
+                if( null != lector ){   
+                   lector.close();     
+                }                  
+             }catch (Exception e2){ 
+                e2.printStackTrace();
+             }
+          } 
+        
+        
+        // Se escribe en el nuevo archivo de rutas
+        
+        
+            
+        File file2 = new File(ruta); 
+        String filename = file2.getAbsolutePath();
+        
+        try
+
+        {
+
+         FileWriter writer = new FileWriter(filename,true);
+         writer.write(archivoCompleto);
+         writer.close();          
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -98,7 +293,11 @@ public class VenArchivar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton5;
     // End of variables declaration//GEN-END:variables
 }

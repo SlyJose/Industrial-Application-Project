@@ -25,11 +25,11 @@ public class SeleccionAsociado {
         int numeroEntrega;                                                      // Numero identificador de la finca
         int zona;                                                               // Numero de la zona 1-8
         int capacidad;                                                          // Capacidad de instalacion de la finca
-        int ventanaH;                                                           // Ventana de tiempo de entrega, horas
-        int ventanaM;                                                           // Ventana de tiempo de entrega, minutos
+        //int ventanaH;                                                           // Ventana de tiempo de entrega, horas
+        //int ventanaM;                                                           // Ventana de tiempo de entrega, minutos
         double costoDistribucion;                                               // Costo de distribucion por kilogramo
-        double kmBuenos;                                                        // Kilometros buenos al Coyol
-        double kmMalos;                                                         // Kilometros malos al Coyol
+        //double kmBuenos;                                                        // Kilometros buenos al Coyol
+        //double kmMalos;                                                         // Kilometros malos al Coyol
         String preferencia;                                                     // Preferencia de transporte, si el asociado no posee preferencia, se inicializa como (No disponible)
     }
     
@@ -46,16 +46,16 @@ public class SeleccionAsociado {
         return existe;    
     }
     
-    public void agregarAsociado(int numeroEntrega, int zona, int capacidad, int ventanaH, int ventanaM, double costoDistribucion, double kmBuenos, double kmMalos, String preferencia){  // Metodo encargado de agregar un asociado a la lista de asociados
+    public void agregarAsociado(int numeroEntrega, int zona, int capacidad, double costoDistribucion, String preferencia){  // Metodo encargado de agregar un asociado a la lista de asociados
         NodoLista nuevoNodo = new NodoLista();
         nuevoNodo.numeroEntrega = numeroEntrega;
         nuevoNodo.zona = zona;
         nuevoNodo.capacidad = capacidad;
-        nuevoNodo.ventanaH = ventanaH;
-        nuevoNodo.ventanaM = ventanaM;
+        //nuevoNodo.ventanaH = ventanaH;
+        //nuevoNodo.ventanaM = ventanaM;
         nuevoNodo.costoDistribucion = costoDistribucion;
-        nuevoNodo.kmBuenos = kmBuenos;
-        nuevoNodo.kmMalos = kmMalos;
+        //nuevoNodo.kmBuenos = kmBuenos;
+        //nuevoNodo.kmMalos = kmMalos;
         nuevoNodo.preferencia = preferencia;
         listaAsociados.add(nuevoNodo);    
     }
@@ -82,12 +82,12 @@ public class SeleccionAsociado {
             int tEntrega = Integer.parseInt(palabrasSeparadas[0]);              // Variables temporales para casting 
             int tZona = Integer.parseInt(palabrasSeparadas[1]);
             int tCapacidad = Integer.parseInt(palabrasSeparadas[2]);
-            int tVenH = Integer.parseInt(palabrasSeparadas[3]);
-            int tVenM = Integer.parseInt(palabrasSeparadas[4]);
-            double tCosto = Double.parseDouble(palabrasSeparadas[5]);
-            double tKmB = Double.parseDouble(palabrasSeparadas[6]);
-            double tKmM = Double.parseDouble(palabrasSeparadas[7]);              
-            agregarAsociado(tEntrega, tZona, tCapacidad, tVenH, tVenM, tCosto, tKmB, tKmM, palabrasSeparadas[8]);                     // Se crea el producto en la lista de productos            
+            //int tVenH = Integer.parseInt(palabrasSeparadas[3]);
+            //int tVenM = Integer.parseInt(palabrasSeparadas[4]);
+            double tCosto = Double.parseDouble(palabrasSeparadas[3]);
+            //double tKmB = Double.parseDouble(palabrasSeparadas[6]);
+            //double tKmM = Double.parseDouble(palabrasSeparadas[7]);              
+            agregarAsociado(tEntrega, tZona, tCapacidad, tCosto, palabrasSeparadas[4]);                     // Se crea el producto en la lista de productos            
         }
       }
       catch(Exception e){
@@ -130,7 +130,7 @@ public class SeleccionAsociado {
     
     }
     
-    public int getVentanaH(int numEntrega){
+    /**public int getVentanaH(int numEntrega){
         int ventanaH = 0;
         if(existeAsociado(numEntrega)){
             for(int iterador = 0; iterador < listaAsociados.size(); ++iterador){
@@ -154,7 +154,7 @@ public class SeleccionAsociado {
             }
         }         
         return ventanaM;       
-    }
+    }**/
     
     public double getCostoD(int numEntrega){
         double costo = 0;
@@ -169,7 +169,7 @@ public class SeleccionAsociado {
         return costo;       
     }
     
-    public double getKmBuenos(int numEntrega){
+    /**public double getKmBuenos(int numEntrega){
         double kilometros = 0;
         if(existeAsociado(numEntrega)){
             for(int iterador = 0; iterador < listaAsociados.size(); ++iterador){
@@ -193,7 +193,7 @@ public class SeleccionAsociado {
             }
         }         
         return kilometros;    
-    }
+    }**/
     
     public String getPreferencia(int numEntrega){
         String preferencia = "";

@@ -82,7 +82,7 @@ public class LlenaMatriz {
        return matriz[indiceA][indiceB].distanciaM;
    }
    
-   public void llenaMatrizTiempos(){                                               // Metodo encargado de cargar el txt de productos al programa
+   public void llenaMatrizTiempos(){                                               // Metodo encargado de cargar el txt de tiempos al programa
         File archivo = null;
         FileReader lector = null;
         BufferedReader lectorLinea = null;
@@ -90,9 +90,11 @@ public class LlenaMatriz {
         File file_ = new File("Prueba4x4.txt"); 
         String fileName = file_.getAbsolutePath();
         
+        boolean leoPrimeraLinea = true;                                         // Se evita leer la primera linea del archivo de texto
+        
         try {                                                                   // Se abre el archivo de asociados
          
-         int contador = 0;
+         int contador = 1;                                                      // Arranca de la fila 1, la fila 0 contiene numeros de entrega
          archivo = new File (fileName);
          lector = new FileReader(archivo);
          lectorLinea = new BufferedReader(lector);
@@ -103,18 +105,18 @@ public class LlenaMatriz {
          
          
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
-            palabrasSeparadas = linea.split(delimitadoresPalabras);  
+                palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
-   
-                   for (int i = 0; i < numFincas; i++){
+                if(!leoPrimeraLinea){
+                    for (int i = 1; i < numFincas; i++){
                    
                        matriz [contador][i] = new matrizObjetos();
                        double campo = (Double.parseDouble(palabrasSeparadas[i]));
                        matriz [contador][i].tiempoM = campo;
                    }
-                   
                    contador++;
-                     
+                }
+                leoPrimeraLinea = true;
         }
       }
       catch(Exception e){
@@ -130,17 +132,18 @@ public class LlenaMatriz {
       } 
     }
    
-   public void llenaMatrizDistancia(){                                               // Metodo encargado de cargar el txt de productos al programa
+   public void llenaMatrizDistancia(){                                               // Metodo encargado de cargar el txt de distancias al programa
         File archivo = null;
         FileReader lector = null;
         BufferedReader lectorLinea = null;
+        boolean leoPrimeraLinea = true;                                         // Se evita leer la primera linea del archivo de texto
         
         File file_ = new File("Prueba4x4.txt"); 
         String fileName = file_.getAbsolutePath();
         
         try {                                                                   // Se abre el archivo de asociados
          
-         int contador = 0;
+         int contador = 1;
          archivo = new File (fileName);
          lector = new FileReader(archivo);
          lectorLinea = new BufferedReader(lector);
@@ -152,8 +155,8 @@ public class LlenaMatriz {
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
             palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
-   
-                   for (int i = 0; i < numFincas; i++){
+                if(!leoPrimeraLinea){
+                    for (int i = 1; i < numFincas; i++){
                    
                        matriz [contador][i] = new matrizObjetos();
                        double campo = (Double.parseDouble(palabrasSeparadas[i]));
@@ -161,7 +164,9 @@ public class LlenaMatriz {
                    }
                    
                    contador++;
-                     
+                }
+                
+                leoPrimeraLinea = false;
         }
       }
       catch(Exception e){

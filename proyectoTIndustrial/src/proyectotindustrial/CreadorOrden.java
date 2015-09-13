@@ -41,10 +41,6 @@ public class CreadorOrden {
         File file_ = new File("Orden.txt"); 
         String fileName = file_.getAbsolutePath();
         
-        //String fileName = "C:\\Users\\luis diego\\Desktop\\proyectoTIndustrial\\proyectoTIndustrial\\Orden.txt"; //location of generated report
-         
-        
-
         try
 
         {

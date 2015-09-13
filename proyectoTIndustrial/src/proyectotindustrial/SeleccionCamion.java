@@ -27,7 +27,7 @@ public class SeleccionCamion {
         double capacidadKg;
         double capacidad;
         String proveedor;
-        int entregaNodisponible;      
+        //int entregaNodisponible;      
         String carretaProductos[];                                              // Vector que indica el producto que contiene cada compartimento
         double carretaEspacioLibre[];                                           // Vector que indica la cantidad de espacio libre que queda en el compartimento
         double diponibilidadTiempo;
@@ -47,7 +47,7 @@ public class SeleccionCamion {
         return existe;    
     }
     
-    public void agregarCamion(int numeroCamion, int placa, int campos, double capacidadQ, double capacidadKg, double capacidad, String proveedor, int entregaNoDisponible){  // Metodo encargado de agregar un camion a la lista de camiones
+    public void agregarCamion(int numeroCamion, int placa, int campos, double capacidadQ, double capacidadKg, double capacidad, String proveedor){  // Metodo encargado de agregar un camion a la lista de camiones
         NodoLista nuevoNodo = new NodoLista();
         nuevoNodo.numeroCamion = numeroCamion;
         nuevoNodo.placa = placa;
@@ -56,7 +56,7 @@ public class SeleccionCamion {
         nuevoNodo.capacidadKg = capacidadKg;
         nuevoNodo.capacidad = capacidad;
         nuevoNodo.proveedor = proveedor;
-        nuevoNodo.entregaNodisponible = entregaNoDisponible;    
+        //nuevoNodo.entregaNodisponible = entregaNoDisponible;    
         nuevoNodo.carretaProductos = new String[campos];
         nuevoNodo.carretaEspacioLibre = new double[campos];
         nuevoNodo.diponibilidadTiempo = 11.0;                                     // Todos los camiones tienen una disponibilidad de 11 horas
@@ -120,8 +120,8 @@ public class SeleccionCamion {
             double tCapacidadQ = Double.parseDouble(palabrasSeparadas[3]);
             double tCapacidadKg = Double.parseDouble(palabrasSeparadas[4]);
             double tCapacidad = Double.parseDouble(palabrasSeparadas[5]);
-            int tEntregaNoDisponible = Integer.parseInt(palabrasSeparadas[7]);                      
-            agregarCamion(tNumeroCamion, tPlaca, tCampos, tCapacidadQ, tCapacidadKg, tCapacidad, palabrasSeparadas[6], tEntregaNoDisponible);                     // Se crea el camion en la lista de camiones
+            //int tEntregaNoDisponible = Integer.parseInt(palabrasSeparadas[7]);                      
+            agregarCamion(tNumeroCamion, tPlaca, tCampos, tCapacidadQ, tCapacidadKg, tCapacidad, palabrasSeparadas[6]);                     // Se crea el camion en la lista de camiones
         }
       }
       catch(Exception e){
@@ -215,7 +215,7 @@ public class SeleccionCamion {
         return proveedor;    
     }
     
-    public int getEntregaNoDisponible(int placa){                                            
+    /**public int getEntregaNoDisponible(int placa){                                            
         int entregaNoDisponible = 0;
         if(existeCamion(placa)){
             for(int iterador = 0; iterador < listaCamiones.size(); ++iterador){
@@ -225,8 +225,9 @@ public class SeleccionCamion {
                 }
             }
         }         
-        return entregaNoDisponible;    
-    }    
+        return entregaNoDisponible;
+    }        **/    
+
     
     public double getCantidadEspacioLibre(int placa){
         double espacioLibre = 0.0;
