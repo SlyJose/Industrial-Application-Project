@@ -22,7 +22,7 @@ import java.io.*;
 public class LlenaMatriz {
    
    
-    int numFincas = 251;
+    int numFincas = 253 ;
     
     matrizObjetos matriz[][] = new matrizObjetos [numFincas][numFincas];
    
@@ -87,14 +87,13 @@ public class LlenaMatriz {
         FileReader lector = null;
         BufferedReader lectorLinea = null;
         
-        File file_ = new File("Prueba4x4.txt"); 
+        File file_ = new File("Tiempos.txt"); 
         String fileName = file_.getAbsolutePath();
-        
-        boolean leoPrimeraLinea = true;                                         // Se evita leer la primera linea del archivo de texto
+                                                                                // Se evita leer la primera linea del archivo de texto
         
         try {                                                                   // Se abre el archivo de asociados
          
-         int contador = 1;                                                      // Arranca de la fila 1, la fila 0 contiene numeros de entrega
+         int contador = 0;                                                      // Arranca de la fila 1, la fila 0 contiene numeros de entrega
          archivo = new File (fileName);
          lector = new FileReader(archivo);
          lectorLinea = new BufferedReader(lector);
@@ -107,16 +106,23 @@ public class LlenaMatriz {
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
                 palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
-                if(!leoPrimeraLinea){
-                    for (int i = 1; i < numFincas; i++){
+              
+                    for (int i = 0; i < numFincas; i++){
                    
-                       matriz [contador][i] = new matrizObjetos();
-                       double campo = (Double.parseDouble(palabrasSeparadas[i]));
-                       matriz [contador][i].tiempoM = campo;
+                        try{
+                          
+                            double campo = (Double.parseDouble(palabrasSeparadas[i]));
+                            matriz [contador][i].distanciaM = campo;
+                            //System.out.print(campo +  "  ");
+                            }  
+                       
+                       catch(NumberFormatException ex){ // handle your exception  
+                           //System.out.println(" Not a number ");
+
+                        }
                    }
                    contador++;
-                }
-                leoPrimeraLinea = true;
+                
         }
       }
       catch(Exception e){
@@ -135,15 +141,14 @@ public class LlenaMatriz {
    public void llenaMatrizDistancia(){                                               // Metodo encargado de cargar el txt de distancias al programa
         File archivo = null;
         FileReader lector = null;
-        BufferedReader lectorLinea = null;
-        boolean leoPrimeraLinea = true;                                         // Se evita leer la primera linea del archivo de texto
+        BufferedReader lectorLinea = null;                                         // Se evita leer la primera linea del archivo de texto
         
-        File file_ = new File("Prueba4x4.txt"); 
+        File file_ = new File("Distancias.txt"); 
         String fileName = file_.getAbsolutePath();
         
         try {                                                                   // Se abre el archivo de asociados
          
-         int contador = 1;
+         int contador = 0;
          archivo = new File (fileName);
          lector = new FileReader(archivo);
          lectorLinea = new BufferedReader(lector);
@@ -155,18 +160,28 @@ public class LlenaMatriz {
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
             palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
-                if(!leoPrimeraLinea){
-                    for (int i = 1; i < numFincas; i++){
+                    for (int i = 0; i < numFincas; i++){
                    
                        matriz [contador][i] = new matrizObjetos();
-                       double campo = (Double.parseDouble(palabrasSeparadas[i]));
-                       matriz [contador][i].distanciaM = campo;
+                       //double campo = (Double.parseDouble(palabrasSeparadas[i]));
+                       
+                       try{
+                          double campo = (Double.parseDouble(palabrasSeparadas[i]));
+                            matriz [contador][i].distanciaM = campo;
+                            //System.out.print(campo +  "  ");
+                            }  
+                       
+                       catch(NumberFormatException ex){ // handle your exception
+                            
+                           //System.out.println(" Not a number ");
+
+                        }
+                      
                    }
                    
                    contador++;
-                }
                 
-                leoPrimeraLinea = false;
+                
         }
       }
       catch(Exception e){

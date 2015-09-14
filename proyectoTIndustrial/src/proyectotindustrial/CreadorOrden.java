@@ -23,7 +23,7 @@ import java.io.*;
 
 
 
-public class CreadorOrden {
+public class CreadorOrden {                                                     //carga la orden ingresada por el usuario a el archivo Orden.txt
   
     public void creaOrden (
     String numPedido, 

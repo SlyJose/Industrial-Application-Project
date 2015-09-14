@@ -43,7 +43,6 @@ public class VenArchivar extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
         jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -69,8 +68,6 @@ public class VenArchivar extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton5.setText("Cerrar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,18 +79,13 @@ public class VenArchivar extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jToggleButton1)
-                            .addComponent(jToggleButton3))
-                        .addGap(87, 87, 87))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jToggleButton5)
-                        .addContainerGap())))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToggleButton1)
+                    .addComponent(jToggleButton3))
+                .addGap(87, 87, 87))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +100,7 @@ public class VenArchivar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jToggleButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButton5)
-                .addGap(7, 7, 7))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -220,7 +210,9 @@ public class VenArchivar extends javax.swing.JFrame {
 
              String linea;             
              while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
-                archivoCompleto += linea+"\n";
+                //archivoCompleto += linea ;
+                
+                guardaEnOrdenFinal(linea,ruta);
             }
              
           }
@@ -234,13 +226,14 @@ public class VenArchivar extends javax.swing.JFrame {
              }catch (Exception e2){ 
                 e2.printStackTrace();
              }
-          } 
+          }       
+        // Se escribe en el nuevo archivo de ordenes
         
+
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
+
+        public void guardaEnOrdenFinal(String linea , String ruta) {  
         
-        // Se escribe en el nuevo archivo de rutas
-        
-        
-            
         File file2 = new File(ruta); 
         String filename = file2.getAbsolutePath();
         
@@ -249,14 +242,15 @@ public class VenArchivar extends javax.swing.JFrame {
         {
 
          FileWriter writer = new FileWriter(filename,true);
-         writer.write(archivoCompleto);
+         writer.write(linea);
+         writer.write(System.lineSeparator());
          writer.close();          
         }
         catch(IOException e){
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
-
+        
+     }
     /**
      * @param args the command line arguments
      */
@@ -298,6 +292,5 @@ public class VenArchivar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton5;
     // End of variables declaration//GEN-END:variables
 }

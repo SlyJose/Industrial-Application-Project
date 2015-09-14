@@ -20,8 +20,40 @@ public class ProyectoTIndustrial {
     /**
      * @param args the command line arguments
      */
+    public void limpiaArhivoOrden () {                                          //metodo que comienza limpiando el archivo que carga las ordenes
     
-    public static void main(String[] args) {    
-        new VenPrincipal().setVisible(true);       
+    File file_ = new File("Orden.txt"); 
+        String fileName = file_.getAbsolutePath();
+        
+        try {
+            
+            
+        PrintWriter writer = new PrintWriter(fileName);
+        writer.print("");
+        writer.close();
+        
+           }
+
+        catch(IOException e)
+
+        {
+            e.printStackTrace();
+
+        }
+    }
+    
+    public static void main(String[] args) { 
+        
+        ProyectoTIndustrial comienza = new ProyectoTIndustrial();
+        comienza.limpiaArhivoOrden();
+        
+        new VenPrincipal().setVisible(true);    
+        
+        LlenaMatriz llena = new LlenaMatriz();
+        llena.llenaMatrizDistancia();
+        
+     //   System.out.print(llena.matriz[252][252].distanciaM);
+        
+        
     }
 }
