@@ -187,7 +187,7 @@ public class VenArchivar extends javax.swing.JFrame {
          JFileChooser file=new JFileChooser();
          file.showSaveDialog(this);
          File rutaGuardar =file.getSelectedFile();
-         ruta = ""+rutaGuardar+".txt";
+         ruta = ""+rutaGuardar+".csv";
          JOptionPane.showMessageDialog(null,
                 "El archivo se ha guardado exitosamente.",
                     "Información",JOptionPane.INFORMATION_MESSAGE);
