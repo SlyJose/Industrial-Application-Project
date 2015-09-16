@@ -59,7 +59,7 @@ public class SeleccionCamion {
         //nuevoNodo.entregaNodisponible = entregaNoDisponible;    
         nuevoNodo.carretaProductos = new String[campos];
         nuevoNodo.carretaEspacioLibre = new double[campos];
-        nuevoNodo.diponibilidadTiempo = 11.0;                                     // Todos los camiones tienen una disponibilidad de 11 horas
+        nuevoNodo.diponibilidadTiempo = 660.0;                                     // Todos los camiones tienen una disponibilidad de 11 horas
         nuevoNodo.numEntregaPedidoAnterior = 0.0;
         
         for(int i = 0; i < campos; ++i){                                        // Se asigna la capacidad del compartimento a cada uno de ellos                                    
