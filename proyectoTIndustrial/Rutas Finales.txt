@@ -1,6 +1,6 @@
-0.0
+95.48499999999999
 
 Mes    Dia    # de Ruta    Socio            Producto            KGS A Entregar    Hora Salida del Coyol    Lugar    # Entrega    Precio Flete    Monto Flete    Placa del Camion    Proveedor
-0    0    0    null            null            0.0    null    0    0.0    0.0    0.0    0    null
-0    0    1    null            null            0.0    null    0    0.0    0.0    0.0    0    null
+9    16    0    Paola            INICIO LACTANCIA GRANEL            464.0        1    4760.0    14.28    6625.92    152388    Dos Pinos
+9    16    1    marcos            PERFECTA ESPECIAL GRANEL            31.0        2    19.0    14.12    437.71999999999997    152388    Dos Pinos
 0    0    2    null            null            0.0    null    0    0.0    0.0    0.0    0    null

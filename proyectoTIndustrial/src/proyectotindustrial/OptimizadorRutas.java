@@ -328,6 +328,11 @@ public void cargarAfuerza(){                                                    
         boolean tienePedido = false;                                            // Variable bandera que identifica si tiene o no pedidos el camion
         int indiceVectorFinal = 0;                                              // Indice estatico que corre sobre la listaFinalPedidos
         
+        for(int l = 0; l < listaFinalPedidos.length; ++l){
+                listaFinalPedidos[l] = new NodoRuta();
+        }
+        
+        
         for (int i = 0; i < insCamion.listaCamiones.size(); i++){               // Itera por la lista de camiones ordenando las rutas del camion
          
             for (int iterador = 0; iterador < listaRutas.size(); iterador++) {  // Buscamos en la lista de rutas, todas las pertenecientes a un camion especifico
@@ -442,11 +447,6 @@ public void cargarAfuerza(){                                                    
                         subMatriz[fil][ultimoIndice].visitado = true; 
                     }
                     
-                    for(int l = 0; l < listaFinalPedidos.length; ++l){
-                        listaFinalPedidos[l] = new NodoRuta();
-                    }
-                    
-                    
                     for(int g = 0; g < subListaRutas.size(); ++g){              // Busca la finca siguiente en la subLista de rutas, la agrega a la lista final y la remueve
                         
                         if(subListaRutas.get(g).numEntrega == subMatriz[espejoIndice][0].numEntrega ){
@@ -466,11 +466,6 @@ public void cargarAfuerza(){                                                    
                     
                     distMinima = 999999999999.0;                    
                 }
-                
-                for(int q = 0; q < listaFinalPedidos.length; ++q){
-                    System.out.println("Lista final: "+listaFinalPedidos[q].placaCamion+" ");
-                }
-                
             } // fin de if tienePedido
             
             tienePedido = false;                                                // Ya que se procede a ordenar las rutas de otro camion, se reinicia la variable
