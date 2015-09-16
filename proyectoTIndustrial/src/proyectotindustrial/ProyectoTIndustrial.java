@@ -50,25 +50,30 @@ public class ProyectoTIndustrial {
         
         new VenPrincipal().setVisible(true);    
         
-       // Pruebas llena matriz
+       LlenaMatriz llena = new LlenaMatriz();
+       llena.seteaMatriz();
         
-        /**LlenaMatriz llena = new LlenaMatriz();
-        llena.llenaMatrizDistancia();
-        llena.llenaMatrizTiempos();
-        llena.llenaNumEntregas(); **/
+        for(int i = 0; i < llena.matriz.length; i++){
+                
+            for(int j= 0; j < llena.matriz.length; j++){
         
-        
-        /**
-        for(int q = 1; q < llena.matriz.length;++q){
-                    for(int u = 1; u < llena.matriz.length; ++u){
-                        System.out.print(llena.matriz[q][u].tiempoM+" ");
-                    }
-                    System.out.println();
-                } **/
-        
-       //System.out.print(llena.matriz[0][4].tiempoM);
-       //System.out.print(llena.matriz[4][0].tiempoM);
-       
-       
+//                System.out.print(llena.matriz[i][j].distanciaM + "\t");
+//                System.out.print(llena.matriz[i][j].tiempoM + "\n");
+//                System.out.print(llena.matriz[j][i].distanciaM + "\t");
+//                System.out.print(llena.matriz[j][i].tiempoM + "\n");
+                
+                if (llena.matriz[i][j].distanciaM != llena.matriz[j][i].distanciaM ){
+                System.out.println("BRINCA LA EMPANADA");
+                }
+                
+                if (llena.matriz[i][j].tiempoM != llena.matriz[j][i].tiempoM ){
+                System.out.println("BRINCA LA EMPANADA");
+                }
+                
+        }
+            
+            
+         
     }
+}
 }
