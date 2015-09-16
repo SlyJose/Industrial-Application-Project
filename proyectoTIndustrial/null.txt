@@ -2,3 +2,13 @@
 0.0
 12,2,3,PERFECTA ESPECIAL GRANEL,4,5,6,7
 543,324,532,PERFECTA ESPECIAL GRANEL,432,43,532,53
+0.0
+
+Mes    Dia    # de Ruta    Socio            Producto            KGS A Entregar    Hora Salida del Coyol    Lugar    # Entrega    Precio Flete    Monto Flete    Placa del Camion    Proveedor
+0    0    0    null            null            0.0    null    0    0.0    0.0    0.0    0    null
+0    0    1    null            null            0.0    null    0    0.0    0.0    0.0    0    null
+0.0
+
+Mes    Dia    # de Ruta    Socio            Producto            KGS A Entregar    Hora Salida del Coyol    Lugar    # Entrega    Precio Flete    Monto Flete    Placa del Camion    Proveedor
+0    0    0    null            null            0.0    null    0    0.0    0.0    0.0    0    null
+0    0    1    null            null            0.0    null    0    0.0    0.0    0.0    0    null

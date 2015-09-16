@@ -72,12 +72,13 @@ public class OptimizadorRutas {
         }
     
     public void cargarBaseDatos(){                                              // Se encarga de que las instancias insasociado, insproducto, inscamion, carguen de los archivos todos los datos al sistema
-        insAsociado.cargarArchivo();
+        insAsociado.cargarArchivo();        
         insCamion.cargarArchivo();
         insProducto.cargarArchivo(); 
-        llena.llenaMatrizTiempos();
-        llena.llenaMatrizDistancia(); 
-        llena.llenaNumEntregas();
+        llena.seteaMatriz();
+        //llena.llenaMatrizDistancia(); 
+        //llena.llenaMatrizTiempos();
+        //llena.llenaNumEntregas();
     }
     
     public ArrayList<NodoPedido> listaPedidos = new ArrayList<NodoPedido>();    // Todos los pedidos ingresados por el usuario
@@ -94,10 +95,12 @@ public class OptimizadorRutas {
         double numEntregaAnterior;
         double numEntregaPedido;
         double tiempoEntreFincas;
-        
+        int cantPedidos = 0;
         
         for(int i = 1; i < 9; ++i){                                             // Itera sobre las zonas para obtener los pedidos en cada una                  
     
+            cantPedidos = 0;
+            
             for(int j = 0; j < listaPedidos.size(); ++j){   
                 
                 if( insAsociado.getZona(listaPedidos.get(j).numEntrega) == i ){ // Obtiene todos los pedidos de la zona actual y los inserta en la subLista de pedidos                    
@@ -105,31 +108,49 @@ public class OptimizadorRutas {
                 }
             }
             
-            
-            for(int m = 0; subListaPedidos.size() != 0; ++m){
+            for(int m = 0; cantPedidos < subListaPedidos.size(); ++m){
                 
                 tamSubListaTemp = subListaPedidos.size();
-                pedidoAescoger = rand.nextInt(tamSubListaTemp) + 0;
+                
+                if(tamSubListaTemp == 1){
+                    pedidoAescoger = 0;
+                }else{
+                    pedidoAescoger = rand.nextInt( (tamSubListaTemp - 1) - 0 + 1) + 0;                    
+                }
+                
+                System.out.println("Ramdon generado: "+pedidoAescoger);
 
                 preferenciaActual = insAsociado.getPreferencia(subListaPedidos.get(pedidoAescoger).numEntrega);                    
 
                 for(int k = 0; k < insCamion.listaCamiones.size(); ++k){                // Se encarga de escoger un camion que cumpla los requisitos de dicho pedido
 
                     if( insCamion.listaCamiones.get(k).proveedor == preferenciaActual || preferenciaActual.equals("no hay preferencia")){    // Se verifica que el camion sea de la preferencia requerida por el pedido
-
+                        
                         if(insCamion.getCantidadEspacioLibre(insCamion.listaCamiones.get(k).placa) >= subListaPedidos.get(pedidoAescoger).cantKg){      // Se verifica si la cantidad de producto cabe en el camion escogido
                             
                             numEntregaAnterior = insCamion.listaCamiones.get(k).numEntregaPedidoAnterior;
                             numEntregaPedido = subListaPedidos.get(pedidoAescoger).numEntrega;
                             tiempoEntreFincas = obtenerTiempoEntreFincas(numEntregaAnterior, numEntregaPedido);
                             
+                            System.out.println("num pedido anterior: "+numEntregaAnterior);
+                            System.out.println("num pedido: "+numEntregaPedido);
+                            System.out.println("tiempo: "+tiempoEntreFincas);
+                            
                             if(insCamion.listaCamiones.get(k).diponibilidadTiempo >= tiempoEntreFincas){                    // Se verifica si el camion tiene disponibilidad de tiempo
+                                
+                                System.out.println("entra");
                                 
                                 insCamion.listaCamiones.get(k).diponibilidadTiempo -= tiempoEntreFincas;                    // Se reduce la cantidad de tiempo disponible en el camion
                                 insCamion.listaCamiones.get(k).numEntregaPedidoAnterior = numEntregaPedido;                 // El ultimo pedido agregado al camion se modifica
                                 
                                 insCamion.agregarProducto(subListaPedidos.get(pedidoAescoger).producto, subListaPedidos.get(pedidoAescoger).cantKg, insCamion.listaCamiones.get(k).placa);
                                     
+                                System.out.println("Preferencia de finca: "+preferenciaActual);
+                                System.out.println("num entrega anterior: "+numEntregaAnterior);
+                                System.out.println("tiempo: "+tiempoEntreFincas);
+                                System.out.println("num entrega anterior: "+insCamion.listaCamiones.get(k).placa);
+                                
+                                
                             
                                 /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
                                     de rutas, incluyendo diferentes aspectos requeridos, faltando los elementos:                                    
@@ -180,6 +201,7 @@ public class OptimizadorRutas {
                     }
                 }            
             }
+                
             
             for(int l = 0; l < auxSubListaPedidos.size(); l++){      
                 subListaPedidos.add(auxSubListaPedidos.get(l));
@@ -191,13 +213,15 @@ public class OptimizadorRutas {
             
                 cargarAfuerza();
             }
-            
+            ++cantPedidos;
         }
     }
 
        /** Una vez obtenidas todas las rutas de todas las zonas, se busca
         *  order estas y analizar si el conjunto de rutas tiene un buen costo
         */     
+        
+        System.out.println("termina optimizador");
         
     evaluarCostos();                                                         // Al finalizar todas las rutas, se evalua si el nuevo conjunto de rutas obtenido es mas eficiente que el anterior obtenido
     limpiarOrdenes();                                                        // Se limpian las listas para una nueva busqueda de rutas     
@@ -209,29 +233,30 @@ public double obtenerTiempoEntreFincas(double numEntCamion, double numEntPedido)
     double tiempo = 0.0;
     int indice1 = 0;
     int indice2 = 0;
-    if(numEntCamion == 0){                                                      // No se ha insertado ninguna orden en el camion
+    if(numEntCamion == 0.0){                                                      // No se ha insertado ninguna orden en el camion
         
-        for(int i = 0; i < 251; ++i){
+        for(int i = 0; i < 253; ++i){
             if(llena.matriz[0][i].tiempoM == numEntPedido){                     // Busca la distancia de la finca del pedido al Coyol
-                tiempo = llena.matriz[251][i].tiempoM;
-                i = 251;
+                tiempo = llena.matriz[252][i].tiempoM;
+                i = 253;
             }
         }
         
     }else{
         
-        for(int i = 0; i < 251; i++){
+        for(int i = 0; i < 253; i++){
             if(llena.matriz[0][i].tiempoM == numEntCamion){
                 indice1 = i;
+                i = 253;
             }
         }
-        for(int i = 0; i < 251; ++i){
+        for(int i = 0; i < 253; ++i){
             if(llena.matriz[i][0].tiempoM == numEntPedido){
                 indice1 = i;
+                i = 253;
             }
         }
-        tiempo = llena.matriz[indice1][indice2].tiempoM;
-        
+        tiempo = llena.matriz[indice1][indice2].tiempoM;        
     }
     return tiempo;
 }    
@@ -342,27 +367,31 @@ public void cargarAfuerza(){                                                    
                 
                 matrizObjetos [][]subMatriz  = new matrizObjetos [subListaRutas.size()+ 2][subListaRutas.size()+ 2];            // Matriz que almacena los pedidos del camion, mas el cero mas el Coyol
             
+                
+                double temp2;
+                
             for (int j = 1; j < subListaRutas.size() + 1; j++){                 // Llena la matriz con sus primeras filas y columnas de numeros de entrega
-                  
-                        
                     
                     subMatriz[0][j] = new matrizObjetos();    
-                    subMatriz[j][0] = new matrizObjetos(); 
+                    subMatriz[j][0] = new matrizObjetos();
                     subMatriz[0][j].numEntrega = subListaRutas.get(j - 1).numEntrega;
-                    subMatriz[j][0].numEntrega = subListaRutas.get(j - 1).numEntrega;
+                    subMatriz[j][0].numEntrega = subListaRutas.get(j - 1).numEntrega;                    
                     subMatriz[0][j].visitado = false;
                     subMatriz[j][0].visitado = false;
-                    
-                    
             }
             
-            subMatriz[0][subListaRutas.size() + 1] = new matrizObjetos();
+             
             
-            subMatriz[subListaRutas.size() + 1][0] = new matrizObjetos();
+            //subListaRutas.size() + 1
             
-            subMatriz[0][subListaRutas.size() + 1].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;        // Se coloca el numero de entrega del Coyol en la ultima casilla de la primera fila y columna
             
-            subMatriz[subListaRutas.size() + 1][0].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;
+            subMatriz[0][subMatriz.length-1] = new matrizObjetos();
+            
+            subMatriz[subMatriz.length-1][0] = new matrizObjetos();
+            
+            subMatriz[0][subMatriz.length-1].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;        // Se coloca el numero de entrega del Coyol en la ultima casilla de la primera fila y columna
+            
+            subMatriz[subMatriz.length-1][0].numEntrega = llena.matriz[llena.numFincas - 1][0].numEntrega;
             
             for(int h = 0; h < subMatriz.length; ++h){                          // Evita que se vuelva a considerar la ruta al Coyol, en la ultima fila de la matriz 
                 
@@ -376,10 +405,20 @@ public void cargarAfuerza(){                                                    
                     for (int l = 1; l < subMatriz.length; ++l ) {
                             
                             subMatriz[k][l] = new matrizObjetos(); 
-                            subMatriz[k][l].distanciaM = llena.retornaDistancia(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);
+                            subMatriz[k][l].distanciaM = llena.retornaDistancia(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);                            
                             subMatriz[k][l].tiempoM = llena.retornaTiempo(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);
                     }
                 } 
+                
+                System.out.println("no brinca");
+                
+                /**for(int q = 1; q < llena.matriz.length;++q){
+                    for(int u = 1; u < llena.matriz.length; ++u){
+                        System.out.print(llena.matriz[q][u].distanciaM+" ");
+                    }
+                    System.out.println();
+                } **/
+                
                 
           
                 // A continuacion se realiza el ordenamiento de rutas, basado en la subMatriz
@@ -400,7 +439,7 @@ public void cargarAfuerza(){                                                    
                     
                     for(int g = 0; g < subListaRutas.size(); ++g){              // Busca la finca siguiente en la subLista de rutas, la agrega a la lista final y la remueve
                         
-                        listaFinalPedidos[g] = new NodoRuta();
+                        //listaFinalPedidos[g] = new NodoRuta();
                         
                         if(subListaRutas.get(g).numEntrega == subMatriz[espejoIndice][0].numEntrega ){
                             
@@ -602,7 +641,6 @@ public void cargarAfuerza(){                                                    
          }catch (Exception e2){ 
             e2.printStackTrace();
          }
-      } 
-    
+      }
     }
 }

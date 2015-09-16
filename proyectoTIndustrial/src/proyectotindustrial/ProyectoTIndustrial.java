@@ -50,19 +50,25 @@ public class ProyectoTIndustrial {
         
         new VenPrincipal().setVisible(true);    
         
-       /** Pruebas llena matriz
+       // Pruebas llena matriz
         
-        LlenaMatriz llena = new LlenaMatriz();
+        /**LlenaMatriz llena = new LlenaMatriz();
         llena.llenaMatrizDistancia();
         llena.llenaMatrizTiempos();
-        llena.llenaNumEntregas();
+        llena.llenaNumEntregas(); **/
         
         
-       System.out.print(llena.matriz[0][5].numEntrega);
-       System.out.print(llena.matriz[5][0].numEntrega);
+        /**
+        for(int q = 1; q < llena.matriz.length;++q){
+                    for(int u = 1; u < llena.matriz.length; ++u){
+                        System.out.print(llena.matriz[q][u].tiempoM+" ");
+                    }
+                    System.out.println();
+                } **/
+        
+       //System.out.print(llena.matriz[0][4].tiempoM);
+       //System.out.print(llena.matriz[4][0].tiempoM);
        
-       **/
-        
-        
+       
     }
 }

@@ -1,0 +1,3 @@
+0.0
+
+Mes    Dia    # de Ruta    Socio            Producto            KGS A Entregar    Hora Salida del Coyol    Lugar    # Entrega    Precio Flete    Monto Flete    Placa del Camion    Proveedor

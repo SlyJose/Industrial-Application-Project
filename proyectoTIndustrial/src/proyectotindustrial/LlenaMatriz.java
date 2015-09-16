@@ -35,21 +35,28 @@ public class LlenaMatriz {
    
    }
    
-//      public void seteaSub(){
-//   
-//       for(int i=0; i < subWidth; i++)
-//           
-//           for (int j=0; j < subHeight; j++)
-//               
-//               subMatriz [i][j] = new matrizObjetos();
-//   
-//   }
+     public void seteaMatriz(){
+   
+       for(int i=0; i < matriz.length; i++)
+           
+           for (int j=0; j < matriz.length; j++)
+               
+               matriz [i][j] = new matrizObjetos();      
+       
+       llenaMatrizTiempos();
+       llenaMatrizDistancia();
+       llenaNumEntregas();
+   }
    
    
    public double retornaTiempo(double fincaA, double fincaB){
        
        int indiceA = 0;
        int indiceB = 0;
+       
+       if(fincaA == 0.0){
+           fincaA = 1.0;
+       }
        
        for(int i=0; i < matriz.length ; ++i){
            if(matriz[0][i].numEntrega == fincaA ){
@@ -83,7 +90,8 @@ public class LlenaMatriz {
    }
    
    public void llenaMatrizTiempos(){                                               // Metodo encargado de cargar el txt de tiempos al programa
-        File archivo = null;
+       
+       File archivo = null;
         FileReader lector = null;
         BufferedReader lectorLinea = null;
         
@@ -107,25 +115,23 @@ public class LlenaMatriz {
                 palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
               
-                    for (int i = 0; i < numFincas; i++){
-                   
-                        try{
+                    for (int i = 0; i < numFincas; i++){                        
+                        //try{
                             
-                            matriz [contador][i] = new matrizObjetos();
+                            //matriz [contador][i] = new matrizObjetos();
                           
                             double campo = (Double.parseDouble(palabrasSeparadas[i]));
-                            matriz [contador][i].distanciaM = campo;
-                           //System.out.print(campo +  "  ");
-                            }  
+                            matriz [contador][i].tiempoM = campo;
+                          //  }  
                        
-                       catch(NumberFormatException ex){ // handle your exception  
-                           System.out.println(" Not a number ");
+                       //catch(NumberFormatException ex){ // handle your exception  
+                        //   System.out.println(" Not a number ");
 
-                        }
+                        //}
                    }
                    contador++;
-                
         }
+         
       }
       catch(Exception e){
          e.printStackTrace();
@@ -158,30 +164,27 @@ public class LlenaMatriz {
          String linea;
          String delimitadoresPalabras = ",";                                    // Variable utilizada para separar los valores en el archivo por cada linea
          String[] palabrasSeparadas;
-         
+                 
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
             palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
                     for (int i = 0; i < numFincas; i++){
                    
-                       matriz [contador][i] = new matrizObjetos();
+                       //matriz [contador][i] = new matrizObjetos();
                        
-                       try{
+                       //try{
                           double campo = (Double.parseDouble(palabrasSeparadas[i]));
                             matriz [contador][i].distanciaM = campo;
                             //System.out.print(campo +  "  ");
-                            }  
+                            //}  
                        
-                       catch(NumberFormatException ex){ // handle your exception
+                       //catch(NumberFormatException ex){ // handle your exception
                             
-                           System.out.println(" Not a number ");
+                          // System.out.println(" Not a number ");
 
-                        }
-                      
+                        //}
                    }
-                   
                    contador++;
-    
         }
       }
       catch(Exception e){
@@ -201,15 +204,9 @@ public class LlenaMatriz {
    
        int semilla = 0;
       
-       for (int i =0; i < matriz.length; i++){
-           
+       for (int i =0; i < matriz.length; i++){           
            matriz[semilla][i].numEntrega = matriz[semilla][i].distanciaM;
-           matriz[i][semilla].numEntrega = matriz[i][semilla].distanciaM;
-           
+           matriz[i][semilla].numEntrega = matriz[i][semilla].distanciaM;           
        }
-              
-       
    }
-   
-    
 }
