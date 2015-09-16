@@ -110,14 +110,16 @@ public class LlenaMatriz {
                     for (int i = 0; i < numFincas; i++){
                    
                         try{
+                            
+                            matriz [contador][i] = new matrizObjetos();
                           
                             double campo = (Double.parseDouble(palabrasSeparadas[i]));
                             matriz [contador][i].distanciaM = campo;
-                            //System.out.print(campo +  "  ");
+                           //System.out.print(campo +  "  ");
                             }  
                        
                        catch(NumberFormatException ex){ // handle your exception  
-                           //System.out.println(" Not a number ");
+                           System.out.println(" Not a number ");
 
                         }
                    }
@@ -163,7 +165,6 @@ public class LlenaMatriz {
                     for (int i = 0; i < numFincas; i++){
                    
                        matriz [contador][i] = new matrizObjetos();
-                       //double campo = (Double.parseDouble(palabrasSeparadas[i]));
                        
                        try{
                           double campo = (Double.parseDouble(palabrasSeparadas[i]));
@@ -173,15 +174,14 @@ public class LlenaMatriz {
                        
                        catch(NumberFormatException ex){ // handle your exception
                             
-                           //System.out.println(" Not a number ");
+                           System.out.println(" Not a number ");
 
                         }
                       
                    }
                    
                    contador++;
-                
-                
+    
         }
       }
       catch(Exception e){
@@ -194,7 +194,22 @@ public class LlenaMatriz {
          }catch (Exception e2){ 
             e2.printStackTrace();
          }
-      } 
+      }
     }
+   
+   public void llenaNumEntregas(){                                              //metodo que llena el campo numEntrega en la fila 0 y columna 0
+   
+       int semilla = 0;
+      
+       for (int i =0; i < matriz.length; i++){
+           
+           matriz[semilla][i].numEntrega = matriz[semilla][i].distanciaM;
+           matriz[i][semilla].numEntrega = matriz[i][semilla].distanciaM;
+           
+       }
+              
+       
+   }
+   
     
 }

@@ -42,7 +42,7 @@ public class OptimizadorRutas {
              
             int numPedido;
             String nomSocio;
-            int numEntrega;
+            double numEntrega;
             String producto;
             double cantKg;
             String fechaEntrega;
@@ -60,7 +60,7 @@ public class OptimizadorRutas {
             double kgAentregar;
             String horaSalida;
             int zona;
-            int numEntrega;
+            double numEntrega;
             double precioFlete;
             double montoFlete;
             int placaCamion;
@@ -76,7 +76,8 @@ public class OptimizadorRutas {
         insCamion.cargarArchivo();
         insProducto.cargarArchivo(); 
         llena.llenaMatrizTiempos();
-        llena.llenaMatrizDistancia();        
+        llena.llenaMatrizDistancia(); 
+        llena.llenaNumEntregas();
     }
     
     public ArrayList<NodoPedido> listaPedidos = new ArrayList<NodoPedido>();    // Todos los pedidos ingresados por el usuario
@@ -90,8 +91,8 @@ public class OptimizadorRutas {
         Random rand = new Random();
         int pedidoAescoger = 0;
         String preferenciaActual = "";
-        int numEntregaAnterior;
-        int numEntregaPedido;
+        double numEntregaAnterior;
+        double numEntregaPedido;
         double tiempoEntreFincas;
         
         
@@ -108,7 +109,7 @@ public class OptimizadorRutas {
             for(int m = 0; subListaPedidos.size() != 0; ++m){
                 
                 tamSubListaTemp = subListaPedidos.size();
-                pedidoAescoger = rand.nextInt(tamSubListaTemp - 1) + 0;
+                pedidoAescoger = rand.nextInt(tamSubListaTemp) + 0;
 
                 preferenciaActual = insAsociado.getPreferencia(subListaPedidos.get(pedidoAescoger).numEntrega);                    
 
@@ -203,7 +204,7 @@ public class OptimizadorRutas {
         
 }
     
-public double obtenerTiempoEntreFincas(int numEntCamion, int numEntPedido){     // Metodo encargado de recibir dos fincas de asociados y obtener el tiempo entre ellas
+public double obtenerTiempoEntreFincas(double numEntCamion, double numEntPedido){     // Metodo encargado de recibir dos fincas de asociados y obtener el tiempo entre ellas
     
     double tiempo = 0.0;
     int indice1 = 0;
@@ -237,8 +238,8 @@ public double obtenerTiempoEntreFincas(int numEntCamion, int numEntPedido){     
     
 public void cargarAfuerza(){                                                    // Método encargado de revisar la sublista de pedidos y procesar los restantes que no hayan sido procesados
     
-    int numEntregaAnterior;
-    int numEntregaPedido;
+    double numEntregaAnterior;
+    double numEntregaPedido;
     double tiempoEntreFincas;
     
     for (int i = 0; i < subListaPedidos.size(); i++){                           // Se itera sobre la sublista de pedidos
@@ -335,28 +336,46 @@ public void cargarAfuerza(){                                                    
                 }
             }
             
+  //          System.out.println(subListaRutas.size());
+            
             if(tienePedido){                                                    // Ya que el camion si tiene pedidos, se ordenan sus rutas
                 
                 matrizObjetos [][]subMatriz  = new matrizObjetos [subListaRutas.size()+ 2][subListaRutas.size()+ 2];            // Matriz que almacena los pedidos del camion, mas el cero mas el Coyol
             
             for (int j = 1; j < subListaRutas.size() + 1; j++){                 // Llena la matriz con sus primeras filas y columnas de numeros de entrega
-                   
-                    subMatriz[0][j].numEntrega = subListaRutas.get(j).numEntrega;
-                    subMatriz[j][0].numEntrega = subListaRutas.get(j).numEntrega;
+                  
+                        
+                    
+                    subMatriz[0][j] = new matrizObjetos();    
+                    subMatriz[j][0] = new matrizObjetos(); 
+                    subMatriz[0][j].numEntrega = subListaRutas.get(j - 1).numEntrega;
+                    subMatriz[j][0].numEntrega = subListaRutas.get(j - 1).numEntrega;
                     subMatriz[0][j].visitado = false;
                     subMatriz[j][0].visitado = false;
+                    
+                    
             }
+            
+            subMatriz[0][subListaRutas.size() + 1] = new matrizObjetos();
+            
+            subMatriz[subListaRutas.size() + 1][0] = new matrizObjetos();
             
             subMatriz[0][subListaRutas.size() + 1].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;        // Se coloca el numero de entrega del Coyol en la ultima casilla de la primera fila y columna
             
             subMatriz[subListaRutas.size() + 1][0].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;
             
             for(int h = 0; h < subMatriz.length; ++h){                          // Evita que se vuelva a considerar la ruta al Coyol, en la ultima fila de la matriz 
-                subMatriz[subListaRutas.size()+ 1][h].visitado = true; 
+                
+                subMatriz[subListaRutas.size()+ 1][h] = new matrizObjetos();
+                
+                subMatriz[subListaRutas.size()+ 1][h].visitado = true;
+                
             }
             
                 for (int k=1; k < subMatriz.length; ++k){                       // Se llena el resto de casillas de la submatriz, con las distancias y los tiempos provenientes de la matriz grande Llena 
                     for (int l = 1; l < subMatriz.length; ++l ) {
+                            
+                            subMatriz[k][l] = new matrizObjetos(); 
                             subMatriz[k][l].distanciaM = llena.retornaDistancia(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);
                             subMatriz[k][l].tiempoM = llena.retornaTiempo(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);
                     }
@@ -381,7 +400,10 @@ public void cargarAfuerza(){                                                    
                     
                     for(int g = 0; g < subListaRutas.size(); ++g){              // Busca la finca siguiente en la subLista de rutas, la agrega a la lista final y la remueve
                         
+                        listaFinalPedidos[g] = new NodoRuta();
+                        
                         if(subListaRutas.get(g).numEntrega == subMatriz[espejoIndice][0].numEntrega ){
+                            
                             listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(g);                // Se agrega la ruta a su respectiva posicion
                             listaFinalPedidos[indiceVectorFinal].costoDist = distMinima;                // Variables utilizadas para obtener el costo de la ruta
                             listaFinalPedidos[indiceVectorFinal].costoTiemp = tiempMinimo;
@@ -536,7 +558,7 @@ public void cargarAfuerza(){                                                    
        File file_ = new File("Orden.txt"); 
        String fileName = file_.getAbsolutePath();
        
-       try {                                                                   // Se abre el archivo de camiones
+       try {                                                                   // 
          archivo = new File (fileName);
          lector = new FileReader(archivo);
          lectorLinea = new BufferedReader(lector);
@@ -549,7 +571,7 @@ public void cargarAfuerza(){                                                    
             
             int numPedido = Integer.parseInt(palabrasSeparadas[0]);             // Variables temporales para casting 
             String nomSocio = palabrasSeparadas[1];
-            int numEntrega = Integer.parseInt(palabrasSeparadas[2]);
+            double numEntrega = Double.parseDouble(palabrasSeparadas[2]);
             String producto = palabrasSeparadas[3];
             double cantKg = Double.parseDouble(palabrasSeparadas[4]);
             String fechaEntrega = palabrasSeparadas[5];

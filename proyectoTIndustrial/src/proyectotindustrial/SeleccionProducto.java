@@ -52,7 +52,7 @@ public class SeleccionProducto {
         FileReader lector = null;
         BufferedReader lectorLinea = null;
         
-        File file_ = new File("Producto.txt"); 
+        File file_ = new File("Productos.txt"); 
        String fileName = file_.getAbsolutePath();
         
         try {                                                                   // Se abre el archivo de productos
@@ -64,7 +64,7 @@ public class SeleccionProducto {
          String delimitadoresPalabras = ",";                                    // Variable utilizada para separar los valores en el archivo por cada linea
          String[] palabrasSeparadas;
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
-            palabrasSeparadas = linea.split(delimitadoresPalabras);               
+            palabrasSeparadas = linea.split(delimitadoresPalabras); 
             double densidad = Double.parseDouble(palabrasSeparadas[1]);
             agregaProducto(palabrasSeparadas[0], densidad);                     // Se crea el producto en la lista de productos
         }

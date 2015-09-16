@@ -45,14 +45,23 @@ public class ProyectoTIndustrial {
     public static void main(String[] args) { 
         
         ProyectoTIndustrial comienza = new ProyectoTIndustrial();
-        comienza.limpiaArhivoOrden();
+        
+       // comienza.limpiaArhivoOrden();
         
         new VenPrincipal().setVisible(true);    
         
+       /** Pruebas llena matriz
+        
         LlenaMatriz llena = new LlenaMatriz();
         llena.llenaMatrizDistancia();
+        llena.llenaMatrizTiempos();
+        llena.llenaNumEntregas();
         
-     //   System.out.print(llena.matriz[252][252].distanciaM);
+        
+       System.out.print(llena.matriz[0][5].numEntrega);
+       System.out.print(llena.matriz[5][0].numEntrega);
+       
+       **/
         
         
     }

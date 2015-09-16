@@ -130,7 +130,7 @@ public class VenArchivar extends javax.swing.JFrame {
             BufferedReader lectorLinea = null;
 
             File file_ = new File("Rutas Finales.txt"); 
-           String fileName = file_.getAbsolutePath();
+            String fileName = file_.getAbsolutePath();
            
            String archivoCompleto = "";
 

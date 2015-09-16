@@ -338,15 +338,17 @@ public class VenPrincipal extends javax.swing.JFrame {
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
-        /**optimiza.cargarBaseDatos();                                             // Primero se carga la base de datos
+        optimiza.cargarBaseDatos();                                             // Primero se carga la base de datos
         optimiza.cargarPedidos();                                               // Se cargan todos los pedidos ingresados por el usuario
         
         for(int i = 0; i < 1; ++i){                                             // Se ejecuta la optimizacion cierta cantidad de veces para mejorar los resultados
             optimiza.optimizador();                                                 // Se toman los pedidos ingresados y se ejecuta el algoritmo de ordenamiento
-        }  **/      
+        }        
+        
         new VenArchivar().setVisible(true);
         
         // es necesario limpiar el archivo de orden una vez finalizadas las ejecuciones
+        //se le hace un llamado a el metodo de borrado en el main para cada vez que se abra la aplicacion borre el orden.txt interno
         
     }//GEN-LAST:event_jButton5ActionPerformed
 

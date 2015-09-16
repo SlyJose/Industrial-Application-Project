@@ -31,7 +31,7 @@ public class SeleccionCamion {
         String carretaProductos[];                                              // Vector que indica el producto que contiene cada compartimento
         double carretaEspacioLibre[];                                           // Vector que indica la cantidad de espacio libre que queda en el compartimento
         double diponibilidadTiempo;
-        int numEntregaPedidoAnterior;                                           // Variable que indica el ultimo pedido insertado en los compartimentos
+        double numEntregaPedidoAnterior;                                           // Variable que indica el ultimo pedido insertado en los compartimentos
     }
     
     public ArrayList<NodoLista> listaCamiones = new ArrayList<NodoLista>();     // Lista de objetos camiones

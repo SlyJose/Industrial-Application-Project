@@ -22,7 +22,7 @@ public class SeleccionAsociado {
     
     static class NodoLista{                                                     // Clase que define cada nodo
         
-        int numeroEntrega;                                                      // Numero identificador de la finca
+        double numeroEntrega;                                                      // Numero identificador de la finca
         int zona;                                                               // Numero de la zona 1-8
         int capacidad;                                                          // Capacidad de instalacion de la finca
         //int ventanaH;                                                           // Ventana de tiempo de entrega, horas
@@ -35,7 +35,7 @@ public class SeleccionAsociado {
     
     public ArrayList<NodoLista> listaAsociados = new ArrayList<NodoLista>();    // Lista de objetos asociados
     
-    public boolean existeAsociado(int numeroEntrega){                           // Metodo encargado de verificar si se encuentra en la lista el asociado
+    public boolean existeAsociado(double numeroEntrega){                           // Metodo encargado de verificar si se encuentra en la lista el asociado
         boolean existe = false;
         for(int iterador = 0; iterador < listaAsociados.size(); ++iterador){
             if(listaAsociados.get(iterador).numeroEntrega == numeroEntrega){
@@ -46,7 +46,7 @@ public class SeleccionAsociado {
         return existe;    
     }
     
-    public void agregarAsociado(int numeroEntrega, int zona, int capacidad, double costoDistribucion, String preferencia){  // Metodo encargado de agregar un asociado a la lista de asociados
+    public void agregarAsociado(double numeroEntrega, int zona, int capacidad, double costoDistribucion, String preferencia){  // Metodo encargado de agregar un asociado a la lista de asociados
         NodoLista nuevoNodo = new NodoLista();
         nuevoNodo.numeroEntrega = numeroEntrega;
         nuevoNodo.zona = zona;
@@ -79,7 +79,7 @@ public class SeleccionAsociado {
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
             palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
-            int tEntrega = Integer.parseInt(palabrasSeparadas[0]);              // Variables temporales para casting 
+            double tEntrega = Double.parseDouble(palabrasSeparadas[0]);              // Variables temporales para casting 
             int tZona = Integer.parseInt(palabrasSeparadas[1]);
             int tCapacidad = Integer.parseInt(palabrasSeparadas[2]);
             //int tVenH = Integer.parseInt(palabrasSeparadas[3]);
@@ -103,7 +103,7 @@ public class SeleccionAsociado {
       } 
     }
     
-    public int getZona(int numEntrega){                                         // Métodos get para cada uno de los atributos del Asociado
+    public int getZona(double numEntrega){                                         // Métodos get para cada uno de los atributos del Asociado
         int zona = 0;
         if(existeAsociado(numEntrega)){
             for(int iterador = 0; iterador < listaAsociados.size(); ++iterador){
@@ -116,7 +116,7 @@ public class SeleccionAsociado {
         return zona;    
     }
     
-    public int getCapacidad(int numEntrega){
+    public int getCapacidad(double numEntrega){
         int capacidad = 0;
         if(existeAsociado(numEntrega)){
             for(int iterador = 0; iterador < listaAsociados.size(); ++iterador){
@@ -156,7 +156,7 @@ public class SeleccionAsociado {
         return ventanaM;       
     }**/
     
-    public double getCostoD(int numEntrega){
+    public double getCostoD(double numEntrega){
         double costo = 0;
         if(existeAsociado(numEntrega)){
             for(int iterador = 0; iterador < listaAsociados.size(); ++iterador){
@@ -195,7 +195,7 @@ public class SeleccionAsociado {
         return kilometros;    
     }**/
     
-    public String getPreferencia(int numEntrega){
+    public String getPreferencia(double numEntrega){
         String preferencia = "";
         if(existeAsociado(numEntrega)){
             for(int iterador = 0; iterador < listaAsociados.size(); ++iterador){
