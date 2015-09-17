@@ -73,11 +73,11 @@
                               </Group>
                               <EmptySpace min="70" pref="70" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton6" min="-2" pref="85" max="-2" attributes="0"/>
                                   <Component id="jLabel13" min="-2" pref="153" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jButton8" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jButton7" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jButton6" alignment="0" pref="85" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -198,17 +198,17 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="N&#xfa;mero  de Pedido"/>
+        <Property name="text" type="java.lang.String" value="N&#xfa;mero de Pedido"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre Socio"/>
+        <Property name="text" type="java.lang.String" value="Nombre de Socio"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="N&#xfa;mero  Entrega"/>
+        <Property name="text" type="java.lang.String" value="N&#xfa;mero de Entrega"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -218,17 +218,17 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cantidad kg"/>
+        <Property name="text" type="java.lang.String" value="Cantidad de Kilogramos"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fech Entrega"/>
+        <Property name="text" type="java.lang.String" value="Fecha de Entrega"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hora Entrega"/>
+        <Property name="text" type="java.lang.String" value="Hora de Entrega"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">

@@ -93,19 +93,19 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Campos para una nueva orden");
 
-        jLabel2.setText("Número  de Pedido");
+        jLabel2.setText("Número de Pedido");
 
-        jLabel3.setText("Nombre Socio");
+        jLabel3.setText("Nombre de Socio");
 
-        jLabel4.setText("Número  Entrega");
+        jLabel4.setText("Número de Entrega");
 
         jLabel5.setText("Producto");
 
-        jLabel6.setText("Cantidad kg");
+        jLabel6.setText("Cantidad de Kilogramos");
 
-        jLabel7.setText("Fech Entrega");
+        jLabel7.setText("Fecha de Entrega");
 
-        jLabel8.setText("Hora Entrega");
+        jLabel8.setText("Hora de Entrega");
 
         jLabel9.setText("Código de Pedido");
 
@@ -227,11 +227,11 @@ public class VenPrincipal extends javax.swing.JFrame {
                                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(70, 70, 70)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
                                 .addContainerGap())))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
