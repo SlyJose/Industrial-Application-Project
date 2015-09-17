@@ -595,7 +595,7 @@ public void cargarAfuerza(){                                                    
                  File nuevoArchivo = new File("Rutas Finales.txt");             // Se abre el archivo para su corespondiente escritura
                  String filename = nuevoArchivo.getAbsolutePath();
                  
-                    try
+                    /**try
 
                     {
 
@@ -616,6 +616,33 @@ public void cargarAfuerza(){                                                    
                          writer.write(System.lineSeparator());
                      }                     
                      writer.close(); 
+                    }
+
+                    catch(IOException e)
+
+                    {**/
+                 
+                 try
+
+                    {
+
+                        FileWriter writer = new FileWriter(filename,true);
+
+                        writer.append(""+costoTotalRutas+"|"); // Lo primero escrito es el costo de dichas rutas
+                        writer.write(System.lineSeparator());
+                        writer.write(System.lineSeparator());
+                        writer.append("Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor");
+                        writer.write(System.lineSeparator()); 
+
+                    for(int i = 0; i < listaFinalPedidos.length; ++i){ // Se escriben todas las rutas en orden
+                        writer.append(""+listaFinalPedidos[i].mes+","+listaFinalPedidos[i].dia+","+listaFinalPedidos[i].numRuta+","+listaFinalPedidos[i].socio+
+                        ","+listaFinalPedidos[i].producto+","+listaFinalPedidos[i].kgAentregar+","+
+                        listaFinalPedidos[i].horaSalida+","+listaFinalPedidos[i].zona+","+listaFinalPedidos[i].numEntrega+
+                        ","+listaFinalPedidos[i].precioFlete+","+listaFinalPedidos[i].montoFlete+","+listaFinalPedidos[i].placaCamion
+                        +","+listaFinalPedidos[i].proveedor);
+                        writer.write(System.lineSeparator());
+                    } 
+                        writer.close(); 
                     }
 
                     catch(IOException e)
