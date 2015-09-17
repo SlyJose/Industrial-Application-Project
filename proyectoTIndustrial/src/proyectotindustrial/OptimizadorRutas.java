@@ -284,7 +284,7 @@ public void cargarAfuerza(){                                                    
             
         for (int j= 0; j < insCamion.listaCamiones.size(); ++j ) {              // Se escoge un camion que cumpla la preferencia y el espacio libre disponible
             
-            if( insCamion.listaCamiones.get(j).proveedor == preferenciaActual || preferenciaActual.equals("no hay preferencia") ){    
+            if( insCamion.listaCamiones.get(j).proveedor.equals(preferenciaActual)  || preferenciaActual.equals("no hay preferencia") ){    
                 
                 if(insCamion.getCantidadEspacioLibre(insCamion.listaCamiones.get(j).placa) >= subListaPedidos.get(i).cantKg){      // Se verifica si la cantidad de producto cabe en el camion escogido
 
@@ -481,6 +481,10 @@ public void cargarAfuerza(){                                                    
                     
                     for(int fil = 0; fil < subMatriz.length; ++fil ){           // Busca la distancia minima en una columna, que es la finca actual en donde se encuentra el camion, asi encuentra la siguiente finca a la cual ir 
                         
+                        System.out.println("subLista: "+subListaRutas.size());
+                        System.out.println("submatriz "+subMatriz.length);
+                        System.out.println("fil "+fil);
+                        
                         if(subMatriz[fil][ultimoIndice].distanciaM < distMinima && subMatriz[fil][ultimoIndice].distanciaM != 0.0 && subMatriz[fil][ultimoIndice].visitado == false){
                             
                             distMinima = subMatriz[fil][ultimoIndice].distanciaM;
@@ -493,17 +497,26 @@ public void cargarAfuerza(){                                                    
                     
                     //System.out.println("Indice del espejo: "+espejoIndice);
                     
+                    int tamanoTemp = subListaRutas.size();
                     
-                    for(int g = 0; g < subListaRutas.size(); ++g){              // Busca la finca siguiente en la subLista de rutas, la agrega a la lista final y la remueve
+                    for(int g = 0; g < tamanoTemp; ++g){              // Busca la finca siguiente en la subLista de rutas, la agrega a la lista final y la remueve
+                        
+                        
+                        /**System.out.println("g: "+g);
+                        System.out.println("subLista: "+tamanoTemp);
+                        System.out.println("submatriz "+subMatriz.length);
+                        System.out.println("espejoInd: "+espejoIndice);**/
                         
                         if(subListaRutas.get(g).numEntrega == subMatriz[espejoIndice][0].numEntrega ){
+                            
+                            System.out.println("entra ");
                             
                             listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(g);                // Se agrega la ruta a su respectiva posicion
                             listaFinalPedidos[indiceVectorFinal].costoDist = distMinima;                // Variables utilizadas para obtener el costo de la ruta
                             listaFinalPedidos[indiceVectorFinal].costoTiemp = tiempMinimo;
                             ++indiceVectorFinal;                            
                             subListaRutas.remove(g);
-                            g = subListaRutas.size();
+                            g = tamanoTemp;
                         }
                     }
                     
