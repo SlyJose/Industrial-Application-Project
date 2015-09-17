@@ -70,7 +70,7 @@ public class ProyectoTIndustrial {
         ProyectoTIndustrial comienza = new ProyectoTIndustrial();
         
         //comienza.limpiaArhivoOrden();
-        //comienza.limpiaArhivoRutas();
+        comienza.limpiaArhivoRutas();
         
         new VenPrincipal().setVisible(true);    
        

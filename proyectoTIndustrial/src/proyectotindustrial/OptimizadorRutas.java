@@ -110,6 +110,8 @@ public class OptimizadorRutas {
             
             for(int m = 0; cantPedidos > 0; ++m){
                 
+                System.out.println("Doy vueltas");
+                
                 tamSubListaTemp = subListaPedidos.size();
                 
                 if(tamSubListaTemp == 1){
@@ -123,7 +125,7 @@ public class OptimizadorRutas {
                 for(int k = 0; k < insCamion.listaCamiones.size(); ++k){                // Se encarga de escoger un camion que cumpla los requisitos de dicho pedido
 
                     //System.out.println("Numero de pedido: "+subListaPedidos.get(pedidoAescoger).numEntrega);
-                    if( insCamion.listaCamiones.get(k).proveedor == preferenciaActual || preferenciaActual.equals("no hay preferencia")){    // Se verifica que el camion sea de la preferencia requerida por el pedido
+                    if( insCamion.listaCamiones.get(k).proveedor.equals(preferenciaActual)  || preferenciaActual.equals("no hay preferencia")){    // Se verifica que el camion sea de la preferencia requerida por el pedido
                         
                         //System.out.println("Soy finca "+subListaPedidos.get(k).numEntrega+" y pase preferencia");
                         
@@ -275,6 +277,8 @@ public void cargarAfuerza(){                                                    
     //System.out.println("Tamaño inicial de la sublista de pedidos: "+subListaPedidos.size());
     
     for (int i = 0; i < subListaPedidos.size(); i++){                           // Se itera sobre la sublista de pedidos
+        
+        
         
        String preferenciaActual = insAsociado.getPreferencia(subListaPedidos.get(i).numEntrega);                    
             
