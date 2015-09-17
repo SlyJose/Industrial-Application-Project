@@ -487,7 +487,7 @@ public void cargarAfuerza(){                                                    
                         subMatriz[ultimoIndice][fil].visitado = true; 
                     }
                     
-                    System.out.println("Indice del espejo: "+espejoIndice);
+                    //System.out.println("Indice del espejo: "+espejoIndice);
                     
                     
                     for(int g = 0; g < subListaRutas.size(); ++g){              // Busca la finca siguiente en la subLista de rutas, la agrega a la lista final y la remueve
@@ -515,10 +515,7 @@ public void cargarAfuerza(){                                                    
             
         }  // fin de for iteraCamiones
         
-        for(int y = 0; y < listaFinalPedidos.length; ++y){
-                System.out.println("Finca: "+listaFinalPedidos[y].numEntrega);
-                    }
-        
+                
         
         /** Una vez ordenadas todas las rutas por camion, se verifica si este conjunto de 
          
@@ -529,6 +526,23 @@ public void cargarAfuerza(){                                                    
         for(int i = 0; i < listaFinalPedidos.length; ++i){                      // Itera por el set de rutas completo obteniendo su costo
             
             costoTotalRutas += (listaFinalPedidos[i].costoDist * 0.70) + (listaFinalPedidos[i].costoTiemp * 0.30);          // Se promedia el costo de la ruta
+            
+        }
+        
+        System.out.println("Costo de las rutas: "+costoTotalRutas);
+        
+        
+        int placaAnterior = listaFinalPedidos[0].placaCamion;
+        int numRuta = 1;
+        
+        for(int w = 0; w < listaFinalPedidos.length; ++w){
+            if(listaFinalPedidos[w].placaCamion == placaAnterior){
+                listaFinalPedidos[w].numRuta = numRuta;                
+            }else{
+                ++numRuta;
+                placaAnterior = listaFinalPedidos[w].placaCamion;
+                listaFinalPedidos[w].numRuta = numRuta;                
+            }
             
         }
         
@@ -583,14 +597,14 @@ public void cargarAfuerza(){                                                    
 
                      FileWriter writer = new FileWriter(filename,true);
 
-                     writer.append(""+costoTotalRutas);                         // Lo primero escrito es el costo de dichas rutas
+                     writer.append(""+costoTotalRutas+"|");                         // Lo primero escrito es el costo de dichas rutas
                      writer.write(System.lineSeparator());
                      writer.write(System.lineSeparator());
                      writer.append("Mes    Dia    # de Ruta    Socio            Producto            KGS A Entregar    Hora Salida del Coyol    Lugar    # Entrega    Precio Flete    Monto Flete    Placa del Camion    Proveedor");
                      writer.write(System.lineSeparator());                     
                      
                      for(int i = 0; i < listaFinalPedidos.length; ++i){         // Se escriben todas las rutas en orden
-                         writer.append(""+listaFinalPedidos[i].mes+"    "+listaFinalPedidos[i].dia+"    "+i+"    "+listaFinalPedidos[i].socio+
+                         writer.append(""+listaFinalPedidos[i].mes+"    "+listaFinalPedidos[i].dia+"    "+listaFinalPedidos[i].numRuta+"    "+listaFinalPedidos[i].socio+
                                         "            "+listaFinalPedidos[i].producto+"            "+listaFinalPedidos[i].kgAentregar+"    "+
                                         listaFinalPedidos[i].horaSalida+"    "+listaFinalPedidos[i].zona+"    "+listaFinalPedidos[i].numEntrega+
                                         "    "+listaFinalPedidos[i].precioFlete+"    "+listaFinalPedidos[i].montoFlete+"    "+listaFinalPedidos[i].placaCamion
