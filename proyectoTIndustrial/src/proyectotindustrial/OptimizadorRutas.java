@@ -182,7 +182,7 @@ public class OptimizadorRutas {
                                 nuevaRuta.socio = subListaPedidos.get(pedidoAescoger).nomSocio;
                                 nuevaRuta.producto = subListaPedidos.get(pedidoAescoger).producto;
                                 nuevaRuta.kgAentregar = subListaPedidos.get(pedidoAescoger).cantKg;
-                                nuevaRuta.horaSalida = "";
+                                nuevaRuta.horaSalida = "Coyol";
                                 nuevaRuta.zona = insAsociado.getZona(subListaPedidos.get(pedidoAescoger).numEntrega);
                                 nuevaRuta.numEntrega = subListaPedidos.get(pedidoAescoger).numEntrega;
                                 nuevaRuta.placaCamion = insCamion.listaCamiones.get(k).placa;
@@ -342,7 +342,7 @@ public void cargarAfuerza(){                                                    
                                 nuevaRuta.socio = subListaPedidos.get(i).nomSocio;
                                 nuevaRuta.producto = subListaPedidos.get(i).producto;
                                 nuevaRuta.kgAentregar = subListaPedidos.get(i).cantKg;
-                                nuevaRuta.horaSalida = "";
+                                nuevaRuta.horaSalida = "Coyol";
                                 nuevaRuta.zona = insAsociado.getZona(subListaPedidos.get(i).numEntrega);
                                 nuevaRuta.numEntrega = subListaPedidos.get(i).numEntrega;
                                 nuevaRuta.placaCamion = insCamion.listaCamiones.get(j).placa;
