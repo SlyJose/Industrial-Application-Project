@@ -106,28 +106,6 @@ public class VenArchivar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void guardaEnRutaFinal(String linea , String ruta) { 
- 
-        File file3 = new File(ruta); 
-        String filename = file3.getAbsolutePath();
-
-        try
-
-        {
-
-        FileWriter writer = new FileWriter(filename,true);
-        writer.write(linea);
-        writer.write(System.lineSeparator());
-        writer.close(); 
-        }
-        catch(IOException e){
-        e.printStackTrace();
-        } 
- }
-    
-    
-    
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         
         // Si desea guardar las rutas
@@ -139,7 +117,7 @@ public class VenArchivar extends javax.swing.JFrame {
          JFileChooser file=new JFileChooser();
          file.showSaveDialog(this);
          File rutaGuardar =file.getSelectedFile();
-         ruta = ""+rutaGuardar+".csv";
+         ruta = ""+rutaGuardar+".txt";
          JOptionPane.showMessageDialog(null,
                 "El archivo se ha guardado exitosamente.",
                     "Información",JOptionPane.INFORMATION_MESSAGE);
@@ -163,8 +141,7 @@ public class VenArchivar extends javax.swing.JFrame {
 
              String linea;             
              while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
-                //archivoCompleto += linea+"\n";
-                 guardaEnRutaFinal(linea, ruta);
+                archivoCompleto += linea+"\n";
             }
              
           }
@@ -178,16 +155,14 @@ public class VenArchivar extends javax.swing.JFrame {
              }catch (Exception e2){ 
                 e2.printStackTrace();
              }
-          }
-            
-            
+          } 
         
         
         // Se escribe en el nuevo archivo de rutas
         
         
             
-        /**File file2 = new File(ruta); 
+        File file2 = new File(ruta); 
         String filename = file2.getAbsolutePath();
         
         try
@@ -200,7 +175,7 @@ public class VenArchivar extends javax.swing.JFrame {
         }
         catch(IOException e){
             e.printStackTrace();
-        }**/
+        }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed

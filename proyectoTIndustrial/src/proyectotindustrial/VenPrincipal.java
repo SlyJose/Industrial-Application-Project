@@ -36,7 +36,7 @@ public class VenPrincipal extends javax.swing.JFrame {
     
     CreadorOrden orden = new CreadorOrden();
     
-    OptimizadorRutas optimiza = new OptimizadorRutas();                         // Instancia que maneja la base de datos y optimizacion de rutas
+    //OptimizadorRutas optimiza = new OptimizadorRutas();                         // Instancia que maneja la base de datos y optimizacion de rutas
     
         
 
@@ -353,10 +353,11 @@ public class VenPrincipal extends javax.swing.JFrame {
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
-        optimiza.cargarBaseDatos();                                             // Primero se carga la base de datos
-        optimiza.cargarPedidos();                                               // Se cargan todos los pedidos ingresados por el usuario
-        
-        for(int i = 0; i < 1; ++i){                                             // Se ejecuta la optimizacion cierta cantidad de veces para mejorar los resultados
+        for(int i = 0; i < 10; ++i){                                             // Se ejecuta la optimizacion cierta cantidad de veces para mejorar los resultados
+            
+            OptimizadorRutas optimiza = new OptimizadorRutas();                         // Instancia que maneja la base de datos y optimizacion de rutas
+            optimiza.cargarBaseDatos();                                             // Primero se carga la base de datos
+            optimiza.cargarPedidos();                                               // Se cargan todos los pedidos ingresados por el usuario            
             optimiza.optimizador();                                                 // Se toman los pedidos ingresados y se ejecuta el algoritmo de ordenamiento
         }        
         

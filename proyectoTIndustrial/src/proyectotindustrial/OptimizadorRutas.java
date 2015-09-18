@@ -97,6 +97,8 @@ public class OptimizadorRutas {
         double tiempoEntreFincas;
         int cantPedidos = 0;
         
+        //System.out.println("Cantidad de pedidos: "+listaPedidos.size());
+        
         for(int i = 1; i < 9; ++i){                                             // Itera sobre las zonas para obtener los pedidos en cada una                  
             
             for(int j = 0; j < listaPedidos.size(); ++j){   
@@ -106,11 +108,11 @@ public class OptimizadorRutas {
                 }
             }
             
+            //System.out.println("tamano de subpedidos: "+subListaPedidos.size());
+            
             cantPedidos = subListaPedidos.size();
             
             for(int m = 0; cantPedidos > 0; ++m){
-                
-                System.out.println("Doy vueltas");
                 
                 tamSubListaTemp = subListaPedidos.size();
                 
@@ -146,6 +148,9 @@ public class OptimizadorRutas {
                                 
                                 insCamion.listaCamiones.get(k).diponibilidadTiempo -= tiempoEntreFincas;                    // Se reduce la cantidad de tiempo disponible en el camion
                                 insCamion.listaCamiones.get(k).numEntregaPedidoAnterior = numEntregaPedido;                 // El ultimo pedido agregado al camion se modifica
+                                
+                                
+                                //System.out.println("Entro pedido normal a listaRutas");
                                 
                                 insCamion.agregarProducto(subListaPedidos.get(pedidoAescoger).producto, subListaPedidos.get(pedidoAescoger).cantKg, insCamion.listaCamiones.get(k).placa);
                                 
@@ -187,17 +192,21 @@ public class OptimizadorRutas {
 
                                 listaRutas.add(nuevaRuta);
                                 
+                                
+                                
                                 subListaPedidos.remove(pedidoAescoger);                 // El pedido se elimina de la sublista, ya fue procesado                        
                                 k = insCamion.listaCamiones.size();
                                 --cantPedidos;
                                 
-                                //System.out.println("Se agrega el pedido a un camion");
+                                //System.out.println("Se agrega el pedido a la lista");
                                 
                             }else{
+                                //System.out.println("No entre por tiempo, soy pedido "+subListaPedidos.get(pedidoAescoger).numEntrega);
                                 auxSubListaPedidos.add(subListaPedidos.get(pedidoAescoger));        // Agrega el pedido que no cabe en el camion actual a una lista auxiliar, para que pase a la siguiente zona
                                 subListaPedidos.remove(pedidoAescoger);
                                 k = insCamion.listaCamiones.size();
                                 --cantPedidos;
+                                
                                 //System.out.println("Se agrega el pedido a una sublista");
                                 //System.out.println("Tamaño lista auxiliar: "+auxSubListaPedidos.size());
                             }           
@@ -217,7 +226,7 @@ public class OptimizadorRutas {
                 
                 auxSubListaPedidos.clear();
                 
-                //System.out.println("Entre a cargar a fuerza");
+                //System.out.println("Entre a cargar a fuerza, soy pedido "+);
                 //System.out.println("Tamaño lista auxiliar: "+auxSubListaPedidos.size());
                 
                 cargarAfuerza();
@@ -276,9 +285,9 @@ public void cargarAfuerza(){                                                    
     
     //System.out.println("Tamaño inicial de la sublista de pedidos: "+subListaPedidos.size());
     
-    for (int i = 0; i < subListaPedidos.size(); i++){                           // Se itera sobre la sublista de pedidos
-        
-        
+    int cantPedidos = subListaPedidos.size();
+    
+    for (int i = 0; i < cantPedidos; i++){                           // Se itera sobre la sublista de pedidos
         
        String preferenciaActual = insAsociado.getPreferencia(subListaPedidos.get(i).numEntrega);                    
             
@@ -297,8 +306,12 @@ public void cargarAfuerza(){                                                    
                                 insCamion.listaCamiones.get(j).diponibilidadTiempo -= tiempoEntreFincas;                    // Se reduce la cantidad de tiempo disponible en el camion
                                 insCamion.listaCamiones.get(j).numEntregaPedidoAnterior = numEntregaPedido;                 // El ultimo pedido agregado al camion se modifica
                                 
+                                //System.out.println("Entro pedido por cargar a fuerza a listaRutas");
+                                
                                 insCamion.agregarProducto(subListaPedidos.get(i).producto, subListaPedidos.get(i).cantKg, insCamion.listaCamiones.get(j).placa);
 
+                                 //System.out.println("Entro pedido por cargar a fuerza a listaRutas");
+                                
                                 //System.out.println("El aux se metio en el camion: "+insCamion.listaCamiones.get(j).placa);
                                 
                                 /* El siguiente segmento se encarga de colocar la ruta recien creada, dentro de la lista
@@ -340,9 +353,11 @@ public void cargarAfuerza(){                                                    
 
                                 listaRutas.add(nuevaRuta);
 
-                                subListaPedidos.remove(i);                 // El pedido se elimina de la sublista, ya fue procesado                                                           // El pedido se elimina de la sublista, ya fue procesado                                        
+                                //System.out.println("Se agrega el pedido a la lista por aux, pedido: "+subListaPedidos.get(i).numEntrega);
+                                
+                                //subListaPedidos.remove(i);                 // El pedido se elimina de la sublista, ya fue procesado                                                           // El pedido se elimina de la sublista, ya fue procesado                                        
                                 j = insCamion.listaCamiones.size();                          // Se detiene la busqueda de camiones para este pedido             
-                            }                    
+                            }                 
                 }
             }
         }
@@ -358,6 +373,8 @@ public void cargarAfuerza(){                                                    
         ArrayList<NodoRuta> subListaRutas = new ArrayList<NodoRuta>();          //crear lista de subrutas para identificarlas con el mismo numero de placa
         //ArrayList<NodoRuta> listaFinalPedidos = new ArrayList<NodoRuta>();    
         NodoRuta [] listaFinalPedidos = new NodoRuta[listaRutas.size()];        // Contiene el conjunto de rutas finales que todos los camiones deben tomar, en orden
+        
+        //System.out.println("cantidad de rutas: "+listaRutas.size());
         
         double distMinima = 999999999999.0;                                     // Finca con la menor distancia a la finca anterior
         double tiempMinimo = 0.0;
@@ -383,156 +400,59 @@ public void cargarAfuerza(){                                                    
                 }
             }
             
-            for(int o = 0; o  < subListaRutas.size(); ++o){
-                    System.out.println("En subListaRutas: "+subListaRutas.get(o).numEntrega);
-            }
+            
             
             //System.out.println("Tamaño de sublista: "+subListaRutas.size());
             
             if(tienePedido){                                                    // Ya que el camion si tiene pedidos, se ordenan sus rutas
                 
-                matrizObjetos [][]subMatriz  = new matrizObjetos [subListaRutas.size()+ 2][subListaRutas.size()+ 2];            // Matriz que almacena los pedidos del camion, mas el cero mas el Coyol
                 
-                double temp2;
+                // Logica de sublistas 
                 
-            for (int j = 1; j < subListaRutas.size() + 1; j++){                 // Llena la matriz con sus primeras filas y columnas de numeros de entrega
-                    
-                    subMatriz[0][j] = new matrizObjetos();    
-                    subMatriz[j][0] = new matrizObjetos();
-                    subMatriz[0][j].numEntrega = subListaRutas.get(j - 1).numEntrega;
-                    subMatriz[j][0].numEntrega = subListaRutas.get(j - 1).numEntrega;                    
-                    subMatriz[0][j].visitado = false;
-                    subMatriz[j][0].visitado = false;
-            }
-            
-             
-            
-            //subListaRutas.size() + 1
-            
-            
-            subMatriz[0][subMatriz.length-1] = new matrizObjetos();
-            
-            subMatriz[subMatriz.length-1][0] = new matrizObjetos();
-            
-            subMatriz[0][subMatriz.length-1].numEntrega = llena.matriz[0][llena.numFincas - 1].numEntrega;        // Se coloca el numero de entrega del Coyol en la ultima casilla de la primera fila y columna
-            
-            subMatriz[subMatriz.length-1][0].numEntrega = llena.matriz[llena.numFincas - 1][0].numEntrega;
-            
-            for(int h = 1; h < subMatriz.length; ++h){                          // Evita que se vuelva a considerar la ruta al Coyol, en la ultima fila de la matriz 
+                double numEntregaActual = 1.0;
+
+                distMinima = 99999999.0;
+
+                double numEntregaSig = 0.0;
                 
-                subMatriz[subListaRutas.size()+ 1][h] = new matrizObjetos();
-                
-                subMatriz[subListaRutas.size()+ 1][h].visitado = true;
-                
-            }
-            
-                for (int k=1; k < subMatriz.length; ++k){                       // Se llena el resto de casillas de la submatriz, con las distancias y los tiempos provenientes de la matriz grande Llena 
-                    for (int l = 1; l < subMatriz.length; ++l ) {
-                            
-                            subMatriz[k][l] = new matrizObjetos(); 
-                            subMatriz[k][l].distanciaM = llena.retornaDistancia(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);                            
-                            subMatriz[k][l].tiempoM = llena.retornaTiempo(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega);
-                            
-                            /**
-                            System.out.println("Fincas: "+subMatriz[0][l].numEntrega+", "+subMatriz[k][0].numEntrega);
-                            System.out.println("dist retornado: "+llena.retornaDistancia(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega));
-                            System.out.println("tiempo retornado: "+llena.retornaTiempo(subMatriz[0][l].numEntrega, subMatriz[k][0].numEntrega)); **/
-                            
+                for(int p = 0; p < subListaRutas.size(); ++p){							// Primero busco la mas cerca al coyol
+		
+                    if(obtenerTiempoEntreFincas(numEntregaActual, subListaRutas.get(p).numEntrega ) < distMinima){
+			numEntregaSig = subListaRutas.get(p).numEntrega;
+			distMinima = obtenerTiempoEntreFincas(numEntregaActual, subListaRutas.get(p).numEntrega );
                     }
-                } 
-                
-                subMatriz[0][0]= new matrizObjetos();
-                
-                
-                for(int q = 0; q < subMatriz.length;++q){
-                    for(int u = 0; u < subMatriz.length; ++u){
-                        System.out.print(subMatriz[q][u].numEntrega+" ");
-                    }
-                    System.out.println();
                 }
-                    System.out.println();
-                        System.out.println();
-                for(int q = 0; q < subMatriz.length;++q){
-                    for(int u = 0; u < subMatriz.length; ++u){
-                        System.out.print(subMatriz[q][u].distanciaM+" ");
-                    }
-                    System.out.println();
-                }
-                    System.out.println();
-                        System.out.println();
-                for(int q = 0; q < subMatriz.length;++q){
-                    for(int u = 0; u < subMatriz.length; ++u){
-                        System.out.print(subMatriz[q][u].tiempoM+" ");
-                    }
-                    System.out.println();
-                }
-                System.out.println();
-                        System.out.println();
                 
-                
-          
-                // A continuacion se realiza el ordenamiento de rutas, basado en la subMatriz
-                
-                ultimoIndice = subMatriz.length - 1;                            // Arranca de la finca el Coyol por su numero de entrega
-                //boolean agarraAlguien = false;
-                
-                
-                for(int m = 0; m < subMatriz.length - 2; ++m){                  // Cantidad de iteraciones totales a realizar para ordenar las rutas ( cantidad de fincas)
-                    
-                    for(int fil = 0; fil < subMatriz.length; ++fil ){           // Busca la distancia minima en una columna, que es la finca actual en donde se encuentra el camion, asi encuentra la siguiente finca a la cual ir 
-                        
-                        System.out.println("subLista: "+subListaRutas.size());
-                        System.out.println("submatriz "+subMatriz.length);
-                        System.out.println("fil "+fil);
-                        
-                        if(subMatriz[fil][ultimoIndice].distanciaM < distMinima && subMatriz[fil][ultimoIndice].distanciaM != 0.0 && subMatriz[fil][ultimoIndice].visitado == false){
-                            
-                            distMinima = subMatriz[fil][ultimoIndice].distanciaM;
-                            tiempMinimo = subMatriz[fil][ultimoIndice].tiempoM;
-                            espejoIndice = fil;                                 // Se almacena el indice de la siguiente finca
+                while(subListaRutas.size() > 0){															// Hago esto hasta limpiar la lista de todo el camion
+
+                        numEntregaActual = numEntregaSig; 
+                        distMinima = 999999999.0;
+
+                        for(int a = 0; a < subListaRutas.size(); ++a){	
+                                if(obtenerTiempoEntreFincas(numEntregaActual, subListaRutas.get(a).numEntrega) <   distMinima && numEntregaActual != subListaRutas.get(a).numEntrega){
+                                        numEntregaSig = subListaRutas.get(a).numEntrega;
+                                        distMinima = obtenerTiempoEntreFincas(numEntregaActual, subListaRutas.get(a).numEntrega);
+                                }
+                        }	
+
+                        for(int b = 0; b < subListaRutas.size(); ++b){												// borro la finca actual en la que me encuentro
+                                if(subListaRutas.get(b).numEntrega == numEntregaActual ){
+                                        listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(b);
+                                        listaFinalPedidos[indiceVectorFinal].costoDist = distMinima;                // Variables utilizadas para obtener el costo de la ruta
+                                        listaFinalPedidos[indiceVectorFinal].costoTiemp = llena.retornaTiempo(numEntregaActual, numEntregaSig);
+                                        subListaRutas.remove(b);
+                                        b = subListaRutas.size();
+                                        ++indiceVectorFinal;
+                                }
                         }
-                        subMatriz[fil][ultimoIndice].visitado = true; 
-                        subMatriz[ultimoIndice][fil].visitado = true; 
-                    }
-                    
-                    //System.out.println("Indice del espejo: "+espejoIndice);
-                    
-                    int tamanoTemp = subListaRutas.size();
-                    
-                    for(int g = 0; g < tamanoTemp; ++g){              // Busca la finca siguiente en la subLista de rutas, la agrega a la lista final y la remueve
-                        
-                        
-                        /**System.out.println("g: "+g);
-                        System.out.println("subLista: "+tamanoTemp);
-                        System.out.println("submatriz "+subMatriz.length);
-                        System.out.println("espejoInd: "+espejoIndice);**/
-                        
-                        if(subListaRutas.get(g).numEntrega == subMatriz[espejoIndice][0].numEntrega ){
-                            
-                            System.out.println("entra ");
-                            
-                            listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(g);                // Se agrega la ruta a su respectiva posicion
-                            listaFinalPedidos[indiceVectorFinal].costoDist = distMinima;                // Variables utilizadas para obtener el costo de la ruta
-                            listaFinalPedidos[indiceVectorFinal].costoTiemp = tiempMinimo;
-                            ++indiceVectorFinal;                            
-                            subListaRutas.remove(g);
-                            g = tamanoTemp;
-                        }
-                    }
-                    
-                    ultimoIndice = espejoIndice;                                // La finca siguiente a visitar, se convierte en la actual
-                    
-                    distMinima = 999999999999.0;                    
                 }
             } // fin de if tienePedido
-            
-            
-            
+                        
             tienePedido = false;                                                // Ya que se procede a ordenar las rutas de otro camion, se reinicia la variable
             
         }  // fin de for iteraCamiones
         
-                
+               // System.out.println("cant de pedidos: "+listaFinalPedidos.length);
         
         /** Una vez ordenadas todas las rutas por camion, se verifica si este conjunto de 
          
@@ -608,7 +528,7 @@ public void cargarAfuerza(){                                                    
                  File nuevoArchivo = new File("Rutas Finales.txt");             // Se abre el archivo para su corespondiente escritura
                  String filename = nuevoArchivo.getAbsolutePath();
                  
-                    /**try
+                    try
 
                     {
 
@@ -629,33 +549,6 @@ public void cargarAfuerza(){                                                    
                          writer.write(System.lineSeparator());
                      }                     
                      writer.close(); 
-                    }
-
-                    catch(IOException e)
-
-                    {**/
-                 
-                 try
-
-                    {
-
-                        FileWriter writer = new FileWriter(filename,true);
-
-                        writer.append(""+costoTotalRutas+"|"); // Lo primero escrito es el costo de dichas rutas
-                        writer.write(System.lineSeparator());
-                        writer.write(System.lineSeparator());
-                        writer.append("Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor");
-                        writer.write(System.lineSeparator()); 
-
-                    for(int i = 0; i < listaFinalPedidos.length; ++i){ // Se escriben todas las rutas en orden
-                        writer.append(""+listaFinalPedidos[i].mes+","+listaFinalPedidos[i].dia+","+listaFinalPedidos[i].numRuta+","+listaFinalPedidos[i].socio+
-                        ","+listaFinalPedidos[i].producto+","+listaFinalPedidos[i].kgAentregar+","+
-                        listaFinalPedidos[i].horaSalida+","+listaFinalPedidos[i].zona+","+listaFinalPedidos[i].numEntrega+
-                        ","+listaFinalPedidos[i].precioFlete+","+listaFinalPedidos[i].montoFlete+","+listaFinalPedidos[i].placaCamion
-                        +","+listaFinalPedidos[i].proveedor);
-                        writer.write(System.lineSeparator());
-                    } 
-                        writer.close(); 
                     }
 
                     catch(IOException e)
