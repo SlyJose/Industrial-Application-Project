@@ -72,11 +72,13 @@ public class SeleccionCamion {
     public void agregarProducto(String productoAcargar, double cantidadProducto, int placa){                     // Metodo encargado de reducir la cantidad de espacio libre en un compartimento, e indicar el producto que almacena
         double temporal = 0.0;
         double temporalCant = 0.0;
+        
         for(int i = 0; i < listaCamiones.size(); ++i){                          // Se busca el camion al cual agregar el producto
+            
             if(listaCamiones.get(i).placa == placa){                            // Se asegura que el pedido cabe en el camion antes de depositarlo
                 
                 for(int k = 0; k < listaCamiones.get(i).carretaProductos.length && cantidadProducto != 0.0; ++k){   // Itera sobre los compartimentos del camion, buscando vacios hasta que deposite todo el producto 
-                    
+                   
                     if(listaCamiones.get(i).carretaProductos[k].equals("vacio")){                   // Encuentra un compartimento vacio
                         listaCamiones.get(i).carretaProductos[k] = productoAcargar;
                         
@@ -91,6 +93,7 @@ public class SeleccionCamion {
                         }
                     }
                 }
+                i = listaCamiones.size();
             }
         }
     }
@@ -245,6 +248,21 @@ public class SeleccionCamion {
             }
         }
         return espacioLibre;
+    }
+    
+    public boolean camionLleno(int placa){                                      // Permite identificar si un camion esta lleno o no           
+        boolean estaLleno = true;
+        for(int iterador = 0; iterador < listaCamiones.size(); ++iterador){
+                if(listaCamiones.get(iterador).placa == placa){                    
+                    for(int i = 0; i < listaCamiones.get(iterador).campos; ++i){
+                        if(listaCamiones.get(iterador).carretaProductos[i].equals("vacio")){
+                            estaLleno = false;                             
+                        }
+                    }
+                    iterador = listaCamiones.size();
+                }                    
+            }
+        return estaLleno;
     }
     
 }
