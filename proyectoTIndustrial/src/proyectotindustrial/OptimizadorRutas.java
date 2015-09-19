@@ -126,6 +126,8 @@ public class OptimizadorRutas {
 
                 for(int k = 0; k < insCamion.listaCamiones.size(); ++k){                // Se encarga de escoger un camion que cumpla los requisitos de dicho pedido
 
+                    if(){}
+                    
                     //System.out.println("Numero de pedido: "+subListaPedidos.get(pedidoAescoger).numEntrega);
                     if( insCamion.listaCamiones.get(k).proveedor.equals(preferenciaActual)  || preferenciaActual.equals("no hay preferencia")){    // Se verifica que el camion sea de la preferencia requerida por el pedido
                         
@@ -203,15 +205,30 @@ public class OptimizadorRutas {
                             }else{
                                 //System.out.println("No entre por tiempo, soy pedido "+subListaPedidos.get(pedidoAescoger).numEntrega);
                                 auxSubListaPedidos.add(subListaPedidos.get(pedidoAescoger));        // Agrega el pedido que no cabe en el camion actual a una lista auxiliar, para que pase a la siguiente zona
+                                System.out.println("No entre por tiempo al camion "+insCamion.listaCamiones.get(k).placa+", soy finca "+subListaPedidos.get(pedidoAescoger).numEntrega);
                                 subListaPedidos.remove(pedidoAescoger);
                                 k = insCamion.listaCamiones.size();
                                 --cantPedidos;
                                 
+                                
+                                
                                 //System.out.println("Se agrega el pedido a una sublista");
                                 //System.out.println("Tamaño lista auxiliar: "+auxSubListaPedidos.size());
                             }           
-                    }
-                }            
+                    }else{
+                            System.out.println("No entre por cantidad al camion "+insCamion.listaCamiones.get(k).placa+", soy finca "+subListaPedidos.get(pedidoAescoger).numEntrega);
+                            auxSubListaPedidos.add(subListaPedidos.get(pedidoAescoger));        // Agrega el pedido que no cabe en el camion actual a una lista auxiliar, para que pase a la siguiente zona
+                            subListaPedidos.remove(pedidoAescoger);
+                            k = insCamion.listaCamiones.size();
+                            --cantPedidos;
+                        }
+                }else{
+                        System.out.println("No entre por preferencia al camion "+insCamion.listaCamiones.get(k).placa+", soy finca "+subListaPedidos.get(pedidoAescoger).numEntrega);
+                        auxSubListaPedidos.add(subListaPedidos.get(pedidoAescoger));        // Agrega el pedido que no cabe en el camion actual a una lista auxiliar, para que pase a la siguiente zona
+                        subListaPedidos.remove(pedidoAescoger);
+                        k = insCamion.listaCamiones.size();
+                        --cantPedidos;
+                    }            
             }           
         }
             

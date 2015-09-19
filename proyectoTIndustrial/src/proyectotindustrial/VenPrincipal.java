@@ -353,7 +353,7 @@ public class VenPrincipal extends javax.swing.JFrame {
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
-        for(int i = 0; i < 10; ++i){                                             // Se ejecuta la optimizacion cierta cantidad de veces para mejorar los resultados
+        for(int i = 0; i < 1; ++i){                                             // Se ejecuta la optimizacion cierta cantidad de veces para mejorar los resultados
             
             OptimizadorRutas optimiza = new OptimizadorRutas();                         // Instancia que maneja la base de datos y optimizacion de rutas
             optimiza.cargarBaseDatos();                                             // Primero se carga la base de datos
