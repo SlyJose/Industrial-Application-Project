@@ -184,7 +184,7 @@ public class OptimizadorRutas {
                                 nuevaRuta.socio = subListaPedidos.get(pedidoAescoger).nomSocio;
                                 nuevaRuta.producto = subListaPedidos.get(pedidoAescoger).producto;
                                 nuevaRuta.kgAentregar = subListaPedidos.get(pedidoAescoger).cantKg;
-                                nuevaRuta.horaSalida = "";
+                                nuevaRuta.horaSalida = "Coyol";
                                 nuevaRuta.zona = insAsociado.getZona(subListaPedidos.get(pedidoAescoger).numEntrega);
                                 nuevaRuta.numEntrega = subListaPedidos.get(pedidoAescoger).numEntrega;
                                 nuevaRuta.placaCamion = insCamion.listaCamiones.get(k).placa;
@@ -359,7 +359,7 @@ public void cargarAfuerza(){                                                    
                                 nuevaRuta.socio = subListaPedidos.get(i).nomSocio;
                                 nuevaRuta.producto = subListaPedidos.get(i).producto;
                                 nuevaRuta.kgAentregar = subListaPedidos.get(i).cantKg;
-                                nuevaRuta.horaSalida = "";
+                                nuevaRuta.horaSalida = "Coyol";
                                 nuevaRuta.zona = insAsociado.getZona(subListaPedidos.get(i).numEntrega);
                                 nuevaRuta.numEntrega = subListaPedidos.get(i).numEntrega;
                                 nuevaRuta.placaCamion = insCamion.listaCamiones.get(j).placa;
@@ -551,20 +551,20 @@ public void cargarAfuerza(){                                                    
 
                      FileWriter writer = new FileWriter(filename,true);
 
-                     writer.append(""+costoTotalRutas+"|");                         // Lo primero escrito es el costo de dichas rutas
+                     writer.append(""+costoTotalRutas+"|"); // Lo primero escrito es el costo de dichas rutas
                      writer.write(System.lineSeparator());
                      writer.write(System.lineSeparator());
-                     writer.append("Mes    Dia    # de Ruta    Socio            Producto            KGS A Entregar    Hora Salida del Coyol    Lugar    # Entrega    Precio Flete    Monto Flete    Placa del Camion    Proveedor");
-                     writer.write(System.lineSeparator());                     
+                     writer.append("Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor");
+                     writer.write(System.lineSeparator()); 
                      
-                     for(int i = 0; i < listaFinalPedidos.length; ++i){         // Se escriben todas las rutas en orden
-                         writer.append(""+listaFinalPedidos[i].mes+"    "+listaFinalPedidos[i].dia+"    "+listaFinalPedidos[i].numRuta+"    "+listaFinalPedidos[i].socio+
-                                        "            "+listaFinalPedidos[i].producto+"            "+listaFinalPedidos[i].kgAentregar+"    "+
-                                        listaFinalPedidos[i].horaSalida+"    "+listaFinalPedidos[i].zona+"    "+listaFinalPedidos[i].numEntrega+
-                                        "    "+listaFinalPedidos[i].precioFlete+"    "+listaFinalPedidos[i].montoFlete+"    "+listaFinalPedidos[i].placaCamion
-                                        +"    "+listaFinalPedidos[i].proveedor);
+                     for(int i = 0; i < listaFinalPedidos.length; ++i){ // Se escriben todas las rutas en orden
+                         writer.append(""+listaFinalPedidos[i].mes+","+listaFinalPedidos[i].dia+","+listaFinalPedidos[i].numRuta+","+listaFinalPedidos[i].socio+
+                                        ","+listaFinalPedidos[i].producto+","+listaFinalPedidos[i].kgAentregar+","+
+                                        listaFinalPedidos[i].horaSalida+","+listaFinalPedidos[i].zona+","+listaFinalPedidos[i].numEntrega+
+                                        ","+listaFinalPedidos[i].precioFlete+","+listaFinalPedidos[i].montoFlete+","+listaFinalPedidos[i].placaCamion
+                                        +","+listaFinalPedidos[i].proveedor);
                          writer.write(System.lineSeparator());
-                     }                     
+                     } 
                      writer.close(); 
                     }
 
