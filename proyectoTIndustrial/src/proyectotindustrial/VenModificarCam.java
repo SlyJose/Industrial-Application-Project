@@ -36,11 +36,9 @@ public class VenModificarCam extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
@@ -61,8 +59,6 @@ public class VenModificarCam extends javax.swing.JFrame {
 
         jLabel2.setText("Numero");
 
-        jLabel8.setText("Num entrega al cual no puede ir");
-
         jLabel3.setText("Placa");
 
         jLabel9.setText("Campo");
@@ -76,7 +72,6 @@ public class VenModificarCam extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
                     .addComponent(jLabel7)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
@@ -84,7 +79,7 @@ public class VenModificarCam extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel9))
-                .addGap(39, 39, 39)
+                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -92,7 +87,6 @@ public class VenModificarCam extends javax.swing.JFrame {
                         .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField8)
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -134,11 +128,7 @@ public class VenModificarCam extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,7 +177,6 @@ public class VenModificarCam extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -196,6 +185,5 @@ public class VenModificarCam extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 }
