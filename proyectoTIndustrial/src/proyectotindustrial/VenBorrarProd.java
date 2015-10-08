@@ -1,5 +1,13 @@
 package proyectotindustrial;
 
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,6 +20,7 @@ package proyectotindustrial;
  */
 public class VenBorrarProd extends javax.swing.JFrame {
 
+    String producto = "";
     /**
      * Creates new form VenBorrarProd
      */
@@ -31,7 +40,7 @@ public class VenBorrarProd extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        prod = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -42,6 +51,11 @@ public class VenBorrarProd extends javax.swing.JFrame {
         jLabel1.setText("Borrar Producto");
 
         jButton1.setText("Borrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,7 +74,7 @@ public class VenBorrarProd extends javax.swing.JFrame {
                         .addGap(169, 169, 169)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(prod, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -71,7 +85,7 @@ public class VenBorrarProd extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(jLabel2)
                 .addGap(30, 30, 30)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(prod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jButton1)
                 .addContainerGap(262, Short.MAX_VALUE))
@@ -79,6 +93,74 @@ public class VenBorrarProd extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+        public void borraLinea(String producto){
+    
+        
+         try {
+             
+                 
+
+        File inFile = new File("Productos.txt");
+
+        if (!inFile.isFile()) {
+        System.out.println("Parameter is not an existing file");
+        return;
+        }
+
+        //Construct the new file that will later be renamed to the original filename. 
+        File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
+
+        BufferedReader br = new BufferedReader(new FileReader("Productos.txt"));
+        PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+
+         String line = null;
+         String delimitadoresPalabras = ",";                                    // Variable utilizada para separar los valores en el archivo por cada linea
+         String[] lineas;
+
+        //Read from the original file and write to the new 
+        //unless content matches data to be removed.
+        while ((line = br.readLine()) != null) {
+
+        if (!(line.trim().split(delimitadoresPalabras)[0].equals(producto))) {
+
+        pw.println(line);
+        pw.flush();
+        }
+        }
+        pw.close();
+        br.close();
+
+        //Delete the original file
+        if (!inFile.delete()) {
+        System.out.println("Could not delete file");
+        return;
+        } 
+
+        //Rename the new file to the filename the original file had.
+        if (!tempFile.renameTo(inFile))
+        System.out.println("Could not rename file");
+
+        }
+        catch (FileNotFoundException ex) {
+        ex.printStackTrace();
+        }
+        catch (IOException ex) {
+        ex.printStackTrace();
+        }
+    
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        producto = prod.getText();
+        
+        borraLinea(producto);
+        
+        prod.setText("");
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,6 +201,6 @@ public class VenBorrarProd extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField prod;
     // End of variables declaration//GEN-END:variables
 }

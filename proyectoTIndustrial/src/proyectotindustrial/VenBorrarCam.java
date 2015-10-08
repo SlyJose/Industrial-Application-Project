@@ -1,5 +1,13 @@
 package proyectotindustrial;
 
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,12 +20,12 @@ package proyectotindustrial;
  */
 public class VenBorrarCam extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VenBorrarCam
-     */
+    String numPlaca = "";
+    
+    
     public VenBorrarCam() {
         initComponents();
-    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,9 +37,9 @@ public class VenBorrarCam extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        placa = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        borrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -41,7 +49,12 @@ public class VenBorrarCam extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 48)); // NOI18N
         jLabel1.setText("Borrar Camion");
 
-        jButton1.setText("Borrar");
+        borrar.setText("Borrar");
+        borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -52,10 +65,10 @@ public class VenBorrarCam extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(placa, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(120, 120, 120)
-                            .addComponent(jButton1))))
+                            .addComponent(borrar))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
@@ -70,14 +83,89 @@ public class VenBorrarCam extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(jLabel2)
                 .addGap(30, 30, 30)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(placa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addComponent(jButton1)
+                .addComponent(borrar)
                 .addContainerGap(250, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void borraLinea(String numPlaca){
+    
+        
+         try {
+             
+                 
+
+        File inFile = new File("Camiones.txt");
+
+        if (!inFile.isFile()) {
+        System.out.println("Parameter is not an existing file");
+        return;
+        }
+
+        //Construct the new file that will later be renamed to the original filename. 
+        File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
+
+        BufferedReader br = new BufferedReader(new FileReader("Camiones.txt"));
+        PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+
+         String line = null;
+         String delimitadoresPalabras = ",";                                    // Variable utilizada para separar los valores en el archivo por cada linea
+         String[] lineas;
+
+        //Read from the original file and write to the new 
+        //unless content matches data to be removed.
+        while ((line = br.readLine()) != null) {
+
+        if (!(line.trim().split(delimitadoresPalabras)[1].equals(numPlaca))) {
+
+        pw.println(line);
+        pw.flush();
+        }
+        }
+        pw.close();
+        br.close();
+
+        //Delete the original file
+        if (!inFile.delete()) {
+        System.out.println("Could not delete file");
+        return;
+        } 
+
+        //Rename the new file to the filename the original file had.
+        if (!tempFile.renameTo(inFile))
+        System.out.println("Could not rename file");
+
+        }
+        catch (FileNotFoundException ex) {
+        ex.printStackTrace();
+        }
+        catch (IOException ex) {
+        ex.printStackTrace();
+        }
+    
+    }
+    
+    private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
+        // TODO add your handling code here:
+        numPlaca = placa.getText();
+        
+        borraLinea(numPlaca);
+        
+        placa.setText("");
+        
+        
+        
+                   
+        
+    }//GEN-LAST:event_borrarActionPerformed
+
+    
+     
+  
 
     /**
      * @param args the command line arguments
@@ -115,9 +203,9 @@ public class VenBorrarCam extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton borrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField placa;
     // End of variables declaration//GEN-END:variables
 }
