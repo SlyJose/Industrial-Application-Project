@@ -214,6 +214,8 @@ public class VenAgregarCam extends javax.swing.JFrame {
         escribeNuevoCamion (nuevoCam);
         limpiaRegistros();
         
+        nuevoCam = "";
+        
     }//GEN-LAST:event_AgregarActionPerformed
     public void limpiaRegistros(){
     

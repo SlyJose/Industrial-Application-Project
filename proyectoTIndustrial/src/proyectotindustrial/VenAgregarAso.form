@@ -25,32 +25,40 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTextField1" alignment="1" pref="69" max="32767" attributes="0"/>
-                          <Component id="jTextField2" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextField3" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextField4" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextField5" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextField6" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextField8" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextField7" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jTextField1" alignment="1" pref="69" max="32767" attributes="0"/>
+                                  <Component id="jTextField2" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jTextField3" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jTextField4" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jTextField5" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jTextField6" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jTextField8" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextField7" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="jLabel1" alignment="0" min="-2" pref="380" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jLabel1" alignment="0" min="-2" pref="380" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+                      <Component id="Agregar" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="28" max="32767" attributes="0"/>
           </Group>
@@ -101,7 +109,9 @@
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextField8" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="82" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <Component id="Agregar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -170,6 +180,14 @@
     <Component class="javax.swing.JTextField" name="jTextField7">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField8">
+    </Component>
+    <Component class="java.awt.Button" name="Agregar">
+      <Properties>
+        <Property name="label" type="java.lang.String" value="Agregar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AgregarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
