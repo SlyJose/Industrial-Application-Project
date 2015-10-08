@@ -633,14 +633,16 @@ public void cargarAfuerza(){                                                    
             nuevoPedido.numPedido = numPedido;
             nuevoPedido.nomSocio = nomSocio;
             nuevoPedido.numEntrega = numEntrega;
-            nuevoPedido.producto = producto;
-            nuevoPedido.cantKg = cantKg;
+            nuevoPedido.producto = producto;            
             nuevoPedido.fechaEntrega = fechaEntrega;
             nuevoPedido.horaEntrega = horaEntrega;
             nuevoPedido.codPedido = codPedido;
             
-            listaPedidos.add(nuevoPedido);
-           
+            double temp = insProducto.getFactorRelacion(nuevoPedido.producto);  // Factor de relacion con respecto al Vap Feed Granel de los productos
+            
+            nuevoPedido.cantKg = cantKg * temp;
+            
+            listaPedidos.add(nuevoPedido);           
         }
       }
       catch(Exception e){
@@ -654,5 +656,31 @@ public void cargarAfuerza(){                                                    
             e2.printStackTrace();
          }
       }
+       
+       ArrayList<NodoPedido> tempLista = new ArrayList<NodoPedido>();             // Lista temporal de pedidos utilizada para ordenar por tamano de pedido
+       
+       boolean continuar = true;
+       double cantidad = 0; 
+       int indice = 0;
+       while(continuar){
+           for(int j = 0; j < listaPedidos.size(); ++j){
+               if(listaPedidos.get(j).cantKg > cantidad){
+                   indice = j;
+                   cantidad = listaPedidos.get(j).cantKg;
+               }                              
+           }
+           if(listaPedidos.size() == 0){
+               continuar = false;
+           }
+           tempLista.add(listaPedidos.get(indice));
+           listaPedidos.remove(indice);
+           cantidad = 0;
+           indice = 0;
+       }
+       
+       for(int i = 0; i < tempLista.size(); ++i){                               // Se retornan los valores a la lista de forma ordenada
+           listaPedidos.add(tempLista.get(i));
+           System.out.println(""+listaPedidos.get(i));
+       }
     }
 }

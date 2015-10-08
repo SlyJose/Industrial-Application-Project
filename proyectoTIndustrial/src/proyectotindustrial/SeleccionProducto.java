@@ -25,6 +25,7 @@ public class SeleccionProducto {
     static class NodoLista{                                                     // Clase que define cada nodo
          String producto;         
          double unidadDensidad;        
+         double factorRelacion;                                                 // Relacion directa con el Vap Feed Granel
     }
     
     public ArrayList<NodoLista> listaProductos = new ArrayList<NodoLista>();    // Lista de objetos producto
@@ -40,10 +41,11 @@ public class SeleccionProducto {
         return existe;
     }
     
-    public void agregaProducto(String producto, double densidad){               // Metodo encargado de agregar un producto a la lista de productos
+    public void agregaProducto(String producto, double densidad, double factorRelacion){               // Metodo encargado de agregar un producto a la lista de productos
         NodoLista nuevoNodo = new NodoLista();
         nuevoNodo.producto = producto;
         nuevoNodo.unidadDensidad = densidad;
+        nuevoNodo.factorRelacion = factorRelacion;
         listaProductos.add(nuevoNodo);
     }
     
@@ -66,7 +68,8 @@ public class SeleccionProducto {
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
             palabrasSeparadas = linea.split(delimitadoresPalabras); 
             double densidad = Double.parseDouble(palabrasSeparadas[1]);
-            agregaProducto(palabrasSeparadas[0], densidad);                     // Se crea el producto en la lista de productos
+            double factorRelacion = Double.parseDouble(palabrasSeparadas[2]);
+            agregaProducto(palabrasSeparadas[0], densidad, factorRelacion);                     // Se crea el producto en la lista de productos
         }
       }
       catch(Exception e){
@@ -102,4 +105,14 @@ public class SeleccionProducto {
         }
         return productos;
     }    
+    
+    public double getFactorRelacion(String nombreProducto){
+        double respuesta = 0;
+        for(int iterador = 0; iterador < listaProductos.size(); ++iterador){
+            if(listaProductos.get(iterador).producto.equals(nombreProducto)){
+                respuesta = listaProductos.get(iterador).factorRelacion;
+            }            
+        }
+        return respuesta;
+    }
 }
