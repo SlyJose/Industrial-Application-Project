@@ -122,11 +122,11 @@ public class VenBorrarProd extends javax.swing.JFrame {
         //unless content matches data to be removed.
         while ((line = br.readLine()) != null) {
 
-        if (!(line.trim().split(delimitadoresPalabras)[0].equals(producto))) {
+            if (!(line.trim().split(delimitadoresPalabras)[0].equals(producto))) {
 
-        pw.println(line);
-        pw.flush();
-        }
+                pw.println(line);
+                pw.flush();
+            }
         }
         pw.close();
         br.close();

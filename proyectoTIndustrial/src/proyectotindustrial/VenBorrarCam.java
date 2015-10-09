@@ -120,11 +120,10 @@ public class VenBorrarCam extends javax.swing.JFrame {
         //unless content matches data to be removed.
         while ((line = br.readLine()) != null) {
 
-        if (!(line.trim().split(delimitadoresPalabras)[1].equals(numPlaca))) {
-
-        pw.println(line);
-        pw.flush();
-        }
+            if (!(line.trim().split(delimitadoresPalabras)[1].equals(numPlaca))) {
+                    pw.println(line);
+                    pw.flush();
+            }
         }
         pw.close();
         br.close();
