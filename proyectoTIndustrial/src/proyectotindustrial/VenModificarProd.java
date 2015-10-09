@@ -136,7 +136,6 @@ public class VenModificarProd extends javax.swing.JFrame {
         
         String producto = textoProducto.getText();
         productoAbuscar = producto;
-        textoDensidad.setVisible(true);
         
         ArrayList<NodoLista> listaProductos = new ArrayList<NodoLista>();    // Lista de objetos producto
         
