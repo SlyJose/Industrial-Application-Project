@@ -11,3 +11,9 @@ Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,
 9,18,3,E,DESARROLLO RB GRANEL,500.0,,6,4022.0,14.46,7230.0,152445,Dos Pinos
 9,18,4,H,ENELAC C/LEV ESPECIAL,800.0,,7,4791.0,16.14,12912.0,156024,Dos Pinos
 9,18,5,D,CRAPID GRANEL,400.0,,3,1993.0,8.6,3440.0,162343,Leo
+7.0000006366E8|
+
+Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor
+10,12,1,h,VAP FEED GRANEL,2000.0,Coyol,2,19.0,14.12,28240.0,152388,Dos Pinos
+10,12,1,j,VAP FEED GRANEL,3000.0,Coyol,4,20.0,13.32,39960.0,152388,Dos Pinos
+10,12,1,v,VAP FEED GRANEL,1000.0,Coyol,2,3684.0,15.93,15930.0,152388,Dos Pinos

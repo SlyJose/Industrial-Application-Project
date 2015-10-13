@@ -64,15 +64,22 @@ public class ProyectoTIndustrial {
         }
     }
     
+
+    
     
     public static void main(String[] args) { 
         
         ProyectoTIndustrial comienza = new ProyectoTIndustrial();
-        
+        VenPrincipal ventana = new VenPrincipal();
         //comienza.limpiaArhivoOrden();
         comienza.limpiaArhivoRutas();
         
-        new VenPrincipal().setVisible(true);    
+        
+        ventana.seteaValoresCB();
+        ventana.setVisible(true); 
+        
+        
+        
        
     }
 }

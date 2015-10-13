@@ -620,23 +620,23 @@ public void cargarAfuerza(){                                                    
          while( ( linea = lectorLinea.readLine() ) != null){                    // Se lee cada linea del archivo
             palabrasSeparadas = linea.split(delimitadoresPalabras);  
             
-            int numPedido = Integer.parseInt(palabrasSeparadas[0]);             // Variables temporales para casting 
-            String nomSocio = palabrasSeparadas[1];
-            double numEntrega = Double.parseDouble(palabrasSeparadas[2]);
-            String producto = palabrasSeparadas[3];
-            double cantKg = Double.parseDouble(palabrasSeparadas[4]);
-            String fechaEntrega = palabrasSeparadas[5];
-            String horaEntrega = palabrasSeparadas[6];
-            String codPedido = palabrasSeparadas[7];  
+            //int numPedido = Integer.parseInt(palabrasSeparadas[0]);             // Variables temporales para casting 
+            String nomSocio = palabrasSeparadas[0];
+            double numEntrega = Integer.parseInt(palabrasSeparadas[1]);
+            String producto = palabrasSeparadas[2];
+            double cantKg = Double.parseDouble(palabrasSeparadas[3]);
+            //String fechaEntrega = palabrasSeparadas[5];
+            //String horaEntrega = palabrasSeparadas[6];
+            //String codPedido = palabrasSeparadas[7];  
             
             NodoPedido nuevoPedido = new NodoPedido();
-            nuevoPedido.numPedido = numPedido;
+            //nuevoPedido.numPedido = numPedido;
             nuevoPedido.nomSocio = nomSocio;
             nuevoPedido.numEntrega = numEntrega;
             nuevoPedido.producto = producto;            
-            nuevoPedido.fechaEntrega = fechaEntrega;
-            nuevoPedido.horaEntrega = horaEntrega;
-            nuevoPedido.codPedido = codPedido;
+            //nuevoPedido.fechaEntrega = fechaEntrega;
+            //nuevoPedido.horaEntrega = horaEntrega;
+            //nuevoPedido.codPedido = codPedido;
             
             double temp = insProducto.getFactorRelacion(nuevoPedido.producto);  // Factor de relacion con respecto al Vap Feed Granel de los productos
             
@@ -667,20 +667,27 @@ public void cargarAfuerza(){                                                    
                if(listaPedidos.get(j).cantKg > cantidad){
                    indice = j;
                    cantidad = listaPedidos.get(j).cantKg;
+                   //System.out.println("entré");
                }                              
            }
+           
+           //System.out.println("indice: "+indice);
+           //System.out.println("tamano: "+listaPedidos.size());
+           
+           tempLista.add(listaPedidos.get(indice));
+           listaPedidos.remove(indice);
+           //System.out.println("saque");
+           cantidad = 0;
+           indice = 0;
+           
            if(listaPedidos.size() == 0){
                continuar = false;
            }
-           tempLista.add(listaPedidos.get(indice));
-           listaPedidos.remove(indice);
-           cantidad = 0;
-           indice = 0;
        }
        
        for(int i = 0; i < tempLista.size(); ++i){                               // Se retornan los valores a la lista de forma ordenada
            listaPedidos.add(tempLista.get(i));
-           System.out.println(""+listaPedidos.get(i));
+           //System.out.println(""+listaPedidos.get(i).cantKg);
        }
     }
 }

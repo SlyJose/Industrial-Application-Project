@@ -51,15 +51,17 @@ public class VenModificarProd extends javax.swing.JFrame {
         mensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(530, 280));
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
         jLabel1.setText("Modificar Producto");
 
-        jLabel2.setText("Producto");
+        jLabel2.setText("Nombre del Producto:");
 
-        jLabel3.setText("Factor de Relación");
+        jLabel3.setText("Factor de Relación:");
 
         Aceptar.setText("Aceptar");
         Aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +84,7 @@ public class VenModificarProd extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
@@ -91,21 +93,24 @@ public class VenModificarProd extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(textoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Buscar)
-                        .addGap(18, 18, 18)
+                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Aceptar)
-                            .addComponent(textoDensidad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textoDensidad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(83, 83, 83))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Aceptar)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(83, 83, 83))))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +130,7 @@ public class VenModificarProd extends javax.swing.JFrame {
                     .addComponent(mensaje))
                 .addGap(18, 18, 18)
                 .addComponent(Aceptar)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();

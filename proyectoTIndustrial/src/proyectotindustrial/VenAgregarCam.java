@@ -93,28 +93,42 @@ public class VenAgregarCam extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 48)); // NOI18N
-        jLabel1.setText("Agregar Camión");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setText("Nuevo Camión");
 
-        jLabel2.setText("Número");
+        jLabel2.setText("Número de Camión:");
 
-        jLabel3.setText("Placa");
+        jLabel3.setText("Placa de Camión:");
 
+        proveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        numero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         numero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numeroActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Capacidad por campo (q)");
+        jLabel4.setText("Capacidad por Compartimento (Q):");
 
-        jLabel5.setText("Capacidad por campo (kg)");
+        jLabel5.setText("Capacidad por Compartimento (KG):");
 
-        jLabel6.setText("Capacidad");
+        jLabel6.setText("Capacidad Total del Camión:");
 
-        jLabel7.setText("Proveedor");
+        placa.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel9.setText("Campo");
+        jLabel7.setText("Proveedor: ");
+
+        campo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel9.setText("Cantidad de compartimentos:");
+
+        capacidadPorCampoKG.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        capacidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        capacidadPorCampoQ.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         Agregar.setActionCommand("Agregar");
         Agregar.setLabel("Agregar");
@@ -132,39 +146,39 @@ public class VenAgregarCam extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel9))
-                        .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(numero, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(placa, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(campo, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(capacidadPorCampoKG, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(capacidad, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(capacidadPorCampoQ, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel9))
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(capacidad, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                                        .addComponent(capacidadPorCampoKG, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(capacidadPorCampoQ)
+                                        .addComponent(campo, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(placa, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(numero, javax.swing.GroupLayout.Alignment.TRAILING))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(numero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -191,9 +205,9 @@ public class VenAgregarCam extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();

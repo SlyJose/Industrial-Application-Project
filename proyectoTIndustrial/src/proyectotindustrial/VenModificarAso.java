@@ -55,7 +55,8 @@ public class VenModificarAso extends javax.swing.JFrame {
 
         jLabel4.setText("Capacidad Instalada");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 102, 255));
         jLabel1.setText("Modificar Asociado");
 
         jLabel5.setText("Ventana de tiempo de Entrega");
@@ -93,8 +94,10 @@ public class VenModificarAso extends javax.swing.JFrame {
                     .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField8)
                     .addComponent(jTextField7))
-                .addContainerGap(125, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(128, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +136,7 @@ public class VenModificarAso extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         pack();

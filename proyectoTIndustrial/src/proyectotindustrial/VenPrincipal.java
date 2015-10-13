@@ -1,5 +1,14 @@
 package proyectotindustrial;
 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -36,17 +45,37 @@ public class VenPrincipal extends javax.swing.JFrame {
     
     CreadorOrden orden = new CreadorOrden();
     
+    
+    
     //OptimizadorRutas optimiza = new OptimizadorRutas();                         // Instancia que maneja la base de datos y optimizacion de rutas
     
         
 
     
     public VenPrincipal() {
+        
+        
         initComponents();
+           
 
        //Prueba no util
        //SeleccionProducto productos = new SeleccionProducto();
        //System.out.println(productos.getProductos());
+    }
+    
+    public void seteaValoresCB(){
+    
+        
+        SeleccionProducto productoLista = new SeleccionProducto();
+   
+        productoLista.cargarArchivo();
+                
+                
+      for (int i = 0; i < productoLista.listaProductos.size(); i++){
+        
+                btnProducto.addItem(productoLista.listaProductos.get(i).producto);
+        }
+    
     }
    
     
@@ -69,7 +98,6 @@ public class VenPrincipal extends javax.swing.JFrame {
         txtNumeroEntrega = new javax.swing.JTextField();
         txtCantidadKilos = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnNuevaOrden = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -82,12 +110,17 @@ public class VenPrincipal extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jToggleButton2 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1100, 538));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(new java.awt.Dimension(1200, 600));
         setResizable(false);
 
+        jLabel1.setForeground(new java.awt.Color(51, 51, 255));
         jLabel1.setText("NUEVA ORDEN");
 
         jLabel3.setText("Nombre de Socio");
@@ -98,13 +131,18 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         jLabel6.setText("Cantidad de Kilogramos");
 
-        btnProducto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PERFECTA ESPECIAL GRANEL", "APOLO 16 % GR", "COMPLETE GR", "CRAPID GRANEL", "DESARROLLO RB GRANEL", "DESARROLLO TERNERAS GRANEL", "DESTILADO MAIZ GRANEL", "ENELAC C/LEV ESPECIAL", "ENELAC ESPECIAL GRANEL", "ENELAC GRANEL", "ENELAC LEVADURA GRANEL", "ENELAC PELETIZADO GRANEL", "ENELAC RUMENSIN GRANEL", "FASE 1 GRANEL", "INICIO LACTANCIA GRANEL", "MAIZ MOLIDO GRANEL", "PELETHENO GRANEL", "PELETHIZADA ESPECIAL GRANEL", "PERFECTA GRANEL", "PREDILECTA GRANEL", "PRODUCTORA LECHE GRANEL", "SUPLEMAX KG", "ULTRA FEED GRANEL", "VAP 17 GRANEL", "VAP FEED C/ LEV ESPECIAL", "VAP FEED ESPECIAL GRANEL", "VAP FEED LEVADURA GRANEL", "VAP FEED PELETIZADO GRANEL", "VAP PELETIZADO ESPECIAL GRANEL", "VAP RB GRANEL" }));
         btnProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProductoActionPerformed(evt);
             }
         });
 
+        txtNombreSocio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtNumeroEntrega.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtCantidadKilos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCantidadKilos.setText("0.0");
         txtCantidadKilos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCantidadKilosActionPerformed(evt);
@@ -115,13 +153,6 @@ public class VenPrincipal extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Asociado");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -146,8 +177,9 @@ public class VenPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 2, 48)); // NOI18N
-        jLabel10.setText("Menú Principal");
+        jLabel10.setFont(new java.awt.Font("Cambria Math", 2, 48)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel10.setText("Aplicación Rutas");
 
         jButton6.setText("Agregar");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +202,8 @@ public class VenPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("MODIFICACIÓN DE ARCHIVOS");
+        jLabel11.setForeground(new java.awt.Color(51, 51, 255));
+        jLabel11.setText("BASE DE DATOS");
 
         jLabel12.setText("Seleccione Conjunto");
 
@@ -185,20 +218,25 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         jLabel2.setText(".");
 
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotindustrial/images.png"))); // NOI18N
+
+        jToggleButton2.setText("Asociado");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(348, 348, 348))
             .addGroup(layout.createSequentialGroup()
                 .addGap(145, 145, 145)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(173, 173, 173))
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,34 +248,29 @@ public class VenPrincipal extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtNombreSocio)
                                     .addComponent(txtNumeroEntrega)
-                                    .addComponent(btnProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCantidadKilos))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(73, 73, 73)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel12)
-                                        .addGap(11, 11, 11))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNuevaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(44, 44, 44)
+                                    .addComponent(txtCantidadKilos)
+                                    .addComponent(btnProducto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))
+                            .addComponent(btnNuevaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                                .addComponent(jLabel12)
+                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -245,58 +278,71 @@ public class VenPrincipal extends javax.swing.JFrame {
                                 .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(38, 38, 38))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(28, 28, 28))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(70, 70, 70))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
-                .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel11))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtNombreSocio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel12)
-                        .addComponent(jLabel13)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtNumeroEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel10)
+                        .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton6))
-                        .addGap(33, 33, 33)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel11))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtNombreSocio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel12)
+                                .addComponent(jLabel13)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton7)
-                            .addComponent(jButton5)))
+                            .addComponent(jLabel4)
+                            .addComponent(txtNumeroEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton1)
+                            .addComponent(jButton6)
+                            .addComponent(jButton1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jToggleButton1))
+                            .addComponent(jButton5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(txtCantidadKilos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(3, 3, 3)
-                .addComponent(btnNuevaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtCantidadKilos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton7)
+                            .addComponent(jButton3))
+                        .addGap(13, 13, 13)))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btnNuevaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8)
+                    .addComponent(jToggleButton2))
+                .addGap(34, 34, 34)
                 .addComponent(jLabel2)
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -310,13 +356,6 @@ public class VenPrincipal extends javax.swing.JFrame {
         varA = 0;
         varC = 0;
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here: botton Asociado
-        varA = 1;
-        varP = 0;
-        varC = 0;
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here: botton Camion
@@ -433,12 +472,11 @@ public class VenPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaOrdenActionPerformed
 
     private void btnProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductoActionPerformed
-        // TODO add your handling code here:
-        
-     //  String x = String.valueOf(btnProducto.getSelectedItem());
-     //  System.out.println(x);
+ 
+             
         
     }//GEN-LAST:event_btnProductoActionPerformed
+
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
@@ -470,12 +508,284 @@ public class VenPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadKilosActionPerformed
 
+    
+    public void guardaNuevoArchivo(String linea , String ruta, String nombreDeArchivo) { 
+        
+        File file3 = new File(ruta);                                            // Se procede con la nueva escritura del archivo
+        String filename = file3.getAbsolutePath();
+        
+        try
+        {
+
+         FileWriter writer = new FileWriter(filename,true);
+         writer.write(linea);
+         System.out.println("Entré a escribir");
+         writer.write(System.lineSeparator());
+         writer.close(); 
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
+        
+        
+    }
+    
+    
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        
+        // Se cargan los archivos de asociados
+        
+        cargarAsociados();        
+        cargarMatrizTiemposAsociados();        
+        cargarMatrizDistanciasAsociados();
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    
+    public void borrarArchivo(String nombreArchivo){
+        try {                                                                   // Se borra todo el archivo original
+        File inFile = new File(nombreArchivo);
+
+        if (!inFile.isFile()) {
+        System.out.println("Parameter is not an existing file");
+        return;
+        }
+
+        //Construct the new file that will later be renamed to the original filename. 
+        File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
+
+        BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
+        PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+
+        String line = null; 
+        while ((line = br.readLine()) != null) {
+                pw.flush();                                                     // Se borra cada una de las lineas                
+        }
+        pw.close();
+        br.close();
+
+        //Delete the original file
+        if (!inFile.delete()) {
+        System.out.println("Could not delete file");
+        return;
+        } 
+
+        //Rename the new file to the filename the original file had.
+        if (!tempFile.renameTo(inFile))
+        System.out.println("Could not rename file");
+
+        }
+        catch (FileNotFoundException ex) {
+        ex.printStackTrace();
+        }
+        catch (IOException ex) {
+        ex.printStackTrace();
+        }
+    }
+    
+    public void cargarAsociados(){
+        
+        String ruta = "";
+        
+        JFileChooser fc=new JFileChooser();
+        fc.setDialogTitle("Selección Lista de Asociados");                      // Primer archivo, lista de asociados
+        int returnVal=fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            borrarArchivo("Prueba Asociados.txt");//"Asociados.txt");
+            System.out.println(""+fc.getSelectedFile().getAbsolutePath()); 
+            ruta = fc.getSelectedFile().getAbsolutePath();                      // Ruta donde se encuentra el archivo de asociados
+        }
+        else {
+            System.out.println("No se cargó el archivo"); 
+            JOptionPane.showMessageDialog(null,
+                "No se cargó ningún archivo de asociados.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+            
+        }
+        
+         // Se lee el archivo original de asociados
+         
+            File archivo = null;
+            FileReader lector = null;
+            BufferedReader lectorLinea = null;
+
+            File file_ = new File("Prueba Asociados.txt"); 
+            String rutaFinal = file_.getAbsolutePath();                         // Ruta donde se van a guardar los datos
+            
+            String fileName = ruta;                                             // Ruta del archivo que tiene los datos
+           
+           String archivoCompleto = "";
+
+            try {                                                               // Se abre el archivo de asociados
+             archivo = new File (fileName);
+             lector = new FileReader(archivo);
+             lectorLinea = new BufferedReader(lector);
+
+             String linea;             
+             while( ( linea = lectorLinea.readLine() ) != null){                // Se lee cada linea del archivo
+               
+                 guardaNuevoArchivo(linea, rutaFinal, "Prueba Asociados.txt");                        // Se manda la ruta donde se va a guardar
+            }
+             
+             JOptionPane.showMessageDialog(null,
+                "El archivo se ha cargado exitosamente.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+             
+          }
+          catch(Exception e){
+             e.printStackTrace();             
+             
+             // mostra ventana emergencia
+          }finally{        
+             try{                    
+                if( null != lector ){   
+                   lector.close();     
+                }                  
+             }catch (Exception e2){ 
+                e2.printStackTrace();
+                new VenError().setVisible(true);
+             }
+          }
+    }
+    
+    public void cargarMatrizTiemposAsociados(){
+        
+        String ruta = "";
+        
+        JFileChooser fc=new JFileChooser();
+        fc.setDialogTitle("Selección Matriz de Tiempos de Asociados");                      // Primer archivo, lista de asociados
+        int returnVal=fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            borrarArchivo("Prueba Asociados.txt");//"Tiempos.txt");
+            System.out.println(""+fc.getSelectedFile().getAbsolutePath()); 
+            ruta = fc.getSelectedFile().getAbsolutePath();                      // Ruta donde se encuentra el archivo de asociados
+        }
+        else {
+            System.out.println("No se cargó el archivo"); 
+            JOptionPane.showMessageDialog(null,
+                "No se cargó ningún archivo de tiempos.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+            
+            // mostrar mensaje de alerta
+        }
+        
+         // Se lee el archivo original de asociados
+         
+            File archivo = null;
+            FileReader lector = null;
+            BufferedReader lectorLinea = null;
+
+            File file_ = new File("Prueba Asociados.txt"); 
+            String rutaFinal = file_.getAbsolutePath();                         // Ruta donde se van a guardar los datos
+            
+            String fileName = ruta;                                             // Ruta del archivo que tiene los datos
+           
+           String archivoCompleto = "";
+
+            try {                                                               // Se abre el archivo de asociados
+             archivo = new File (fileName);
+             lector = new FileReader(archivo);
+             lectorLinea = new BufferedReader(lector);
+
+             String linea;             
+             while( ( linea = lectorLinea.readLine() ) != null){                // Se lee cada linea del archivo
+               
+                 guardaNuevoArchivo(linea, rutaFinal, "Prueba Asociados.txt");                                 // Se manda la ruta donde se va a guardar
+            }
+             
+             JOptionPane.showMessageDialog(null,
+                "El archivo se ha cargado exitosamente.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+             
+          }
+          catch(Exception e){
+             e.printStackTrace();
+             
+             // mostra ventana emergencia
+          }finally{        
+             try{                    
+                if( null != lector ){   
+                   lector.close();     
+                }                  
+             }catch (Exception e2){ 
+                e2.printStackTrace();
+                new VenError().setVisible(true);
+             }
+          }
+    }
+    
+    public void cargarMatrizDistanciasAsociados(){
+        
+        String ruta = "";
+        
+        JFileChooser fc=new JFileChooser();
+        fc.setDialogTitle("Selección Matriz de Distancias de Asociados");                      // Primer archivo, lista de asociados
+        int returnVal=fc.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            borrarArchivo("Prueba Asociados.txt");//"Distancias.txt");
+            System.out.println(""+fc.getSelectedFile().getAbsolutePath()); 
+            ruta = fc.getSelectedFile().getAbsolutePath();                      // Ruta donde se encuentra el archivo de asociados
+        }
+        else {
+            System.out.println("No se cargó el archivo"); 
+            JOptionPane.showMessageDialog(null,
+                "No se cargó ningún archivo de distancias.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+            
+            // mostrar mensaje de alerta
+        }
+        
+         // Se lee el archivo original de asociados
+         
+            File archivo = null;
+            FileReader lector = null;
+            BufferedReader lectorLinea = null;
+
+            File file_ = new File("Prueba Asociados.txt"); 
+            String rutaFinal = file_.getAbsolutePath();                         // Ruta donde se van a guardar los datos
+            
+            String fileName = ruta;                                             // Ruta del archivo que tiene los datos
+           
+           String archivoCompleto = "";
+
+            try {                                                               // Se abre el archivo de asociados
+             archivo = new File (fileName);
+             lector = new FileReader(archivo);
+             lectorLinea = new BufferedReader(lector);
+
+             String linea;             
+             while( ( linea = lectorLinea.readLine() ) != null){                // Se lee cada linea del archivo
+               
+                 guardaNuevoArchivo(linea, rutaFinal, "Prueba Asociados.txt");                                 // Se manda la ruta donde se va a guardar
+            }
+             
+             JOptionPane.showMessageDialog(null,
+                "El archivo se ha cargado exitosamente.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
+             
+          }
+          catch(Exception e){
+             e.printStackTrace();
+             
+             // mostra ventana emergencia
+          }finally{        
+             try{                    
+                if( null != lector ){   
+                   lector.close();     
+                }                  
+             }catch (Exception e2){ 
+                e2.printStackTrace();
+                new VenError().setVisible(true);
+             }
+          }
+    }
+    
     public void limpiaRegistros(){
     
     
     txtNombreSocio.setText("");
     txtNumeroEntrega.setText("");
-    txtCantidadKilos.setText("");
+    txtCantidadKilos.setText("0.0");
     
     
     }
@@ -520,7 +830,6 @@ public class VenPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevaOrden;
     private javax.swing.JComboBox btnProducto;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -536,7 +845,10 @@ public class VenPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JTextField txtCantidadKilos;
     private javax.swing.JTextField txtNombreSocio;
     private javax.swing.JTextField txtNumeroEntrega;

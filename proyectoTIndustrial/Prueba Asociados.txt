@@ -1,0 +1,109 @@
+							DHCP
+
+- Crear pooles de DHCP:
+
+		ip dhcp pool ____
+			default-router  (ip router salida)
+			dns-server      (address)
+			network   (ip/mask)
+
+  Routers que buscan el dhcp:
+
+		En la interfaz interna de la LAN del router, pone el comando:
+			
+			ip helper-address (ip externa del router dhcp servidor)
+
+
+------------------------------------------------------------------------------------
+
+
+
+							VTP
+
+- Escoje servidor VTP y los clientes se unen al mismo
+
+
+	Servidor:
+			vtp domain name ____
+			vtp version ___
+			vtp mode client / server / transparent
+			vtp password __
+
+			
+
+---------------------------------------------------------------------------------
+
+
+							VLAN
+
+
+- Cree las vlan en el servidor vtp o servidor de vlans (si hay varios switches)
+
+		vlan __
+			name Nativa
+
+- Configure los puertos ya sean troncales o de acceso
+
+		Troncal:         switchport mode trunk
+				 switchport trunk native vlan __
+
+		Acceso:		switchport mode access
+             			 switchport access vlan __
+
+
+- En la interface LAN o serial del router que se comunica con las vlan:
+
+		int f0/0.11
+			encapsulation dot1Q 11 native  -- vlan nativa
+			exit
+		
+		int f0/0.30
+			encapsulation dot1Q 30
+			ip add 172.16.30.1 255.255.255.0   -- ip del router
+
+		
+
+-------------------------------------------------------------------------------------
+
+
+						Spanning Tree
+
+
+- Utilizado para evitar loops y caidas de la red por publicaciones de broadcast
+- Ademas asegura los caminos m�s rapidos y levanta paths por si los principales caen
+
+
+- Modo: 
+		spanning-tree mode rapid-pvst
+
+- Root primario o secundario de vlan's:
+		
+		spanning-tree vlan ___ root primary/secondary
+
+
+- Portfast (solo en puertos de acceso):
+
+		spanning-tree portfast
+
+- Comandos de seguridad:
+
+		switchport port-security
+  		switchport port-security maximum [1-132]
+ 		switchport port-security mac-address sticky
+ 		switchport port-security violation shutdown
+
+
+
+---------------------------------------------------------------------------------------------
+
+
+
+
+
+					
+
+
+
+
+
+

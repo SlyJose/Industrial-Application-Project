@@ -75,23 +75,24 @@ public class VenModificarCam extends javax.swing.JFrame {
         mensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(552, 520));
+        setPreferredSize(new java.awt.Dimension(603, 420));
         setResizable(false);
 
-        jLabel5.setText("Capacidad por campo (kg)");
+        jLabel5.setText("Capacidad por Compartimento (KG):");
 
-        jLabel6.setText("Capacidad Total");
+        jLabel6.setText("Capacidad Total del Camión:");
 
-        jLabel7.setText("Proveedor");
+        jLabel7.setText("Proveedor:");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
         jLabel1.setText("Modificar Camión");
 
-        jLabel2.setText("Número de Camión");
+        jLabel2.setText("Número de Camión:");
 
-        jLabel3.setText("Placa de Camión");
+        jLabel3.setText("Placa de Camión:");
 
-        jLabel9.setText("Número de compartimentos");
+        jLabel9.setText("Número de Compartimentos:");
 
         capacidadkg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +100,7 @@ public class VenModificarCam extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Capacidad por campo (q)");
+        jLabel4.setText("Capacidad por Compartimento (Q):");
 
         Aceptar.setText("Aceptar");
         Aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,14 +124,6 @@ public class VenModificarCam extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(82, 82, 82)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(Aceptar)
-                            .addGap(38, 38, 38)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +133,7 @@ public class VenModificarCam extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(72, 72, 72)
@@ -156,9 +149,13 @@ public class VenModificarCam extends javax.swing.JFrame {
                                     .addComponent(proveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Buscar)
-                            .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                            .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +195,7 @@ public class VenModificarCam extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(Aceptar)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();

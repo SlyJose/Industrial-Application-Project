@@ -51,6 +51,8 @@ public class CreadorOrden {                                                     
          writer.append(producto);
          writer.append(",");
          writer.append(cantKg);
+         
+         writer.write(System.lineSeparator());
 
      
          writer.close(); 
