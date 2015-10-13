@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.swing.JOptionPane;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,6 +27,22 @@ public class VenBorrarProd extends javax.swing.JFrame {
      */
     public VenBorrarProd() {
         initComponents();
+        seteaValoresCB();
+    }
+    
+    public void seteaValoresCB(){
+    
+        
+        SeleccionProducto productoLista = new SeleccionProducto();
+   
+        productoLista.cargarArchivo();
+                
+                
+      for (int i = 0; i < productoLista.listaProductos.size(); i++){
+        
+                cbProducto.addItem(productoLista.listaProductos.get(i).producto);
+        }
+    
     }
 
     /**
@@ -40,12 +57,12 @@ public class VenBorrarProd extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        prod = new javax.swing.JTextField();
+        cbProducto = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        jLabel2.setText("Digite el nombre del producto que desea borrar:");
+        jLabel2.setText("Seleccione el nombre del producto que desea borrar:");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
@@ -58,27 +75,26 @@ public class VenBorrarProd extends javax.swing.JFrame {
             }
         });
 
-        prod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 99, Short.MAX_VALUE)
+                .addGap(0, 131, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(110, 110, 110))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(110, 110, 110))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addComponent(prod, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(cbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,11 +103,11 @@ public class VenBorrarProd extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(prod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
+                .addComponent(cbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addComponent(jButton1)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -100,7 +116,7 @@ public class VenBorrarProd extends javax.swing.JFrame {
         public void borraLinea(String producto){
     
         
-         try {
+        try {
         File inFile = new File("Productos.txt");
 
         if (!inFile.isFile()) {
@@ -153,16 +169,20 @@ public class VenBorrarProd extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        producto = prod.getText();
+        producto = String.valueOf(cbProducto.getSelectedItem()) ;
         
         if (!producto.equals("")){
         borraLinea(producto);
         
         }
         
-        prod.setText("");
-        producto = "";
+        //prod.setText("");
         
+        VenBorrarProd.this.dispose();
+        
+        JOptionPane.showMessageDialog(null, "La aplicación ha cambiado sus datos, cierre y vuelva a abrir la aplicación para trabajar con los cambios efectuados");
+        
+        producto = "";
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -201,9 +221,9 @@ public class VenBorrarProd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox cbProducto;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField prod;
     // End of variables declaration//GEN-END:variables
 }

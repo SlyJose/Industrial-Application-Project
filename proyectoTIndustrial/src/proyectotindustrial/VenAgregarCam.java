@@ -9,7 +9,7 @@ import java.io.Writer;
 
 import java.io.*;
 
-
+import javax.swing.JOptionPane;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -45,8 +45,10 @@ public class VenAgregarCam extends javax.swing.JFrame {
 
          FileWriter writer = new FileWriter(fileName,true);
             
+         
          writer.write(System.lineSeparator());
          writer.append(nuevoCam);
+         
      
          writer.close(); 
          
@@ -219,6 +221,8 @@ public class VenAgregarCam extends javax.swing.JFrame {
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         // TODO add your handling code here:
+        
+        
         nuevoCam += numero.getText()+",";
         nuevoCam += placa.getText()+",";
         nuevoCam += campo.getText()+",";
@@ -227,7 +231,14 @@ public class VenAgregarCam extends javax.swing.JFrame {
         nuevoCam += capacidad.getText()+",";
         nuevoCam += proveedor.getText();
         
+        if (! placa.getText().equals("")){
+        
         escribeNuevoCamion (nuevoCam);
+        
+        JOptionPane.showMessageDialog(null, "La aplicación ha cambiado sus datos, cierre y vuelva a abrir la aplicación para trabajar con los cambios efectuados");
+        
+        }
+        
         limpiaRegistros();
         
         nuevoCam = "";

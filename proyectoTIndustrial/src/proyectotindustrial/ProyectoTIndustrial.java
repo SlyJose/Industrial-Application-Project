@@ -69,14 +69,19 @@ public class ProyectoTIndustrial {
     
     public static void main(String[] args) { 
         
+        //instancias
         ProyectoTIndustrial comienza = new ProyectoTIndustrial();
-        VenPrincipal ventana = new VenPrincipal();
-        //comienza.limpiaArhivoOrden();
+        VenPrincipal ventanaP = new VenPrincipal();
+        
+        //limpia
+        comienza.limpiaArhivoOrden();
         comienza.limpiaArhivoRutas();
+       
+        
+        //inicial seteo de datos
+        ventanaP.setVisible(true); 
         
         
-        ventana.seteaValoresCB();
-        ventana.setVisible(true); 
         
         
         
