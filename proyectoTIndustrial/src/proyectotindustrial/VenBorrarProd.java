@@ -180,7 +180,7 @@ public class VenBorrarProd extends javax.swing.JFrame {
         
         VenBorrarProd.this.dispose();
         
-        JOptionPane.showMessageDialog(null, "La aplicación ha cambiado sus datos, cierre y vuelva a abrir la aplicación para trabajar con los cambios efectuados");
+        JOptionPane.showMessageDialog(null, "El producto ha sido borrado, para ver los cambios reflejados es necesario cargar base de datos");
         
         producto = "";
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -8,6 +8,7 @@ package proyectotindustrial;
 
 import java.io.*;                                                               // Bibliotecas necesarias para lectura de archivos
 import java.util.ArrayList;                                                     // Uso de listas dinamicas para el manejo de productos
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,13 +21,28 @@ public class VenModificarCam extends javax.swing.JFrame {
      */
     public VenModificarCam() {
         initComponents();
-        
+        seteaValoresCB();
         numero.setText("------------------------------------------------------------------------------------------------");
         compartimentos.setText("------------------------------------------------------------------------------------------------");
         capacidadq.setText("------------------------------------------------------------------------------------------------");
         capacidadkg.setText("------------------------------------------------------------------------------------------------");
         capacidadt.setText("------------------------------------------------------------------------------------------------");
         proveedor.setText("------------------------------------------------------------------------------------------------");        
+    }
+    
+    public void seteaValoresCB(){
+    
+        
+        SeleccionCamion placaLista = new SeleccionCamion();
+   
+        placaLista.cargarArchivo();
+                
+                
+      for (int i = 0; i < placaLista.listaCamiones.size() ; i++){
+        
+                cbPlaca.addItem(placaLista.listaCamiones.get(i).placa);
+        }
+    
     }
     
     static class NodoLista{                                                     // Clase que define cada nodo
@@ -58,7 +74,6 @@ public class VenModificarCam extends javax.swing.JFrame {
         capacidadq = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        placa = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         compartimentos = new javax.swing.JTextField();
@@ -73,9 +88,10 @@ public class VenModificarCam extends javax.swing.JFrame {
         Aceptar = new javax.swing.JToggleButton();
         Buscar = new javax.swing.JToggleButton();
         mensaje = new javax.swing.JLabel();
+        cbPlaca = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(603, 420));
+        setPreferredSize(new java.awt.Dimension(650, 450));
         setResizable(false);
 
         jLabel5.setText("Capacidad por Compartimento (KG):");
@@ -141,12 +157,13 @@ public class VenModificarCam extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(73, 73, 73)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(placa, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(numero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(compartimentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(capacidadkg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(capacidadt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(proveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(numero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(compartimentos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(capacidadkg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(capacidadt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(proveedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbPlaca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,7 +172,7 @@ public class VenModificarCam extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(176, 176, 176)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,8 +182,8 @@ public class VenModificarCam extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(placa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Buscar))
+                        .addComponent(Buscar)
+                        .addComponent(cbPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -195,7 +212,7 @@ public class VenModificarCam extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(Aceptar)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
@@ -210,7 +227,7 @@ public class VenModificarCam extends javax.swing.JFrame {
         
         // Se procede a buscar el camion en la lista de camiones
         
-        String placaCamion = placa.getText();
+        String placaCamion = String.valueOf(cbPlaca.getSelectedItem());
         camionAbuscar = placaCamion;
         
         ArrayList<NodoLista> listaCamiones = new ArrayList<>();    // Lista de objetos camion
@@ -265,7 +282,7 @@ public class VenModificarCam extends javax.swing.JFrame {
         for(int i = 0; i < listaCamiones.size(); ++i){
             if( (listaCamiones.get(i).placa+"").equals(placaCamion)){
                 mensaje.setText("Camión encontrado");
-                placa.setText(""+listaCamiones.get(i).placa);
+                //placa.setText(""+listaCamiones.get(i).placa); //preg a jose acerca de este cambio
                 numero.setText(""+listaCamiones.get(i).numeroCamion);
                 compartimentos.setText(""+listaCamiones.get(i).campos);
                 capacidadq.setText(""+listaCamiones.get(i).capacidadQ);
@@ -292,7 +309,7 @@ public class VenModificarCam extends javax.swing.JFrame {
         
         // Se procede con la modificacion del camion
         
-        String nuevaLinea = numero.getText() +","+ placa.getText() +","+ compartimentos.getText() +","+ capacidadq.getText() +","+ capacidadkg.getText() +","+ capacidadt.getText() +","+ proveedor.getText();
+        String nuevaLinea = numero.getText() +","+ String.valueOf(cbPlaca.getSelectedItem()) +","+ compartimentos.getText() +","+ capacidadq.getText() +","+ capacidadkg.getText() +","+ capacidadt.getText() +","+ proveedor.getText();
         
         try {
             File inFile = new File("Camiones.txt");
@@ -346,6 +363,10 @@ public class VenModificarCam extends javax.swing.JFrame {
         
         mensaje.setText("Camión modificado");
         
+        VenModificarCam.this.dispose();
+        
+        JOptionPane.showMessageDialog(null, "El camión ha sido modificado, para ver los cambios reflejados es necesario cargar base de datos");
+        
     }//GEN-LAST:event_AceptarActionPerformed
 
     /**
@@ -389,6 +410,7 @@ public class VenModificarCam extends javax.swing.JFrame {
     private javax.swing.JTextField capacidadkg;
     private javax.swing.JTextField capacidadq;
     private javax.swing.JTextField capacidadt;
+    private javax.swing.JComboBox cbPlaca;
     private javax.swing.JTextField compartimentos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -400,7 +422,6 @@ public class VenModificarCam extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel mensaje;
     private javax.swing.JTextField numero;
-    private javax.swing.JTextField placa;
     private javax.swing.JTextField proveedor;
     // End of variables declaration//GEN-END:variables
 }

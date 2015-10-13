@@ -235,7 +235,10 @@ public class VenAgregarCam extends javax.swing.JFrame {
         
         escribeNuevoCamion (nuevoCam);
         
-        JOptionPane.showMessageDialog(null, "La aplicación ha cambiado sus datos, cierre y vuelva a abrir la aplicación para trabajar con los cambios efectuados");
+        
+        VenAgregarCam.this.dispose();
+        
+        JOptionPane.showMessageDialog(null, "El camión ha sido agregado, para ver los cambios reflejados es necesario cargar base de datos");
         
         }
         

@@ -7,8 +7,8 @@ package proyectotindustrial;
  */
 
 import java.io.*;                                                               // Bibliotecas necesarias para lectura de archivos
-import java.util.ArrayList;                                                     // Uso de listas dinamicas para el manejo de productos
-
+import java.util.ArrayList;    // Uso de listas dinamicas para el manejo de productos
+import javax.swing.JOptionPane;
 /**
  *
  * @author luis diego
@@ -19,8 +19,25 @@ public class VenModificarProd extends javax.swing.JFrame {
      * Creates new form VenModificarProd
      */
     public VenModificarProd() {
+        
         initComponents();
         textoDensidad.setText("------------------------------------------------------------------------------");
+        seteaValoresCB();
+    }
+    
+     public void seteaValoresCB(){
+    
+        
+        SeleccionProducto productoLista = new SeleccionProducto();
+   
+        productoLista.cargarArchivo();
+                
+                
+      for (int i = 0; i < productoLista.listaProductos.size(); i++){
+        
+                cbProducto.addItem(productoLista.listaProductos.get(i).producto);
+        }
+    
     }
     
     static class NodoLista{                                                     // Clase que define cada nodo
@@ -41,7 +58,6 @@ public class VenModificarProd extends javax.swing.JFrame {
     private void initComponents() {
 
         textoDensidad = new javax.swing.JTextField();
-        textoProducto = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -49,10 +65,11 @@ public class VenModificarProd extends javax.swing.JFrame {
         Buscar = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
         mensaje = new javax.swing.JLabel();
+        cbProducto = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(530, 280));
+        setPreferredSize(new java.awt.Dimension(580, 320));
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
@@ -89,16 +106,11 @@ public class VenModificarProd extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textoDensidad, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(textoDensidad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -106,7 +118,13 @@ public class VenModificarProd extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(83, 83, 83))))))
+                                .addGap(83, 83, 83))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addContainerGap(75, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,8 +138,8 @@ public class VenModificarProd extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(textoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Buscar))
+                    .addComponent(Buscar)
+                    .addComponent(cbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -130,7 +148,7 @@ public class VenModificarProd extends javax.swing.JFrame {
                     .addComponent(mensaje))
                 .addGap(18, 18, 18)
                 .addComponent(Aceptar)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,7 +157,7 @@ public class VenModificarProd extends javax.swing.JFrame {
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
         
-        String producto = textoProducto.getText();
+        String producto = String.valueOf(cbProducto.getSelectedItem());
         productoAbuscar = producto;
         
         ArrayList<NodoLista> listaProductos = new ArrayList<NodoLista>();    // Lista de objetos producto
@@ -192,7 +210,7 @@ public class VenModificarProd extends javax.swing.JFrame {
             if(listaProductos.get(i).producto.equals(producto)){                
                 mensaje.setText("Producto encontrado");
                 
-                textoProducto.setText(listaProductos.get(i).producto);
+                //textoProducto.setText(listaProductos.get(i).producto);
                 textoDensidad.setText(""+listaProductos.get(i).factorRelacion);
                 i = listaProductos.size();
                 
@@ -207,7 +225,7 @@ public class VenModificarProd extends javax.swing.JFrame {
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
 
-        String producto = textoProducto.getText();
+        String producto = String.valueOf(cbProducto.getSelectedItem());
         String nuevaLinea = producto + ",0.0," + textoDensidad.getText();
         
         try {
@@ -265,6 +283,10 @@ public class VenModificarProd extends javax.swing.JFrame {
         
         mensaje.setText("Producto modificado");
         
+        VenModificarProd.this.dispose();
+        
+        JOptionPane.showMessageDialog(null, "El producto ha sido modificado, para ver los cambios reflejados es necesario cargar base de datos");
+        
     }//GEN-LAST:event_AceptarActionPerformed
 
     /**
@@ -305,12 +327,12 @@ public class VenModificarProd extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Aceptar;
     private javax.swing.JToggleButton Buscar;
+    private javax.swing.JComboBox cbProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel mensaje;
     private javax.swing.JTextField textoDensidad;
-    private javax.swing.JTextField textoProducto;
     // End of variables declaration//GEN-END:variables
 }

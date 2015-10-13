@@ -160,8 +160,9 @@ public class VenAgregarProd extends javax.swing.JFrame {
         
         escribeNuevoProducto (nuevoProd);
         
+        VenAgregarProd.this.dispose();
         
-        JOptionPane.showMessageDialog(null, "La aplicación ha cambiado sus datos, cierre y vuelva a abrir la aplicación para trabajar con los cambios efectuados");
+        JOptionPane.showMessageDialog(null, "El producto ha sido agregado, para ver los cambios reflejados es necesario cargar base de datos");
         
         }
         
