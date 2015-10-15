@@ -371,6 +371,10 @@ public class VenPrincipal extends javax.swing.JFrame {
         varP = 1;
         varA = 0;
         varC = 0;
+        
+     //   jButton1.setSelected(true);
+     //   jButton3.setSelected(false);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -378,6 +382,10 @@ public class VenPrincipal extends javax.swing.JFrame {
         varC = 1;
         varA = 0;
         varP = 0;
+        
+     //   jButton1.setSelected(false);
+      //  jButton3.setSelected(true);
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     
@@ -526,6 +534,10 @@ public class VenPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
+        if (JOptionPane.showConfirmDialog(null, "¿Está seguro?", "WARNING",
+        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+    // yes option
+
         
         File file_ = new File("Orden.txt"); 
         String fileName = file_.getAbsolutePath();
@@ -545,7 +557,12 @@ public class VenPrincipal extends javax.swing.JFrame {
             e.printStackTrace();
 
         }
-    
+        }
+        else {
+    // no option
+            
+            
+        }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void txtCantidadKilosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadKilosActionPerformed
@@ -583,6 +600,8 @@ public class VenPrincipal extends javax.swing.JFrame {
         cargarAsociados();        
         cargarMatrizTiemposAsociados();        
         cargarMatrizDistanciasAsociados();
+        
+        jToggleButton2.setSelected(false);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void cargarBasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarBasesActionPerformed

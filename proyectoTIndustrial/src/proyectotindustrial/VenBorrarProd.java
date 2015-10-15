@@ -136,12 +136,22 @@ public class VenBorrarProd extends javax.swing.JFrame {
 
         //Read from the original file and write to the new 
         //unless content matches data to be removed.
+         int contador = 0;
+         
         while ((line = br.readLine()) != null) {
 
             if (!(line.trim().split(delimitadoresPalabras)[0].equals(producto))) {
-
-                pw.println(line);
+                if (contador != 0){
+                pw.println();
+                pw.print(line);
                 pw.flush();
+                contador++;
+                }
+                else{
+                pw.print(line);
+                contador++;
+                pw.flush();
+                }
             }
         }
         pw.close();

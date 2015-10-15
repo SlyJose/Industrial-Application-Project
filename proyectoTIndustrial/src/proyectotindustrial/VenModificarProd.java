@@ -96,6 +96,12 @@ public class VenModificarProd extends javax.swing.JFrame {
 
         mensaje.setText(".");
 
+        cbProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProductoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,6 +162,8 @@ public class VenModificarProd extends javax.swing.JFrame {
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
+        
+        Aceptar.setEnabled(true);
         
         String producto = String.valueOf(cbProducto.getSelectedItem());
         productoAbuscar = producto;
@@ -248,17 +256,55 @@ public class VenModificarProd extends javax.swing.JFrame {
 
         //Read from the original file and write to the new 
         //unless content matches data to be removed.
+//        while ((line = br.readLine()) != null) {
+//
+//            
+//            if( line.trim().split(delimitadoresPalabras)[0].equals(productoAbuscar) ){
+//                pw.println(nuevaLinea);
+//                pw.flush();
+//            }else{
+//                if (!(line.trim().split(delimitadoresPalabras)[0].equals(productoAbuscar))) {
+//                    pw.println(line);
+//                    pw.flush();
+//                }                
+//            }
+//        }
+//        pw.close();
+//        br.close();
+         
+          int contador = 0;
+         
         while ((line = br.readLine()) != null) {
 
-            
-            if( line.trim().split(delimitadoresPalabras)[0].equals(productoAbuscar) ){
-                pw.println(nuevaLinea);
+            if (!(line.trim().split(delimitadoresPalabras)[0].equals(productoAbuscar))) {
+                
+                if (contador == 0 ){
+                pw.print(line);
+                contador++;
                 pw.flush();
-            }else{
-                if (!(line.trim().split(delimitadoresPalabras)[0].equals(productoAbuscar))) {
-                    pw.println(line);
-                    pw.flush();
-                }                
+                }
+                else {
+                pw.println();
+                pw.print(line);
+                pw.flush();
+                contador++;
+                }
+                
+            }
+            else{
+            
+                if (contador == 0 ){
+                pw.print(nuevaLinea);
+                contador++;
+                pw.flush();
+                }
+                else {
+                pw.println();
+                pw.print(nuevaLinea);
+                pw.flush();
+                contador++;
+                }
+            
             }
         }
         pw.close();
@@ -288,6 +334,15 @@ public class VenModificarProd extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "El producto ha sido modificado, para ver los cambios reflejados es necesario cargar base de datos");
         
     }//GEN-LAST:event_AceptarActionPerformed
+
+    private void cbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProductoActionPerformed
+        // TODO add your handling code here:
+                    Buscar.setSelected(false);
+                    Aceptar.setEnabled(false); 
+                    mensaje.setText("");
+                    
+                    textoDensidad.setText("------------------------------------------------------------------------------------------------");
+    }//GEN-LAST:event_cbProductoActionPerformed
 
     /**
      * @param args the command line arguments

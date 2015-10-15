@@ -134,6 +134,12 @@ public class VenModificarCam extends javax.swing.JFrame {
 
         mensaje.setText(".");
 
+        cbPlaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPlacaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,6 +232,7 @@ public class VenModificarCam extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Se procede a buscar el camion en la lista de camiones
+        Aceptar.setEnabled(true); 
         
         String placaCamion = String.valueOf(cbPlaca.getSelectedItem());
         camionAbuscar = placaCamion;
@@ -309,6 +316,7 @@ public class VenModificarCam extends javax.swing.JFrame {
         
         // Se procede con la modificacion del camion
         
+        
         String nuevaLinea = numero.getText() +","+ String.valueOf(cbPlaca.getSelectedItem()) +","+ compartimentos.getText() +","+ capacidadq.getText() +","+ capacidadkg.getText() +","+ capacidadt.getText() +","+ proveedor.getText();
         
         try {
@@ -328,16 +336,54 @@ public class VenModificarCam extends javax.swing.JFrame {
          String delimitadoresPalabras = ",";                                    // Variable utilizada para separar los valores en el archivo por cada linea
          String[] lineas;
 
+//        while ((line = br.readLine()) != null) {
+//
+//            if( line.trim().split(delimitadoresPalabras)[1].equals(camionAbuscar) ){
+//                pw.println(nuevaLinea);
+//                pw.flush();
+//            }else{
+//                if (!(line.trim().split(delimitadoresPalabras)[1].equals(camionAbuscar))) {
+//                    pw.println(line);
+//                    pw.flush();
+//                }
+//            }
+//        }
+//        pw.close();
+//        br.close();
+         
+        int contador = 0;
+         
         while ((line = br.readLine()) != null) {
 
-            if( line.trim().split(delimitadoresPalabras)[1].equals(camionAbuscar) ){
-                pw.println(nuevaLinea);
+            if (!(line.trim().split(delimitadoresPalabras)[1].equals(camionAbuscar))) {
+                
+                if (contador == 0 ){
+                pw.print(line);
+                contador++;
                 pw.flush();
-            }else{
-                if (!(line.trim().split(delimitadoresPalabras)[1].equals(camionAbuscar))) {
-                    pw.println(line);
-                    pw.flush();
                 }
+                else {
+                pw.println();
+                pw.print(line);
+                pw.flush();
+                contador++;
+                }
+                
+            }
+            else{
+            
+                if (contador == 0 ){
+                pw.print(nuevaLinea);
+                contador++;
+                pw.flush();
+                }
+                else {
+                pw.println();
+                pw.print(nuevaLinea);
+                pw.flush();
+                contador++;
+                }
+            
             }
         }
         pw.close();
@@ -368,6 +414,20 @@ public class VenModificarCam extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "El camión ha sido modificado, para ver los cambios reflejados es necesario cargar base de datos");
         
     }//GEN-LAST:event_AceptarActionPerformed
+
+    private void cbPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPlacaActionPerformed
+        // TODO add your handling code here:
+                    Buscar.setSelected(false);
+                    Aceptar.setEnabled(false); 
+                    mensaje.setText("");
+                    
+                    numero.setText("------------------------------------------------------------------------------------------------");
+                    compartimentos.setText("------------------------------------------------------------------------------------------------");
+                    capacidadq.setText("------------------------------------------------------------------------------------------------");
+                    capacidadkg.setText("------------------------------------------------------------------------------------------------");
+                    capacidadt.setText("------------------------------------------------------------------------------------------------");
+                    proveedor.setText("------------------------------------------------------------------------------------------------");
+    }//GEN-LAST:event_cbPlacaActionPerformed
 
     /**
      * @param args the command line arguments
