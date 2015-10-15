@@ -20,11 +20,10 @@ import java.io.*;
  * @author Jose Sly
  */
 public class LlenaMatriz {
-   
-   
-    int numFincas = 253 ;
     
-    matrizObjetos matriz[][] = new matrizObjetos [numFincas][numFincas];
+    int numFincas = 0 ;
+    
+    matrizObjetos matriz[][];                                                   // Se declara la matriz de objetos
    
 
    static class matrizObjetos{
@@ -36,6 +35,8 @@ public class LlenaMatriz {
    }
    
      public void seteaMatriz(){
+         
+         matriz = new matrizObjetos [numFincas][numFincas];                     // Una vez obtenida la cantidad de fincas, se inicializa la matriz de objetos
    
        for(int i=0; i < matriz.length; i++)
            

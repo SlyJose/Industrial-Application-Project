@@ -75,6 +75,10 @@ public class OptimizadorRutas {
         insAsociado.cargarArchivo();        
         insCamion.cargarArchivo();
         insProducto.cargarArchivo(); 
+        llena.numFincas = insAsociado.listaAsociados.size();                    // Se obtiene la cantidad de fincas en el sistema
+        
+        System.out.println("Numero de fincas: "+llena.numFincas);
+        
         llena.seteaMatriz();
         //llena.llenaMatrizDistancia(); 
         //llena.llenaMatrizTiempos();
