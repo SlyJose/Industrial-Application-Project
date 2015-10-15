@@ -1,5 +1,6 @@
 package proyectotindustrial;
 
+import java.awt.Color;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
 import proyectotindustrial.SeleccionProducto;
 import java.lang.String;
 import java.io.*;
+import java.util.Locale;
 
 
 public class VenPrincipal extends javax.swing.JFrame {
@@ -58,6 +60,8 @@ public class VenPrincipal extends javax.swing.JFrame {
         
         initComponents();
         seteaValoresCB();
+        
+        this.getContentPane().setBackground(Color.green);
 
        //Prueba no util
        //SeleccionProducto productos = new SeleccionProducto();
@@ -117,12 +121,11 @@ public class VenPrincipal extends javax.swing.JFrame {
         cargarBases = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+        setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(1200, 600));
         setResizable(false);
 
-        jLabel1.setForeground(new java.awt.Color(0, 204, 0));
         jLabel1.setText("NUEVA ORDEN");
 
         jLabel3.setText("Nombre de Socio");
@@ -180,7 +183,6 @@ public class VenPrincipal extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Cambria Math", 2, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 204, 0));
         jLabel10.setText("Módulo de Programación de Rutas");
 
         jButton6.setText("Agregar");
@@ -204,7 +206,6 @@ public class VenPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setForeground(new java.awt.Color(0, 204, 0));
         jLabel11.setText("BASE DE DATOS");
 
         jLabel12.setText("Seleccione Conjunto");
@@ -472,12 +473,23 @@ public class VenPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    public boolean existeFinca(String numF){
+    public boolean verificaOrden(String numF, String nombreS, String cantK){
     
+        double numFinca;
         
         boolean existe = false;
+       
+        double auxCantK = Double.parseDouble(cantK);
         
-        double numFinca = Double.parseDouble(numF);
+        if ( numF.equals("") || nombreS.equals("") || auxCantK <= 0.0 ) {
+            
+            numFinca = -2.0;
+             
+        }
+        else {
+        
+            numFinca = Double.parseDouble(numF);
+        }
         
         SeleccionAsociado finca = new SeleccionAsociado();
         finca.cargarArchivo();
@@ -498,7 +510,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         
         
         
-        if (existeFinca(txtNumeroEntrega.getText()) == true){
+        if (verificaOrden(txtNumeroEntrega.getText(),txtNombreSocio.getText(),txtCantidadKilos.getText()) == true){
         nomSocio = txtNombreSocio.getText();
         System.out.println(nomSocio);
         
@@ -519,7 +531,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         }
         else {
         
-            JOptionPane.showMessageDialog(null, "La finca ingresada no existe, por favor modifique su valor");
+            JOptionPane.showMessageDialog(null, "Algún valor ingresado no es invalido, por favor revise los campos de la orden");
         }
     }//GEN-LAST:event_btnNuevaOrdenActionPerformed
 
@@ -532,7 +544,7 @@ public class VenPrincipal extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        
+        JOptionPane.setDefaultLocale(new Locale("es", "ES"));
         
         if (JOptionPane.showConfirmDialog(null, "¿Está seguro?", "WARNING",
         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
@@ -557,10 +569,13 @@ public class VenPrincipal extends javax.swing.JFrame {
             e.printStackTrace();
 
         }
+        
+        jToggleButton1.setSelected(false);
         }
+        
         else {
     // no option
-            
+         jToggleButton1.setSelected(false);
             
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
