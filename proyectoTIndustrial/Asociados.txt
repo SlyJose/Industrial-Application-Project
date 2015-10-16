@@ -240,3 +240,14 @@
 5164.00,7,5070,16.87,no hay preferencia
 5170.00,7,3690,20.74,no hay preferencia
 5140.00,8,2420,23.19,no hay preferencia
+-4807.00,7,5640,16.97,no hay preferencia
+-4808.00,7,3380,16.6,no hay preferencia
+-5011.00,7,4000,16.41,no hay preferencia
+-5061.00,7,3930,16.19,no hay preferencia
+-5066.00,7,15430,16.21,no hay preferencia
+-5089.00,7,7600,17.66,no hay preferencia
+-5164.00,7,5070,16.87,no hay preferencia
+-5170.00,7,3690,20.74,no hay preferencia
+-5140.00,8,2420,23.19,no hay preferencia
+-5170.00,7,3690,20.74,no hay preferencia
+-5140.00,8,2420,23.19,no hay preferencia

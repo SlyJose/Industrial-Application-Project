@@ -11,6 +11,10 @@ import java.io.*;                                                               
 import java.util.ArrayList;                                                     // Uso de listas dinamicas para el manejo de productos
 import javax.swing.JOptionPane;
 
+import java.awt.Dimension;                                                      // Elementos que brindan dimension y centrado a las ventanas ***
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;                                              // ***
 /**
  *
  * @author luis diego
@@ -22,6 +26,11 @@ public class VenModificarCam extends javax.swing.JFrame {
      */
     public VenModificarCam() {
         initComponents();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation(screenWidth / 4, screenHeight / 7);
         this.getContentPane().setBackground(Color.WHITE);
         seteaValoresCB();
         numero.setText("------------------------------------------------------------------------------------------------");

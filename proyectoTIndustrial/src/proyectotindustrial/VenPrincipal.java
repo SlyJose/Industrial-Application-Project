@@ -10,6 +10,11 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import javax.swing.JOptionPane;
 
+import java.awt.Dimension;                                                      // Elementos que brindan dimension y centrado a las ventanas ***
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;                                              // ***
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -62,12 +67,12 @@ public class VenPrincipal extends javax.swing.JFrame {
         seteaValoresCB();
         
         this.getContentPane().setBackground(Color.WHITE);
-        this.getContentPane().setLocation(100, 100);
         
-
-       //Prueba no util
-       //SeleccionProducto productos = new SeleccionProducto();
-       //System.out.println(productos.getProductos());
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation(screenWidth / 13, screenHeight / 10);
     }
     
     public void seteaValoresCB(){
@@ -83,6 +88,36 @@ public class VenPrincipal extends javax.swing.JFrame {
                 btnProducto.addItem(productoLista.listaProductos.get(i).producto);
         }
     
+    }
+    
+    public boolean devuelveValor(double cantkg){
+    
+        boolean respuesta = true; 
+        SeleccionCamion cam = new SeleccionCamion();
+        SeleccionProducto prod = new SeleccionProducto();
+        
+        cam.cargarArchivo();
+        prod.cargarArchivo();
+        
+        double mayorCamion = 0;
+        double mayorFactor = 0;
+        
+        for (int i = 0; i < prod.listaProductos.size(); i++){
+                if (prod.listaProductos.get(i).factorRelacion > mayorFactor){
+                    mayorFactor = prod.listaProductos.get(i).factorRelacion;
+                }
+        }
+        
+        for (int i = 0; i < cam.listaCamiones.size(); i++){
+            if(cam.listaCamiones.get(i).capacidad > mayorCamion){
+                mayorCamion = cam.listaCamiones.get(i).capacidad;
+            }            
+        }
+        
+        if( (mayorFactor*cantkg) > mayorCamion ){       // Pedido no le cabe a ningun camion
+            respuesta = false;
+        }
+        return respuesta;
     }
    
     
@@ -233,7 +268,7 @@ public class VenPrincipal extends javax.swing.JFrame {
             }
         });
 
-        cargarBases.setText("Cargar Base de Datos");
+        cargarBases.setText("Actualizar Base de Datos");
         cargarBases.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cargarBasesActionPerformed(evt);
@@ -482,9 +517,15 @@ public class VenPrincipal extends javax.swing.JFrame {
         
         boolean existe = false;
        
-        double auxCantK = Double.parseDouble(cantK);
+        try {
+        double auxCantK = Double.parseDouble(cantK);}
         
-        if ( numF.equals("") || nombreS.equals("") || auxCantK <= 0.0 ) {
+         catch (Exception e) {
+            System.out.println("Error!");
+           
+        }
+        
+        if ( numF.equals("") || nombreS.equals("") || auxCantK <= 0.0 || !devuelveValor(auxCantK)) {
             
             numFinca = -2.0;
              
@@ -534,7 +575,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         }
         else {
         
-            JOptionPane.showMessageDialog(null, "Algún valor ingresado no es invalido, por favor revise los campos de la orden");
+            JOptionPane.showMessageDialog(null, "Algún valor ingresado no es válido, por favor revise los campos de la orden.");
         }
     }//GEN-LAST:event_btnNuevaOrdenActionPerformed
 
@@ -549,7 +590,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.setDefaultLocale(new Locale("es", "ES"));
         
-        if (JOptionPane.showConfirmDialog(null, "¿Está seguro?", "WARNING",
+        if (JOptionPane.showConfirmDialog(null, "¿Está seguro que desea borrar las órdenes?", "PRECAUCIÓN",
         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
     // yes option
 
@@ -689,7 +730,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         fc.setDialogTitle("Selección Lista de Asociados");                      // Primer archivo, lista de asociados
         int returnVal=fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            borrarArchivo("Prueba Asociados.txt");//"Asociados.txt");
+            borrarArchivo("Asociados.txt");//"Asociados.txt");
             System.out.println(""+fc.getSelectedFile().getAbsolutePath()); 
             ruta = fc.getSelectedFile().getAbsolutePath();                      // Ruta donde se encuentra el archivo de asociados
         }
@@ -707,7 +748,7 @@ public class VenPrincipal extends javax.swing.JFrame {
             FileReader lector = null;
             BufferedReader lectorLinea = null;
 
-            File file_ = new File("Prueba Asociados.txt"); 
+            File file_ = new File("Asociados.txt"); 
             String rutaFinal = file_.getAbsolutePath();                         // Ruta donde se van a guardar los datos
             
             String fileName = ruta;                                             // Ruta del archivo que tiene los datos
@@ -722,7 +763,7 @@ public class VenPrincipal extends javax.swing.JFrame {
              String linea;             
              while( ( linea = lectorLinea.readLine() ) != null){                // Se lee cada linea del archivo
                
-                 guardaNuevoArchivo(linea, rutaFinal, "Prueba Asociados.txt");                        // Se manda la ruta donde se va a guardar
+                 guardaNuevoArchivo(linea, rutaFinal, "Asociados.txt");                        // Se manda la ruta donde se va a guardar
             }
              
              JOptionPane.showMessageDialog(null,
@@ -754,7 +795,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         fc.setDialogTitle("Selección Matriz de Tiempos de Asociados");                      // Primer archivo, lista de asociados
         int returnVal=fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            borrarArchivo("Prueba Asociados.txt");//"Tiempos.txt");
+            borrarArchivo("Tiempos.txt");//"Tiempos.txt");
             System.out.println(""+fc.getSelectedFile().getAbsolutePath()); 
             ruta = fc.getSelectedFile().getAbsolutePath();                      // Ruta donde se encuentra el archivo de asociados
         }
@@ -773,7 +814,7 @@ public class VenPrincipal extends javax.swing.JFrame {
             FileReader lector = null;
             BufferedReader lectorLinea = null;
 
-            File file_ = new File("Prueba Asociados.txt"); 
+            File file_ = new File("Tiempos.txt"); 
             String rutaFinal = file_.getAbsolutePath();                         // Ruta donde se van a guardar los datos
             
             String fileName = ruta;                                             // Ruta del archivo que tiene los datos
@@ -788,7 +829,7 @@ public class VenPrincipal extends javax.swing.JFrame {
              String linea;             
              while( ( linea = lectorLinea.readLine() ) != null){                // Se lee cada linea del archivo
                
-                 guardaNuevoArchivo(linea, rutaFinal, "Prueba Asociados.txt");                                 // Se manda la ruta donde se va a guardar
+                 guardaNuevoArchivo(linea, rutaFinal, "Tiempos.txt");                                 // Se manda la ruta donde se va a guardar
             }
              
              JOptionPane.showMessageDialog(null,
@@ -820,7 +861,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         fc.setDialogTitle("Selección Matriz de Distancias de Asociados");                      // Primer archivo, lista de asociados
         int returnVal=fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            borrarArchivo("Prueba Asociados.txt");//"Distancias.txt");
+            borrarArchivo("Distancias.txt");//"Distancias.txt");
             System.out.println(""+fc.getSelectedFile().getAbsolutePath()); 
             ruta = fc.getSelectedFile().getAbsolutePath();                      // Ruta donde se encuentra el archivo de asociados
         }
@@ -839,7 +880,7 @@ public class VenPrincipal extends javax.swing.JFrame {
             FileReader lector = null;
             BufferedReader lectorLinea = null;
 
-            File file_ = new File("Prueba Asociados.txt"); 
+            File file_ = new File("Distancias.txt"); 
             String rutaFinal = file_.getAbsolutePath();                         // Ruta donde se van a guardar los datos
             
             String fileName = ruta;                                             // Ruta del archivo que tiene los datos
@@ -854,7 +895,7 @@ public class VenPrincipal extends javax.swing.JFrame {
              String linea;             
              while( ( linea = lectorLinea.readLine() ) != null){                // Se lee cada linea del archivo
                
-                 guardaNuevoArchivo(linea, rutaFinal, "Prueba Asociados.txt");                                 // Se manda la ruta donde se va a guardar
+                 guardaNuevoArchivo(linea, rutaFinal, "Distancias.txt");                                 // Se manda la ruta donde se va a guardar
             }
              
              JOptionPane.showMessageDialog(null,

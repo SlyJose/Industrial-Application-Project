@@ -10,6 +10,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
+
+import java.awt.Dimension;                                                      // Elementos que brindan dimension y centrado a las ventanas ***
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;                                              // ***
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,6 +33,11 @@ public class VenBorrarProd extends javax.swing.JFrame {
      */
     public VenBorrarProd() {
         initComponents();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation(screenWidth / 3, screenHeight / 8);
         this.getContentPane().setBackground(Color.WHITE);
         seteaValoresCB();
     }

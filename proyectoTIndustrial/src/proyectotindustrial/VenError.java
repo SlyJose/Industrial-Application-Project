@@ -5,6 +5,12 @@
  */
 package proyectotindustrial;
 
+import java.awt.Color;
+import java.awt.Dimension;                                                      // Elementos que brindan dimension y centrado a las ventanas ***
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;                                              // ***
+
 /**
  *
  * @author Jose
@@ -16,6 +22,12 @@ public class VenError extends javax.swing.JFrame {
      */
     public VenError() {
         initComponents();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation(screenWidth / 3, screenHeight / 8);
+        this.getContentPane().setBackground(Color.WHITE);
     }
 
     /**

@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
+import java.awt.Dimension;                                                      // Elementos que brindan dimension y centrado a las ventanas ***
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;                                              // ***
+
 //import 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,6 +34,11 @@ public class VenArchivar extends javax.swing.JFrame {
      */
     public VenArchivar() {
         initComponents();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation(screenWidth / 3, screenHeight / 8);
         this.getContentPane().setBackground(Color.WHITE);
     }
 
@@ -52,6 +62,9 @@ public class VenArchivar extends javax.swing.JFrame {
          writer.write(linea);
          writer.write(System.lineSeparator());
          writer.close(); 
+         JOptionPane.showMessageDialog(null,
+                "El archivo se ha guardado exitosamente.",
+                    "Información",JOptionPane.INFORMATION_MESSAGE);
         }
         catch(IOException e){
             e.printStackTrace();
@@ -142,9 +155,7 @@ public class VenArchivar extends javax.swing.JFrame {
          file.showSaveDialog(this);
          File rutaGuardar =file.getSelectedFile();
          ruta = ""+rutaGuardar+".csv";
-         JOptionPane.showMessageDialog(null,
-                "El archivo se ha guardado exitosamente.",
-                    "Información",JOptionPane.INFORMATION_MESSAGE);
+         
          
          
          // Se lee el archivo original de rutas

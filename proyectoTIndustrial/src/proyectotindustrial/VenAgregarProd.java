@@ -2,14 +2,15 @@ package proyectotindustrial;
 
 import java.awt.Color;
 import java.io.FileWriter; //add to import list
-
 import java.io.IOException;
-
 import java.io.Writer;
-
 import java.io.*;
-
 import javax.swing.JOptionPane;
+
+import java.awt.Dimension;                                                      // Elementos que brindan dimension y centrado a las ventanas ***
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;                                              // ***
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,6 +32,11 @@ public class VenAgregarProd extends javax.swing.JFrame {
      */
     public VenAgregarProd() {
         initComponents();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension screenSize = tk.getScreenSize();
+        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width;
+        setLocation(screenWidth / 3, screenHeight / 8);
         this.getContentPane().setBackground(Color.WHITE);
     }
 
