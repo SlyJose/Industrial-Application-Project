@@ -6,6 +6,7 @@ package proyectotindustrial;
  * and open the template in the editor.
  */
 
+import java.awt.Color;
 import java.io.*;                                                               // Bibliotecas necesarias para lectura de archivos
 import java.util.ArrayList;    // Uso de listas dinamicas para el manejo de productos
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ public class VenModificarProd extends javax.swing.JFrame {
     public VenModificarProd() {
         
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
         textoDensidad.setText("------------------------------------------------------------------------------");
         seteaValoresCB();
     }
@@ -73,7 +75,7 @@ public class VenModificarProd extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setForeground(new java.awt.Color(102, 204, 0));
         jLabel1.setText("Modificar Producto");
 
         jLabel2.setText("Nombre del Producto:");
@@ -132,7 +134,7 @@ public class VenModificarProd extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addContainerGap(75, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addGap(101, 101, 101)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );

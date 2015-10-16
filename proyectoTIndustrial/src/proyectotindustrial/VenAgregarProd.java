@@ -1,5 +1,6 @@
 package proyectotindustrial;
 
+import java.awt.Color;
 import java.io.FileWriter; //add to import list
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class VenAgregarProd extends javax.swing.JFrame {
      */
     public VenAgregarProd() {
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
     }
 
     
@@ -89,7 +91,7 @@ public class VenAgregarProd extends javax.swing.JFrame {
         UnidadDeDensidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 102, 255));
+        jLabel1.setForeground(new java.awt.Color(102, 204, 0));
         jLabel1.setText("Nuevo Producto");
 
         jLabel2.setText("Nombre de Producto:");

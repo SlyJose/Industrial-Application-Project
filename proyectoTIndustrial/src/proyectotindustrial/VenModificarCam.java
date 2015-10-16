@@ -6,6 +6,7 @@ package proyectotindustrial;
  * and open the template in the editor.
  */
 
+import java.awt.Color;
 import java.io.*;                                                               // Bibliotecas necesarias para lectura de archivos
 import java.util.ArrayList;                                                     // Uso de listas dinamicas para el manejo de productos
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ public class VenModificarCam extends javax.swing.JFrame {
      */
     public VenModificarCam() {
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
         seteaValoresCB();
         numero.setText("------------------------------------------------------------------------------------------------");
         compartimentos.setText("------------------------------------------------------------------------------------------------");
@@ -101,7 +103,7 @@ public class VenModificarCam extends javax.swing.JFrame {
         jLabel7.setText("Proveedor:");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setForeground(new java.awt.Color(102, 204, 0));
         jLabel1.setText("Modificar Camión");
 
         jLabel2.setText("Número de Camión:");

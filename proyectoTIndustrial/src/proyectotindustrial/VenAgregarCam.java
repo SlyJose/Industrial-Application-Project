@@ -1,6 +1,7 @@
 package proyectotindustrial;
 
 
+import java.awt.Color;
 import java.io.FileWriter; //add to import list
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class VenAgregarCam extends javax.swing.JFrame {
      */
     public VenAgregarCam() {
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
         
     }
     
@@ -96,7 +98,7 @@ public class VenAgregarCam extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setForeground(new java.awt.Color(51, 204, 0));
         jLabel1.setText("Nuevo Camión");
 
         jLabel2.setText("Número de Camión:");

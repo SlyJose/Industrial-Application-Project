@@ -21,7 +21,7 @@ import java.io.*;
  */
 public class LlenaMatriz {
     
-    int numFincas = 0 ;
+    int numFincas = 253 ;
     
     matrizObjetos matriz[][];                                                   // Se declara la matriz de objetos
    

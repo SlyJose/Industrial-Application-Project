@@ -61,7 +61,9 @@ public class VenPrincipal extends javax.swing.JFrame {
         initComponents();
         seteaValoresCB();
         
-        this.getContentPane().setBackground(Color.green);
+        this.getContentPane().setBackground(Color.WHITE);
+        this.getContentPane().setLocation(100, 100);
+        
 
        //Prueba no util
        //SeleccionProducto productos = new SeleccionProducto();
@@ -183,6 +185,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Cambria Math", 2, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 204, 0));
         jLabel10.setText("Módulo de Programación de Rutas");
 
         jButton6.setText("Agregar");
@@ -270,7 +273,7 @@ public class VenPrincipal extends javax.swing.JFrame {
                                     .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))
                             .addComponent(btnNuevaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -294,7 +297,7 @@ public class VenPrincipal extends javax.swing.JFrame {
                         .addComponent(cargarBases)
                         .addGap(143, 143, 143))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+                .addGap(71, 71, 71)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8)
@@ -307,14 +310,14 @@ public class VenPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(88, 88, 88)
-                                .addComponent(jLabel10))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel8)))
-                        .addGap(39, 39, 39)
+                                .addComponent(jLabel8)
+                                .addGap(39, 39, 39))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(77, 77, 77)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel11))

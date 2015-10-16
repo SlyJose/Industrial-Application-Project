@@ -75,7 +75,7 @@ public class OptimizadorRutas {
         insAsociado.cargarArchivo();        
         insCamion.cargarArchivo();
         insProducto.cargarArchivo(); 
-        llena.numFincas = insAsociado.listaAsociados.size();                    // Se obtiene la cantidad de fincas en el sistema
+        //llena.numFincas = insAsociado.listaAsociados.size();                    // Se obtiene la cantidad de fincas en el sistema
         
         System.out.println("Numero de fincas: "+llena.numFincas);
         
@@ -661,12 +661,12 @@ public void cargarAfuerza(){                                                    
          }
       }
        
-       ArrayList<NodoPedido> tempLista = new ArrayList<NodoPedido>();             // Lista temporal de pedidos utilizada para ordenar por tamano de pedido
+       /**ArrayList<NodoPedido> tempLista = new ArrayList<NodoPedido>();             // Lista temporal de pedidos utilizada para ordenar por tamano de pedido
        
        boolean continuar = true;
        double cantidad = 0; 
-       int indice = 0;
-       while(continuar){
+       int indice = 0;**/
+       /**while(continuar){
            for(int j = 0; j < listaPedidos.size(); ++j){
                if(listaPedidos.get(j).cantKg > cantidad){
                    indice = j;
@@ -687,11 +687,11 @@ public void cargarAfuerza(){                                                    
            if(listaPedidos.size() == 0){
                continuar = false;
            }
-       }
+       }**/
        
-       for(int i = 0; i < tempLista.size(); ++i){                               // Se retornan los valores a la lista de forma ordenada
+       /**for(int i = 0; i < tempLista.size(); ++i){                               // Se retornan los valores a la lista de forma ordenada
            listaPedidos.add(tempLista.get(i));
            //System.out.println(""+listaPedidos.get(i).cantKg);
-       }
+       }**/
     }
 }

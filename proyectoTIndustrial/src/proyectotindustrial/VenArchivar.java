@@ -1,5 +1,6 @@
 package proyectotindustrial;
 
+import java.awt.Color;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.io.File;
@@ -28,6 +29,7 @@ public class VenArchivar extends javax.swing.JFrame {
      */
     public VenArchivar() {
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
     }
 
     /**
@@ -71,7 +73,7 @@ public class VenArchivar extends javax.swing.JFrame {
         jLabel1.setText("¿ Desea guardar el archivo de rutas finales ? ");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel2.setForeground(new java.awt.Color(102, 204, 0));
         jLabel2.setText("Almacenar Rutas Finales");
 
         jToggleButton1.setText("Sí");

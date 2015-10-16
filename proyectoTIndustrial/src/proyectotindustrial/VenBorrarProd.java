@@ -1,6 +1,7 @@
 package proyectotindustrial;
 
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
@@ -27,6 +28,7 @@ public class VenBorrarProd extends javax.swing.JFrame {
      */
     public VenBorrarProd() {
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
         seteaValoresCB();
     }
     
@@ -65,7 +67,7 @@ public class VenBorrarProd extends javax.swing.JFrame {
         jLabel2.setText("Seleccione el nombre del producto que desea borrar:");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setForeground(new java.awt.Color(102, 204, 0));
         jLabel1.setText("Borrar Producto");
 
         jButton1.setText("Borrar");
