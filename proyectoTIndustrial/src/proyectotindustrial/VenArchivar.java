@@ -62,9 +62,9 @@ public class VenArchivar extends javax.swing.JFrame {
          writer.write(linea);
          writer.write(System.lineSeparator());
          writer.close(); 
-         JOptionPane.showMessageDialog(null,
-                "El archivo se ha guardado exitosamente.",
-                    "Información",JOptionPane.INFORMATION_MESSAGE);
+//         JOptionPane.showMessageDialog(null,
+//                "El archivo se ha guardado exitosamente.",
+//                    "Información",JOptionPane.INFORMATION_MESSAGE);
         }
         catch(IOException e){
             e.printStackTrace();
@@ -192,6 +192,8 @@ public class VenArchivar extends javax.swing.JFrame {
                 e2.printStackTrace();
              }
           } 
+            
+            jToggleButton1.setSelected(false);
 
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -205,9 +207,9 @@ public class VenArchivar extends javax.swing.JFrame {
          file.showSaveDialog(this);
          File rutaGuardar =file.getSelectedFile();
          ruta = ""+rutaGuardar+".csv";
-         JOptionPane.showMessageDialog(null,
-                "El archivo se ha guardado exitosamente.",
-                    "Información",JOptionPane.INFORMATION_MESSAGE);
+//         JOptionPane.showMessageDialog(null,
+//                "El archivo se ha guardado exitosamente.",
+//                    "Información",JOptionPane.INFORMATION_MESSAGE);
          
          
          // Se lee el archivo original de rutas
@@ -245,7 +247,7 @@ public class VenArchivar extends javax.swing.JFrame {
              }
           }       
         // Se escribe en el nuevo archivo de ordenes
-        
+        jToggleButton3.setSelected(false);
 
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 

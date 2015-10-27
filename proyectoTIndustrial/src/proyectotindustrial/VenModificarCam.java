@@ -326,8 +326,76 @@ public class VenModificarCam extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         // Se procede con la modificacion del camion
+                int numeroCamion;
+       
+        try {
         
+            numeroCamion = Integer.parseInt(numero.getText());
         
+        }
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+        
+                int campos;
+       
+        try {
+        
+            campos= Integer.parseInt(compartimentos.getText());}
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+        
+                double capQ;
+       
+        try {
+        
+            capQ = Double.parseDouble(capacidadq.getText());}
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+        
+                double capKg;
+       
+        try {
+        
+            capKg = Double.parseDouble(capacidadkg.getText());}
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+        
+                double cap;
+       
+        try {
+        
+            cap = Double.parseDouble(capacidadt.getText());}
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+      
+       
+        
+        if(numeroCamion != -1 && !(proveedor.getText().equals(""))) {
         String nuevaLinea = numero.getText() +","+ String.valueOf(cbPlaca.getSelectedItem()) +","+ compartimentos.getText() +","+ capacidadq.getText() +","+ capacidadkg.getText() +","+ capacidadt.getText() +","+ proveedor.getText();
         
         try {
@@ -423,6 +491,13 @@ public class VenModificarCam extends javax.swing.JFrame {
         VenModificarCam.this.dispose();
         
         JOptionPane.showMessageDialog(null, "El camión ha sido modificado, para ver los cambios reflejados es necesario cargar base de datos");
+        
+    }
+        else {
+              
+        JOptionPane.showMessageDialog(null, "Algún dato modificado es inválido, por favor revisar");  
+                
+        }
         
     }//GEN-LAST:event_AceptarActionPerformed
 

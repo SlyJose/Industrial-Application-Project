@@ -102,7 +102,7 @@ public class VenAgregarProd extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre de Producto:");
 
-        jLabel3.setText("Unidad de densidad:");
+        jLabel3.setText("Factor de Relación:");
 
         Agregar.setLabel("Agregar");
         Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +164,22 @@ public class VenAgregarProd extends javax.swing.JFrame {
         relacionD = UnidadDeDensidad.getText();
         nuevoProd = nombre + relacionD;
 
-        if (! nombre.equals(",0.0,") && ! relacionD .equals("")){
+                double unidadD;
+        
+        try {
+        
+            unidadD = Double.parseDouble(UnidadDeDensidad.getText());}
+        
+         catch (Exception e) {
+             
+             unidadD = 0;
+             System.out.println("Error!");
+           
+        }
+      
+       
+        
+        if(unidadD > 0 && !(producto.getText().equals(""))) {
         
         escribeNuevoProducto (nuevoProd);
         
@@ -172,6 +187,11 @@ public class VenAgregarProd extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null, "El producto ha sido agregado, para ver los cambios reflejados es necesario cargar base de datos");
         
+        }
+        
+        else{
+        
+            JOptionPane.showMessageDialog(null, "Algún dato ingresado es inválido, por favor revisar"); 
         }
         
         limpiaRegistros();

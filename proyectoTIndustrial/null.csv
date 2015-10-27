@@ -17,3 +17,28 @@ Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,
 10,12,1,h,VAP FEED GRANEL,2000.0,Coyol,2,19.0,14.12,28240.0,152388,Dos Pinos
 10,12,1,j,VAP FEED GRANEL,3000.0,Coyol,4,20.0,13.32,39960.0,152388,Dos Pinos
 10,12,1,v,VAP FEED GRANEL,1000.0,Coyol,2,3684.0,15.93,15930.0,152388,Dos Pinos
+0.0|
+0.0|
+6.999999993E8|
+
+Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor
+10,16,1,pedro,﻿PERFECTA ESPECIAL GRANEL,6.164107488,Coyol,2,19.0,14.12,87.03719773056,152388,Dos Pinos
+pedro,19,﻿PERFECTA ESPECIAL GRANEL,6
+6.999999993E8|
+
+Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor
+10,16,1,rts,﻿PERFECTA ESPECIAL GRANEL,23.629078704,Coyol,2,19.0,14.12,333.64259130048,152388,Dos Pinos
+6.999999993E8|
+
+Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor
+10,16,1,19,﻿PERFECTA ESPECIAL GRANEL,4109.404992,Coyol,2,19.0,14.12,58024.798487039996,152388,Dos Pinos
+6.999999993E8|
+
+Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor
+10,16,1,rtyer,﻿PERFECTA ESPECIAL GRANEL,5820.972171168,Coyol,2,19.0,14.12,82192.12705689216,152388,Dos Pinos
+rtyer,19,﻿PERFECTA ESPECIAL GRANEL,5666
+6.999999993E8|
+
+Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor
+10,16,1,5634,﻿PERFECTA ESPECIAL GRANEL,5706.93618264,Coyol,2,19.0,14.12,80581.93889887679,152388,Dos Pinos
+5634,19,﻿PERFECTA ESPECIAL GRANEL,5555

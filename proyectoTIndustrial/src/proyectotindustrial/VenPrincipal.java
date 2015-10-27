@@ -73,6 +73,8 @@ public class VenPrincipal extends javax.swing.JFrame {
         int screenHeight = screenSize.height;
         int screenWidth = screenSize.width;
         setLocation(screenWidth / 13, screenHeight / 10);
+        
+        
     }
     
     public void seteaValoresCB(){
@@ -163,14 +165,19 @@ public class VenPrincipal extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1200, 600));
         setResizable(false);
 
+        jLabel1.setForeground(new java.awt.Color(0, 204, 0));
         jLabel1.setText("NUEVA ORDEN");
 
+        jLabel3.setForeground(new java.awt.Color(0, 204, 0));
         jLabel3.setText("Nombre de Socio");
 
+        jLabel4.setForeground(new java.awt.Color(0, 204, 0));
         jLabel4.setText("Número de Entrega");
 
+        jLabel5.setForeground(new java.awt.Color(0, 204, 0));
         jLabel5.setText("Producto");
 
+        jLabel6.setForeground(new java.awt.Color(0, 204, 0));
         jLabel6.setText("Cantidad de Kilogramos");
 
         btnProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -244,10 +251,13 @@ public class VenPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setForeground(new java.awt.Color(0, 204, 0));
         jLabel11.setText("BASE DE DATOS");
 
+        jLabel12.setForeground(new java.awt.Color(0, 204, 0));
         jLabel12.setText("Seleccione Conjunto");
 
+        jLabel13.setForeground(new java.awt.Color(0, 204, 0));
         jLabel13.setText("Seleccione Operación");
 
         jToggleButton1.setText("Limpiar Órdenes");
@@ -435,15 +445,30 @@ public class VenPrincipal extends javax.swing.JFrame {
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
+        boolean vacio = true;
+        
         for(int i = 0; i < 100; ++i){                                             // Se ejecuta la optimizacion cierta cantidad de veces para mejorar los resultados
             
             OptimizadorRutas optimiza = new OptimizadorRutas();                         // Instancia que maneja la base de datos y optimizacion de rutas
+            
             optimiza.cargarBaseDatos();                                             // Primero se carga la base de datos
             optimiza.cargarPedidos();                                               // Se cargan todos los pedidos ingresados por el usuario            
+     //       optimiza.optimizador();                                                 // Se toman los pedidos ingresados y se ejecuta el algoritmo de ordenamiento
+            
+            if (optimiza.listaPedidos.isEmpty()){
+         
+             JOptionPane.showMessageDialog(null, "No se han ingresado pedidos, por favor ingrese uno");
+            i = 100;
+            vacio = false;
+            }
+            else{
             optimiza.optimizador();                                                 // Se toman los pedidos ingresados y se ejecuta el algoritmo de ordenamiento
-        }        
+            }
+        } 
         
+        if (vacio == true){
         new VenArchivar().setVisible(true);
+        }
         
         // es necesario limpiar el archivo de orden una vez finalizadas las ejecuciones
         //se le hace un llamado a el metodo de borrado en el main para cada vez que se abra la aplicacion borre el orden.txt interno
@@ -516,12 +541,17 @@ public class VenPrincipal extends javax.swing.JFrame {
         double numFinca;
         
         boolean existe = false;
+        
+        double auxCantK;
        
         try {
-        double auxCantK = Double.parseDouble(cantK);}
+        
+            auxCantK = Double.parseDouble(cantK);}
         
          catch (Exception e) {
-            System.out.println("Error!");
+             
+             auxCantK = 0.0;
+             System.out.println("Error!");
            
         }
         
@@ -819,7 +849,7 @@ public class VenPrincipal extends javax.swing.JFrame {
             
             String fileName = ruta;                                             // Ruta del archivo que tiene los datos
            
-           String archivoCompleto = "";
+            String archivoCompleto = "";
 
             try {                                                               // Se abre el archivo de asociados
              archivo = new File (fileName);

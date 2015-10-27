@@ -84,8 +84,10 @@ public class VenModificarProd extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
-        setPreferredSize(new java.awt.Dimension(560, 280));
+        setPreferredSize(new java.awt.Dimension(585, 326));
         setResizable(false);
+
+        textoDensidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 204, 0));
@@ -150,7 +152,7 @@ public class VenModificarProd extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(93, Short.MAX_VALUE))))
+                        .addContainerGap(95, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(161, 161, 161)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,7 +177,7 @@ public class VenModificarProd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoDensidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(Aceptar)
                 .addGap(36, 36, 36))
         );
@@ -256,8 +258,29 @@ public class VenModificarProd extends javax.swing.JFrame {
 
     private void AceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarActionPerformed
 
+        
+        
         String producto = textoProducto.getText();
         String nuevaLinea = producto + ",0.0," + textoDensidad.getText();
+        
+        
+        double factorD;
+        
+        try {
+        
+            factorD = Double.parseDouble(textoDensidad.getText());}
+        
+         catch (Exception e) {
+             
+             factorD = 0;
+             System.out.println("Error!");
+           
+        }
+      
+       
+        
+        if(factorD > 0 && !(textoProducto.getText().equals(""))) {
+        
         
         try {
             File inFile = new File("Productos.txt");
@@ -356,6 +379,13 @@ public class VenModificarProd extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(null, "El producto ha sido modificado, para ver los cambios reflejados es necesario cargar base de datos");
         
+        }
+        
+        else{
+        
+            JOptionPane.showMessageDialog(null, "Algún dato modificado es inválido, por favor revisar"); 
+        
+        }
     }//GEN-LAST:event_AceptarActionPerformed
 
     private void cbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProductoActionPerformed

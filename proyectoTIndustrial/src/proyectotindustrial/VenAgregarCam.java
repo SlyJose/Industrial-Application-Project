@@ -239,7 +239,93 @@ public class VenAgregarCam extends javax.swing.JFrame {
         nuevoCam += capacidad.getText()+",";
         nuevoCam += proveedor.getText();
         
-        if (! placa.getText().equals("")){
+        
+        
+                int numeroCamion;
+       
+        try {
+        
+            numeroCamion = Integer.parseInt(numero.getText());
+        
+        }
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+        
+                       int numPlaca;
+       
+        try {
+        
+            numPlaca = Integer.parseInt(placa.getText());
+        
+        }
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+        
+                int campos;
+       
+        try {
+        
+            campos= Integer.parseInt(campo.getText());}
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+        
+                double capQ;
+       
+        try {
+        
+            capQ = Double.parseDouble(capacidadPorCampoQ.getText());}
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+        
+                double capKg;
+       
+        try {
+        
+            capKg = Double.parseDouble(capacidadPorCampoKG.getText());}
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+        
+                double cap;
+       
+        try {
+        
+            cap = Double.parseDouble(capacidad.getText());}
+        
+         catch (Exception e) {
+             
+             numeroCamion = -1;
+             System.out.println("Error!");
+           
+        }
+      
+       
+        
+        if(numeroCamion != -1 && !(proveedor.getText().equals(""))) {
         
         escribeNuevoCamion (nuevoCam);
         
@@ -247,6 +333,11 @@ public class VenAgregarCam extends javax.swing.JFrame {
         VenAgregarCam.this.dispose();
         
         JOptionPane.showMessageDialog(null, "El camión ha sido agregado, para ver los cambios reflejados es necesario cargar base de datos");
+        
+        }
+        else{
+        
+        JOptionPane.showMessageDialog(null, "Algún dato ingresado es inválido, por favor revisar");
         
         }
         

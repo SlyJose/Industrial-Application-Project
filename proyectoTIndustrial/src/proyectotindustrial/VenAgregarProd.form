@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Unidad de densidad:"/>
+        <Property name="text" type="java.lang.String" value="Factor de Relaci&#xf3;n:"/>
       </Properties>
     </Component>
     <Component class="java.awt.Button" name="Agregar">
