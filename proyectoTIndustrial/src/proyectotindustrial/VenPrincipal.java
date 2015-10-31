@@ -459,9 +459,10 @@ public class VenPrincipal extends javax.swing.JFrame {
          
              JOptionPane.showMessageDialog(null, "No se han ingresado pedidos, por favor ingrese uno");
             i = 100;
-            vacio = false;
+            vacio = false;            
             }
             else{
+            jButton5.setVisible(false);    
             optimiza.optimizador();                                                 // Se toman los pedidos ingresados y se ejecuta el algoritmo de ordenamiento
             }
         } 
@@ -469,6 +470,8 @@ public class VenPrincipal extends javax.swing.JFrame {
         if (vacio == true){
         new VenArchivar().setVisible(true);
         }
+        
+        
         
         // es necesario limpiar el archivo de orden una vez finalizadas las ejecuciones
         //se le hace un llamado a el metodo de borrado en el main para cada vez que se abra la aplicacion borre el orden.txt interno
@@ -707,7 +710,13 @@ public class VenPrincipal extends javax.swing.JFrame {
         
         //inicial seteo de datos
         ventanaP.setVisible(true);
+        //this.jToggleButton1.doClick();                                          // Se realiza una limpieza de ordenes al actualizar la base de datos
+        ProyectoTIndustrial comienza = new ProyectoTIndustrial();
         
+        
+        //limpia
+        comienza.limpiaArhivoOrden();
+        comienza.limpiaArhivoRutas();
     }//GEN-LAST:event_cargarBasesActionPerformed
 
     

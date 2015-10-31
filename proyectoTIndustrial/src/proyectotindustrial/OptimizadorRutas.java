@@ -75,7 +75,7 @@ public class OptimizadorRutas {
         insAsociado.cargarArchivo();        
         insCamion.cargarArchivo();
         insProducto.cargarArchivo(); 
-        llena.numFincas = insAsociado.listaAsociados.size();                    // Se obtiene la cantidad de fincas en el sistema
+        llena.numFincas = insAsociado.listaAsociados.size() + 2;                    // Se obtiene la cantidad de fincas en el sistema
         
         System.out.println("Numero de fincas: "+llena.numFincas);
         
@@ -420,27 +420,27 @@ public void cargarAfuerza(){                                                    
                 
                 double numEntregaActual = 1.0;
 
-                distMinima = 99999999.0;
+                distMinima = 49999999999999999.0;
 
                 double numEntregaSig = 0.0;
                 
                 for(int p = 0; p < subListaRutas.size(); ++p){							// Primero busco la mas cerca al coyol
 		
-                    if(llena.retornaTiempo(numEntregaActual, subListaRutas.get(p).numEntrega ) < distMinima){
+                    if(llena.retornaDistancia(numEntregaActual, subListaRutas.get(p).numEntrega ) < distMinima){
 			numEntregaSig = subListaRutas.get(p).numEntrega;
-			distMinima = llena.retornaTiempo(numEntregaActual, subListaRutas.get(p).numEntrega );
+			distMinima = llena.retornaDistancia(numEntregaActual, subListaRutas.get(p).numEntrega );
                     }
                 }
                 
                 while(subListaRutas.size() > 0){															// Hago esto hasta limpiar la lista de todo el camion
 
                         numEntregaActual = numEntregaSig; 
-                        distMinima = 999999999.0;
+                        distMinima = 49999999999999.0;
 
                         for(int a = 0; a < subListaRutas.size(); ++a){	
-                                if(llena.retornaTiempo(numEntregaActual, subListaRutas.get(a).numEntrega) <   distMinima && numEntregaActual != subListaRutas.get(a).numEntrega){
+                                if(llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega) <   distMinima && numEntregaActual != subListaRutas.get(a).numEntrega){
                                         numEntregaSig = subListaRutas.get(a).numEntrega;
-                                        distMinima = llena.retornaTiempo(numEntregaActual, subListaRutas.get(a).numEntrega);
+                                        distMinima = llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega);
                                 }
                         }	
 
@@ -546,7 +546,7 @@ public void cargarAfuerza(){                                                    
                      writer.append(""+costoTotalRutas+"|"); // Lo primero escrito es el costo de dichas rutas
                      writer.write(System.lineSeparator());
                      writer.write(System.lineSeparator());
-                     writer.append("Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor");
+                     writer.append("Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor,Kilómetros");
                      writer.write(System.lineSeparator()); 
                      
                      for(int i = 0; i < listaFinalPedidos.length; ++i){ // Se escriben todas las rutas en orden
@@ -554,7 +554,7 @@ public void cargarAfuerza(){                                                    
                                         ","+listaFinalPedidos[i].producto+","+listaFinalPedidos[i].kgAentregar+","+
                                         listaFinalPedidos[i].horaSalida+","+listaFinalPedidos[i].zona+","+listaFinalPedidos[i].numEntrega+
                                         ","+listaFinalPedidos[i].precioFlete+","+listaFinalPedidos[i].montoFlete+","+listaFinalPedidos[i].placaCamion
-                                        +","+listaFinalPedidos[i].proveedor);
+                                        +","+listaFinalPedidos[i].proveedor+","+listaFinalPedidos[i].costoDist);
                          writer.write(System.lineSeparator());
                      } 
                      writer.close(); 
