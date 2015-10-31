@@ -546,6 +546,8 @@ public class VenPrincipal extends javax.swing.JFrame {
         boolean existe = false;
         
         double auxCantK;
+        
+        double auxNumF;
        
         try {
         
@@ -558,7 +560,20 @@ public class VenPrincipal extends javax.swing.JFrame {
            
         }
         
-        if ( numF.equals("") || nombreS.equals("") || auxCantK <= 0.0 || !devuelveValor(auxCantK)) {
+        try {
+            
+            auxNumF = Double.parseDouble(numF);}
+        
+        catch (Exception e) {
+            
+            auxNumF = 0.0;
+            System.out.println("Error!");
+            
+        }
+        
+        
+        
+        if ( numF.equals("") || nombreS.equals("") || auxCantK <= 0.0 || !devuelveValor(auxCantK) || auxNumF == 0) {
             
             numFinca = -2.0;
              

@@ -546,7 +546,7 @@ public void cargarAfuerza(){                                                    
                      writer.append(""+costoTotalRutas+"|"); // Lo primero escrito es el costo de dichas rutas
                      writer.write(System.lineSeparator());
                      writer.write(System.lineSeparator());
-                     writer.append("Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor,Kilómetros");
+                     writer.append("Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor"/*,Kilómetros"*/);
                      writer.write(System.lineSeparator()); 
                      
                      for(int i = 0; i < listaFinalPedidos.length; ++i){ // Se escriben todas las rutas en orden
@@ -554,7 +554,7 @@ public void cargarAfuerza(){                                                    
                                         ","+listaFinalPedidos[i].producto+","+listaFinalPedidos[i].kgAentregar+","+
                                         listaFinalPedidos[i].horaSalida+","+listaFinalPedidos[i].zona+","+listaFinalPedidos[i].numEntrega+
                                         ","+listaFinalPedidos[i].precioFlete+","+listaFinalPedidos[i].montoFlete+","+listaFinalPedidos[i].placaCamion
-                                        +","+listaFinalPedidos[i].proveedor+","+listaFinalPedidos[i].costoDist);
+                                        +","+listaFinalPedidos[i].proveedor+","/*+listaFinalPedidos[i].costoDist*/);
                          writer.write(System.lineSeparator());
                      } 
                      writer.close(); 
