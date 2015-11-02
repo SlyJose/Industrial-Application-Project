@@ -432,29 +432,69 @@ public void cargarAfuerza(){                                                    
                     }
                 }
                 
-                while(subListaRutas.size() > 0){															// Hago esto hasta limpiar la lista de todo el camion
+                int flag = 0;                                                   // Indica si es o no la primera corrida de busqueda del Coyol a su siguiente finca
+                
+                int tamano = subListaRutas.size();
+                
+                
+                while(tamano > 0){															// Hago esto hasta limpiar la lista de todo el camion
 
                         numEntregaActual = numEntregaSig; 
-                        distMinima = 49999999999999.0;
+                        
+                        if(flag != 0 /*|| subListaRutas.size() != 1*/){
+                            //distMinima = 49999999999999.0;
+                            for(int a = 0; a < subListaRutas.size(); ++a){	
+                                    if(llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega) <   distMinima && numEntregaActual != subListaRutas.get(a).numEntrega){
+                                            
+                                                numEntregaSig = subListaRutas.get(a).numEntrega;
+                                                distMinima = llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega);
 
-                        for(int a = 0; a < subListaRutas.size(); ++a){	
-                                if(llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega) <   distMinima && numEntregaActual != subListaRutas.get(a).numEntrega){
-                                        numEntregaSig = subListaRutas.get(a).numEntrega;
-                                        distMinima = llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega);
-                                }
-                        }	
+                                                System.out.println("Entra aqui, fincas: "+numEntregaActual +" "+ subListaRutas.get(a).numEntrega);
+                                                System.out.println("Distancia: "+distMinima);                                                
+                                            
+                                    }/*else{
+                                            System.out.println("No entró aqui, fincas: "+numEntregaActual +" "+ subListaRutas.get(a).numEntrega);
+                                            System.out.println("Distancia: "+distMinima);
+                                    }*/
+                            }                            
+                        }
 
                         for(int b = 0; b < subListaRutas.size(); ++b){												// borro la finca actual en la que me encuentro
-                                if(subListaRutas.get(b).numEntrega == numEntregaActual ){
+                                if(subListaRutas.get(b).numEntrega == numEntregaActual){
+                                    
                                         listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(b);
+                                        System.out.println("Estoy metiendo de distancia: "+distMinima);
                                         listaFinalPedidos[indiceVectorFinal].costoDist = distMinima;                // Variables utilizadas para obtener el costo de la ruta
                                         listaFinalPedidos[indiceVectorFinal].costoTiemp = llena.retornaTiempo(numEntregaActual, numEntregaSig);
-                                        subListaRutas.remove(b);
-                                        b = subListaRutas.size();
+                                        
+                                        if(flag != 0 && subListaRutas.size() > 1 ){                 // El camion tiene mas de un pedido, no debe borrar en la primera iteracion
+                                            subListaRutas.remove(b);
+                                        }else{
+                                            if(flag == 0 && subListaRutas.size() == 1){             // El camion tiene solo un pedido
+                                                subListaRutas.remove(b);
+                                            }
+                                        }                                        
+                                        
+                                        b = subListaRutas.size();                                        
                                         ++indiceVectorFinal;
-                                }
+                                }                                
+                        }    
+                        //if(flag == 0){
+                            distMinima = 49999999999999.0;
+                        //}
+                        ++flag;
+                        
+                        if(subListaRutas.size() == 1){
+                            tamano = 0;
+                        }else{
+                            tamano = subListaRutas.size();
+                            
                         }
-                }
+                        
+                        
+                        
+                        
+                }                
             } // fin de if tienePedido
                         
             tienePedido = false;                                                // Ya que se procede a ordenar las rutas de otro camion, se reinicia la variable
@@ -475,7 +515,7 @@ public void cargarAfuerza(){                                                    
             
         }
         
-        System.out.println("Costo de las rutas: "+costoTotalRutas);
+        //System.out.println("Costo de las rutas: "+costoTotalRutas);
         
         
         int placaAnterior = listaFinalPedidos[0].placaCamion;
@@ -546,7 +586,7 @@ public void cargarAfuerza(){                                                    
                      writer.append(""+costoTotalRutas+"|"); // Lo primero escrito es el costo de dichas rutas
                      writer.write(System.lineSeparator());
                      writer.write(System.lineSeparator());
-                     writer.append("Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor"/*,Kilómetros"*/);
+                     writer.append("Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor,Kilómetros");
                      writer.write(System.lineSeparator()); 
                      
                      for(int i = 0; i < listaFinalPedidos.length; ++i){ // Se escriben todas las rutas en orden
@@ -554,7 +594,7 @@ public void cargarAfuerza(){                                                    
                                         ","+listaFinalPedidos[i].producto+","+listaFinalPedidos[i].kgAentregar+","+
                                         listaFinalPedidos[i].horaSalida+","+listaFinalPedidos[i].zona+","+listaFinalPedidos[i].numEntrega+
                                         ","+listaFinalPedidos[i].precioFlete+","+listaFinalPedidos[i].montoFlete+","+listaFinalPedidos[i].placaCamion
-                                        +","+listaFinalPedidos[i].proveedor+","/*+listaFinalPedidos[i].costoDist*/);
+                                        +","+listaFinalPedidos[i].proveedor+","+listaFinalPedidos[i].costoDist);
                          writer.write(System.lineSeparator());
                      } 
                      writer.close(); 
