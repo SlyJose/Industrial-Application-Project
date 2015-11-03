@@ -436,7 +436,7 @@ public void cargarAfuerza(){                                                    
                 
                 while(tamano > 0){															// Hago esto hasta limpiar la lista de todo el camion
 
-                    System.out.println("Actual: "+numEntregaActual+" ,"+"Siguiente: "+numEntregaSig);
+                    //System.out.println("Actual: "+numEntregaActual+" ,"+"Siguiente: "+numEntregaSig);
                     
                     numEntregaActual = numEntregaSig; 
                     
@@ -446,10 +446,10 @@ public void cargarAfuerza(){                                                    
                                 if(subListaRutas.get(b).numEntrega == numEntregaActual){
                                     
                                     //System.out.println("Valor de indice: "+indiceVectorFinal);
-                                    System.out.println("Numero de entrega que va a meter: "+numEntregaActual);
+                                    //System.out.println("Numero de entrega que va a meter: "+numEntregaActual);
                                     
                                         listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(b);
-                                        System.out.println("Estoy metiendo de distancia: "+distMinima);
+                                        //System.out.println("Estoy metiendo de distancia: "+distMinima);
                                         listaFinalPedidos[indiceVectorFinal].costoDist = distMinima;                // Variables utilizadas para obtener el costo de la ruta
                                         listaFinalPedidos[indiceVectorFinal].costoTiemp = llena.retornaTiempo(numEntregaActual, numEntregaSig);
                                         
@@ -478,15 +478,15 @@ public void cargarAfuerza(){                                                    
                                                 numEntregaSig = subListaRutas.get(a).numEntrega;
                                                 distMinima = llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega);
 
-                                                System.out.println("Entra aqui, fincas: "+numEntregaActual +" "+ numEntregaSig);
-                                                System.out.println("Distancia: "+distMinima);                                                
+                                                //System.out.println("Entra aqui, fincas: "+numEntregaActual +" "+ numEntregaSig);
+                                                //System.out.println("Distancia: "+distMinima);                                                
                                             
                                     }
                             }                 
                         
-                        for(int h =0; h< listaFinalPedidos.length; ++h){
+                        /*for(int h =0; h< listaFinalPedidos.length; ++h){
                              System.out.println("Kilometros orden "+h+" "+listaFinalPedidos[h].costoDist);
-                        }
+                        }*/
                 }  
                 
                 
@@ -513,7 +513,7 @@ public void cargarAfuerza(){                                                    
             
         }
         
-        //System.out.println("Costo de las rutas: "+costoTotalRutas);
+        System.out.println("Costo de las rutas: "+costoTotalRutas);
         
         
         int placaAnterior = listaFinalPedidos[0].placaCamion;
