@@ -432,46 +432,29 @@ public void cargarAfuerza(){                                                    
                     }
                 }
                 
-                int flag = 0;                                                   // Indica si es o no la primera corrida de busqueda del Coyol a su siguiente finca
-                
                 int tamano = subListaRutas.size();
                 
-                
-                while(tamano > 1){															// Hago esto hasta limpiar la lista de todo el camion
+                while(tamano > 0){															// Hago esto hasta limpiar la lista de todo el camion
 
-                        numEntregaActual = numEntregaSig; 
-                        
-                        if(flag != 0 /*|| subListaRutas.size() != 1*/){
-                            //distMinima = 49999999999999.0;
-                            for(int a = 0; a < subListaRutas.size(); ++a){	
-                                    if(llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega) <   distMinima && numEntregaActual != subListaRutas.get(a).numEntrega){
-                                            
-                                                numEntregaSig = subListaRutas.get(a).numEntrega;
-                                                distMinima = llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega);
-
-                                                System.out.println("Entra aqui, fincas: "+numEntregaActual +" "+ subListaRutas.get(a).numEntrega);
-                                                System.out.println("Distancia: "+distMinima);                                                
-                                            
-                                    }/*else{
-                                            System.out.println("No entró aqui, fincas: "+numEntregaActual +" "+ subListaRutas.get(a).numEntrega);
-                                            System.out.println("Distancia: "+distMinima);
-                                    }*/
-                            }                            
-                        }
-
-                        System.out.println("Tamano de listaFinalPedidos: "+listaFinalPedidos.length);
+                    System.out.println("Actual: "+numEntregaActual+" ,"+"Siguiente: "+numEntregaSig);
+                    
+                    numEntregaActual = numEntregaSig; 
+                    
+                        //System.out.println("Tamano de listaFinalPedidos: "+listaFinalPedidos.length);
                         
                         for(int b = 0; b < subListaRutas.size(); ++b){												// borro la finca actual en la que me encuentro
                                 if(subListaRutas.get(b).numEntrega == numEntregaActual){
                                     
-                                    System.out.println("Valor de indice: "+indiceVectorFinal);
+                                    //System.out.println("Valor de indice: "+indiceVectorFinal);
+                                    System.out.println("Numero de entrega que va a meter: "+numEntregaActual);
                                     
                                         listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(b);
                                         System.out.println("Estoy metiendo de distancia: "+distMinima);
                                         listaFinalPedidos[indiceVectorFinal].costoDist = distMinima;                // Variables utilizadas para obtener el costo de la ruta
                                         listaFinalPedidos[indiceVectorFinal].costoTiemp = llena.retornaTiempo(numEntregaActual, numEntregaSig);
                                         
-                                        if(flag != 0 && subListaRutas.size() > 1 ){                 // El camion tiene mas de un pedido, no debe borrar en la primera iteracion
+                                        
+                                        /*if(flag != 0 && subListaRutas.size() > 1 ){                 // El camion tiene mas de un pedido, no debe borrar en la primera iteracion
                                             subListaRutas.remove(b);
                                             --tamano;
                                         }else{
@@ -479,24 +462,37 @@ public void cargarAfuerza(){                                                    
                                                 subListaRutas.remove(b);
                                                 --tamano;
                                             }
-                                        }                                        
-                                        
+                                        }*/    
+                                        subListaRutas.remove(b);
+                                        --tamano;
                                         b = subListaRutas.size();                                        
                                         ++indiceVectorFinal;
                                 }                                
-                        }    
-                        //if(flag == 0){
-                            distMinima = 49999999999999.0;
-                        //}
-                        ++flag;
+                        }
                         
-                        /*if(subListaRutas.size() == 1){
-                            tamano = 0;
-                        }else{
-                            tamano = subListaRutas.size();
-                            
-                        }*/
-                }                
+                        distMinima = 49999999999999.0;
+                        
+                            for(int a = 0; a < subListaRutas.size(); ++a){	
+                                    if(llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega) <   distMinima && numEntregaActual != subListaRutas.get(a).numEntrega){
+                                            
+                                                numEntregaSig = subListaRutas.get(a).numEntrega;
+                                                distMinima = llena.retornaDistancia(numEntregaActual, subListaRutas.get(a).numEntrega);
+
+                                                System.out.println("Entra aqui, fincas: "+numEntregaActual +" "+ numEntregaSig);
+                                                System.out.println("Distancia: "+distMinima);                                                
+                                            
+                                    }
+                            }                 
+                        
+                        for(int h =0; h< listaFinalPedidos.length; ++h){
+                             System.out.println("Kilometros orden "+h+" "+listaFinalPedidos[h].costoDist);
+                        }
+                }  
+                
+                
+                
+                
+                
             } // fin de if tienePedido
                         
             tienePedido = false;                                                // Ya que se procede a ordenar las rutas de otro camion, se reinicia la variable
