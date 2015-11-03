@@ -437,7 +437,7 @@ public void cargarAfuerza(){                                                    
                 int tamano = subListaRutas.size();
                 
                 
-                while(tamano > 0){															// Hago esto hasta limpiar la lista de todo el camion
+                while(tamano > 1){															// Hago esto hasta limpiar la lista de todo el camion
 
                         numEntregaActual = numEntregaSig; 
                         
@@ -459,8 +459,12 @@ public void cargarAfuerza(){                                                    
                             }                            
                         }
 
+                        System.out.println("Tamano de listaFinalPedidos: "+listaFinalPedidos.length);
+                        
                         for(int b = 0; b < subListaRutas.size(); ++b){												// borro la finca actual en la que me encuentro
                                 if(subListaRutas.get(b).numEntrega == numEntregaActual){
+                                    
+                                    System.out.println("Valor de indice: "+indiceVectorFinal);
                                     
                                         listaFinalPedidos[indiceVectorFinal] = subListaRutas.get(b);
                                         System.out.println("Estoy metiendo de distancia: "+distMinima);
@@ -469,9 +473,11 @@ public void cargarAfuerza(){                                                    
                                         
                                         if(flag != 0 && subListaRutas.size() > 1 ){                 // El camion tiene mas de un pedido, no debe borrar en la primera iteracion
                                             subListaRutas.remove(b);
+                                            --tamano;
                                         }else{
                                             if(flag == 0 && subListaRutas.size() == 1){             // El camion tiene solo un pedido
                                                 subListaRutas.remove(b);
+                                                --tamano;
                                             }
                                         }                                        
                                         
@@ -484,16 +490,12 @@ public void cargarAfuerza(){                                                    
                         //}
                         ++flag;
                         
-                        if(subListaRutas.size() == 1){
+                        /*if(subListaRutas.size() == 1){
                             tamano = 0;
                         }else{
                             tamano = subListaRutas.size();
                             
-                        }
-                        
-                        
-                        
-                        
+                        }*/
                 }                
             } // fin de if tienePedido
                         

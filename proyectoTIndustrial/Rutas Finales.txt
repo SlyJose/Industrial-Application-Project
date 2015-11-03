@@ -1,6 +1,1 @@
-79.634|
-
-Mes,Dia,#de Ruta,Socio,Producto,KGS A Entregar,Salida del Coyol,Lugar,# Entrega,Precio Flete,Monto Flete,Placa del Camion,Proveedor,Kilómetros
-11,1,1,a,PERFECTA ESPECIAL GRANEL,1.027351248,Coyol,2,229.0,13.22,13.58158349856,152388,Dos Pinos,15.28
-11,1,1,a,PERFECTA ESPECIAL GRANEL,1.027351248,Coyol,2,229.0,13.22,13.58158349856,152388,Dos Pinos,15.28
-11,1,1,v,PERFECTA ESPECIAL GRANEL,1.027351248,Coyol,3,381.0,13.31,13.67404511088,152388,Dos Pinos,42.06
+0.0|
